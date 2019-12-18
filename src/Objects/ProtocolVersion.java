@@ -1,9 +1,17 @@
 package Objects;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class ProtocolVersion{
 
     XMLTag ProtocolVersionMajor;
     XMLTag ProtocolVersionMinor;
+
+    public ProtocolVersion(){
+        
+    }
 
     //constructor
     public ProtocolVersion(XMLTag protocolVersionMajor, XMLTag protocolVersionMinor) {
@@ -11,6 +19,7 @@ public class ProtocolVersion{
         ProtocolVersionMinor = protocolVersionMinor;
     }
 
+    @XmlElement
     public XMLTag getProtocolVersionMajor() {
         return ProtocolVersionMajor;
     }
@@ -18,7 +27,7 @@ public class ProtocolVersion{
     public void setProtocolVersionMajor(XMLTag protocolVersionMajor) {
         ProtocolVersionMajor = protocolVersionMajor;
     }
-
+    @XmlElement
     public XMLTag getProtocolVersionMinor() {
         return ProtocolVersionMinor;
     }

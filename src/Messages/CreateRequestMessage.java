@@ -3,6 +3,10 @@ package Messages;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.JAXBContext;
+import javax.xml.bind.JAXBException;
+import javax.xml.bind.Marshaller;
+
 import Attributes.Attribute;
 import Enum.EnumTag;
 import Enum.EnumType;
@@ -13,12 +17,12 @@ import KMIPTypes.KMIPTextString;
 import Objects.ProtocolVersion;
 import Objects.XMLTag;
 
-public class CreateRequestMessage{
+public class CreateRequestMessage {
 
     ProtocolVersion protocolVersion;
 
-    XMLTag ProtocolVersionMajor; 
-    XMLTag ProtocolVersionMinor;    
+    XMLTag ProtocolVersionMajor;
+    XMLTag ProtocolVersionMinor;
     XMLTag ClientCorrelationValue;
     XMLTag BatchOrderOption;
     XMLTag BatchCount;
@@ -38,7 +42,7 @@ public class CreateRequestMessage{
 
     KMIPRequestMessage requestMessage;
 
-    public void createSDRequestMessage()
+    public void createSDRequestMessage() throws JAXBException
     {
         //KMIP v2.0
         ProtocolVersionMajor = new XMLTag("ProtocolVersionMajor", new EnumTag(EnumTag.ProtocolVersionMajor), new EnumType(EnumType.Integer), new KMIPInteger("2"));
@@ -73,13 +77,19 @@ public class CreateRequestMessage{
         batchItems.add(requestBatchItem);
 
         requestMessage = new KMIPRequestMessage(requestHeader, batchItems);
+
+        final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
+        final Marshaller marshaller = context.createMarshaller();
+        marshaller.marshal(requestMessage, System.out);    
     }
 
-    public static void main(String[] args) {
+
+
+    public static void main(String[] args) throws JAXBException {
         
         CreateRequestMessage createRequestMessage = new CreateRequestMessage();
         createRequestMessage.createSDRequestMessage();
-        System.out.println(createRequestMessage.requestMessage.toString());
+        //System.out.println(createRequestMessage.requestMessage.toString());
     }
         
 }

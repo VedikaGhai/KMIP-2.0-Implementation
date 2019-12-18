@@ -1,15 +1,23 @@
 package Objects;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;
 
+@XmlRootElement
 public class XMLTag
 {
     String name;
     EnumTag tag;
     EnumType type;
     KMIPType value;
+
+    public XMLTag(){
+
+    }
 
     public XMLTag(String name, EnumTag tag, EnumType type, KMIPType value) {
         this.name = name;
@@ -18,6 +26,7 @@ public class XMLTag
         this.value = value;
     }
 
+    @XmlElement
     public String getName() {
         return name;
     }
@@ -25,7 +34,7 @@ public class XMLTag
     public void setName(String name) {
         this.name = name;
     }
-
+    
     public EnumTag getTag() {
         return tag;
     }
@@ -33,7 +42,7 @@ public class XMLTag
     public void setTag(EnumTag tag) {
         this.tag = tag;
     }
-
+    @XmlElement
     public EnumType getType() {
         return type;
     }
@@ -41,7 +50,7 @@ public class XMLTag
     public void setType(EnumType type) {
         this.type = type;
     }
-
+    @XmlElement
     public KMIPType getValue() {
         return value;
     }

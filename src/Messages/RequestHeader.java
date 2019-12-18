@@ -1,13 +1,21 @@
 package Messages;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 import Objects.ProtocolVersion;
 import Objects.XMLTag;
 
+@XmlRootElement
 public class RequestHeader {
 	ProtocolVersion protocolVersion;
 	XMLTag ClientCorrelationValue;
 	XMLTag BatchOrderOption;
 	XMLTag BatchCount;
+
+	public RequestHeader(){
+		
+	}
 
 	public RequestHeader(ProtocolVersion protocolVersion, XMLTag clientCorrelationValue, XMLTag batchOrderOption,
 			XMLTag batchCount) {
@@ -17,6 +25,7 @@ public class RequestHeader {
 		BatchCount = batchCount;
 	}
 
+	@XmlElement
 	public ProtocolVersion getProtocolVersion() {
 		return protocolVersion;
 	}
@@ -24,7 +33,7 @@ public class RequestHeader {
 	public void setProtocolVersion(ProtocolVersion protocolVersion) {
 		this.protocolVersion = protocolVersion;
 	}
-
+	@XmlElement
 	public XMLTag getClientCorrelationValue() {
 		return ClientCorrelationValue;
 	}
@@ -32,7 +41,7 @@ public class RequestHeader {
 	public void setClientCorrelationValue(XMLTag clientCorrelationValue) {
 		ClientCorrelationValue = clientCorrelationValue;
 	}
-
+	@XmlElement
 	public XMLTag getBatchOrderOption() {
 		return BatchOrderOption;
 	}
@@ -40,7 +49,7 @@ public class RequestHeader {
 	public void setBatchOrderOption(XMLTag batchOrderOption) {
 		BatchOrderOption = batchOrderOption;
 	}
-
+	@XmlElement
 	public XMLTag getBatchCount() {
 		return BatchCount;
 	}

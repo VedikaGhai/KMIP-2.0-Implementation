@@ -1,10 +1,17 @@
 package Messages;
 
+import javax.xml.bind.annotation.XmlRootElement;
+
 import Objects.XMLTag;
 
+@XmlRootElement
 public class RequestBatchItem extends BatchItem {
 
 	RequestPayload requestPayload;
+
+	public RequestBatchItem(){
+		
+	}
 
 	public RequestBatchItem(XMLTag operation, XMLTag uniqueBatchItemId, RequestPayload requestPayload) {
 		super(operation, uniqueBatchItemId);

@@ -3,9 +3,17 @@ package Messages;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class KMIPRequestMessage {
 	RequestHeader requestHeader;
 	List<RequestBatchItem> batchItems;
+
+	public KMIPRequestMessage(){
+
+	}
 
 	//Request Message setter
 	public KMIPRequestMessage(RequestHeader requestHeader, List<RequestBatchItem> batchItems) {
@@ -16,6 +24,7 @@ public class KMIPRequestMessage {
 	}
 
 	//Resquest Header getter
+	@XmlElement
 	public RequestHeader getRequestHeader() {
 		return requestHeader;
 	}
@@ -26,6 +35,7 @@ public class KMIPRequestMessage {
 	}
 
 	//Request Message Batch Items getter
+	@XmlElement
 	public List<RequestBatchItem> getBatchItems() {
 		return batchItems;
 	}

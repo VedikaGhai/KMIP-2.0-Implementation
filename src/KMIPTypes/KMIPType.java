@@ -1,7 +1,16 @@
 package KMIPTypes;
 
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+@XmlRootElement
 public class KMIPType {
+
 	int defaultLength;
+
+	public KMIPType(){
+		
+	}
 	KMIPType(int defaultLength)
 	{
 		this.defaultLength=defaultLength;
@@ -10,6 +19,7 @@ public class KMIPType {
 	{
 		
 	}
+	@XmlElement
 	public int getDefaultLength()
 	{
 		return this.defaultLength;
