@@ -2,16 +2,16 @@ package KMIPTypes;
 
 public class KMIPBoolean extends KMIPType {
 	boolean value;
-	KMIPBoolean()
+	public KMIPBoolean()
 	{
 		super(8);
 	}
-	KMIPBoolean(boolean value)
+	public KMIPBoolean(boolean value)
 	{
 		super(8);
 		this.value=value;
 	}
-	KMIPBoolean(String value)
+	public KMIPBoolean(String value)
 	{
 		super(8);
 		setValue(value);
@@ -31,4 +31,11 @@ public class KMIPBoolean extends KMIPType {
 	{
 		return this.value;
 	}
+
+	@Override
+	public String toString() {
+		return "KMIPBoolean [value=" + value + "]";
+	}
+
+	
 }

@@ -1,35 +1,39 @@
 package Messages;
 
-import Enum.EnumOperation;
-import KMIPTypes.KMIPByteString;
+import Objects.XMLTag;
 
 public class BatchItem {
-	EnumOperation operation;
-	KMIPByteString UniqueBatchItemId;
-	RequestPayload requestPayLoad;
-	public BatchItem(EnumOperation operation, KMIPByteString uniqueBatchItemId, RequestPayload requestPayLoad) {
-		super();
+	XMLTag operation;
+	XMLTag UniqueBatchItemId;
+
+	public BatchItem(XMLTag operation, XMLTag uniqueBatchItemId) {
 		this.operation = operation;
 		UniqueBatchItemId = uniqueBatchItemId;
-		this.requestPayLoad = requestPayLoad;
 	}
-	public EnumOperation getOperation() {
+
+	public XMLTag getOperation() {
 		return operation;
 	}
-	public void setOperation(EnumOperation operation) {
+
+	public void setOperation(XMLTag operation) {
 		this.operation = operation;
 	}
-	public KMIPByteString getUniqueBatchItemId() {
+
+	public XMLTag getUniqueBatchItemId() {
 		return UniqueBatchItemId;
 	}
-	public void setUniqueBatchItemId(KMIPByteString uniqueBatchItemId) {
+
+	public void setUniqueBatchItemId(XMLTag uniqueBatchItemId) {
 		UniqueBatchItemId = uniqueBatchItemId;
 	}
-	public RequestPayload getRequestPayLoad() {
-		return requestPayLoad;
+
+	@Override
+	public String toString() {
+		return "BatchItem [UniqueBatchItemId=" + UniqueBatchItemId + ", operation=" + operation + "]";
 	}
-	public void setRequestPayLoad(RequestPayload requestPayLoad) {
-		this.requestPayLoad = requestPayLoad;
-	}
+	
+	
+	
+	
 
 }

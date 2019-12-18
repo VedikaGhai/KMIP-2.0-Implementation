@@ -30,5 +30,11 @@ public class EnumResultStatus extends KMIPEnum {
 	{
 		this.value=getEntry(value, tagvalues);
 	}
+
+	@Override
+	public String toString() {
+		return "EnumResultStatus []";
+	}
+	
 	
 }

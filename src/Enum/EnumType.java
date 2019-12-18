@@ -4,6 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
+
+//TTLV types
 public class EnumType extends KMIPEnum {
 	public static final int Integer= 0x02;
 	public static final int LongInteger= 0x03;
@@ -37,6 +39,10 @@ public class EnumType extends KMIPEnum {
 	public EnumType(int value)
 	{
 		this.value=getEntry(value, tagvalues);
+		System.out.println("EnumType : "+value);
 	}
+
+	
+	
 	
 }

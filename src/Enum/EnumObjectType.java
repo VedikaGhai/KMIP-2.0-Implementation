@@ -30,5 +30,11 @@ public class EnumObjectType extends KMIPEnum {
 	{
 		this.value=getEntry(value, tagvalues);
 	}
+
+	@Override
+	public String toString() {
+		return "EnumObjectType []";
+	}
+	
 	
 }

@@ -10,6 +10,11 @@ public class CryptographicLength extends Attribute{
 		super("CryptographicLength", value, new EnumType(EnumType.Integer), new EnumTag(EnumTag.CryptographicLength));
 		// TODO Auto-generated constructor stub
 	}
-	
 
+	@Override
+	public String toString() {
+		return "CryptographicLength []";
+	}
+	
+	
 }

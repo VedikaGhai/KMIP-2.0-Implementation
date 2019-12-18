@@ -30,5 +30,11 @@ public class EnumOperation extends KMIPEnum {
 	{
 		this.value=getEntry(value, tagvalues);
 	}
+
+	@Override
+	public String toString() {
+		return "EnumOperation []";
+	}
+	
 	
 }

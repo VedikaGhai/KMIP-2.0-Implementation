@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
+//TTLV tags
 public class EnumTag extends KMIPEnum {
 	public static final int ProtocolVersion= 0x420069;
 	public static final int ProtocolVersionMajor= 0x42006A;
@@ -13,6 +14,7 @@ public class EnumTag extends KMIPEnum {
 	public static final int RequestMessage= 0x420078;
 	public static final int RequestHeader= 0x420077;
 	public static final int BatchItem= 0x42000F;
+	public static final int ClientCorrelationValue = 0x420105;
 	public static final int Operation= 0x42005C;
 	public static final int UniqueBatchItemId= 0x420093;
 	public static final int RequestPayload= 0x420079;
@@ -42,6 +44,9 @@ public class EnumTag extends KMIPEnum {
 	public EnumTag(int value)
 	{
 		this.value=getEntry(value, tagvalues);
+		System.out.println("EnumTag : "+value);
 	}
+
+	
 	
 }

@@ -4,12 +4,15 @@ import Enum.EnumOperation;
 import Enum.EnumResultStatus;
 import KMIPTypes.KMIPByteString;
 
-public class ResponseBatchItem extends BatchItem{
-	public ResponseBatchItem(EnumOperation operation, KMIPByteString uniqueBatchItemId, RequestPayload requestPayLoad) {
-		super(operation, uniqueBatchItemId, requestPayLoad);
-		// TODO Auto-generated constructor stub
-	}
 
-	EnumResultStatus resultStatus;
+//extends BatchItem
+public class ResponseBatchItem {
+	// public ResponseBatchItem(EnumOperation operation, KMIPByteString uniqueBatchItemId) {
+	// 	super(operation, uniqueBatchItemId);
+	// 	// TODO Auto-generated constructor stub
+	// }
+
+	// EnumResultStatus resultStatus;
+	// ResponsePayload responsePayload;
 
 }

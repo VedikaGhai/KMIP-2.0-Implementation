@@ -10,7 +10,8 @@ public class Attribute {
 	EnumType type;
 	EnumTag tag;
 	int length;
-	
+
+	//POJO
 	public Attribute(String name, KMIPType value, EnumType type, EnumTag tag) {
 		super();
 		this.name = name;
@@ -50,7 +51,12 @@ public class Attribute {
 	public void setLength(int length) {
 		this.length = length;
 	}
-	
-	
 
+	@Override
+	public String toString() {
+		return "Attribute [length=" + length + ", name=" + name + ", tag=" + tag + ", type=" + type + ", value=" + value
+				+ "]";
+	}
+	
+	
 }

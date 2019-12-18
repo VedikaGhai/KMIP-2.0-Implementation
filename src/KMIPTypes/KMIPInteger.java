@@ -8,19 +8,20 @@ public class KMIPInteger extends KMIPType{
 		super(4);
 		// TODO Auto-generated constructor stub
 	}
-	KMIPInteger(String value)
+	public KMIPInteger(String value)
 	{
 		super(value);
 		toInteger(value);
 	}
 	public void toInteger(String value)
 	{
-		if(value.length()>1&& value.substring(0,  2)!="0x")
+		if(value.length()>1&& value.substring(0,2)=="0x")
 		{
-			this.value=Integer.parseInt(value);
+			this.value=Integer.parseInt(value.substring(2), 16 );
 		}
 		else
-			this.value=Integer.parseInt(value.substring(2), 16 );
+			this.value=Integer.parseInt(value);
+
 	}
 	public String toString()
 	{
@@ -34,5 +35,6 @@ public class KMIPInteger extends KMIPType{
 	{
 		this.value=value;
 	}
+	
 	
 }

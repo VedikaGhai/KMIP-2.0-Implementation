@@ -14,4 +14,11 @@ public class KMIPType {
 	{
 		return this.defaultLength;
 	}
+
+	@Override
+	public String toString() {
+		return "KMIPType [defaultLength=" + defaultLength + "]";
+	}
+
+	
 }

@@ -1,13 +1,21 @@
 package Messages;
 
-import Enum.EnumOperation;
-import KMIPTypes.KMIPByteString;
+import Objects.XMLTag;
 
 public class RequestBatchItem extends BatchItem {
 
-	public RequestBatchItem(EnumOperation operation, KMIPByteString uniqueBatchItemId, RequestPayload requestPayLoad) {
-		super(operation, uniqueBatchItemId, requestPayLoad);
+	RequestPayload requestPayload;
+
+	public RequestBatchItem(XMLTag operation, XMLTag uniqueBatchItemId, RequestPayload requestPayload) {
+		super(operation, uniqueBatchItemId);
+		this.requestPayload =  requestPayload;
 		// TODO Auto-generated constructor stub
 	}
+
+	@Override
+	public String toString() {
+		return "RequestBatchItem [requestPayload=" + requestPayload + "]";
+	}
+
 
 }
