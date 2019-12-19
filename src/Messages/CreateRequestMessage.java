@@ -84,7 +84,6 @@ public class CreateRequestMessage {
     }
 
 
-
     public static void main(String[] args) throws JAXBException {
         
         CreateRequestMessage createRequestMessage = new CreateRequestMessage();
