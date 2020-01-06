@@ -31,8 +31,7 @@ public class DecodeResponseMessage {
             Node node = nList.item(temp);
             Element e= (Element)node;
             System.out.println(e.getAttribute("value"));
-
-            
+   
         }
 
     }
