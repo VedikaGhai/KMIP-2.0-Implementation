@@ -3,9 +3,13 @@ import org.w3c.dom.*;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.*;
+import java.util.*;
 import java.io.*;
+import Messages.ResponseBatchItem;
 
 public class DecodeResponseMessage {
+
+    List<ResponseBatchItem> responseBatchItem;
 
     public void DOMParser() throws SAXException, IOException, ParserConfigurationException
     {
@@ -36,6 +40,7 @@ public class DecodeResponseMessage {
     public static void main(String args[]) throws SAXException, IOException, ParserConfigurationException
     {
         DecodeResponseMessage d = new DecodeResponseMessage();
+        d.responseBatchItem=new ArrayList<ResponseBatchItem>();
         d.DOMParser();
     }
 

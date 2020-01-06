@@ -26,6 +26,13 @@ public class XMLTag
         this.value = value;
     }
 
+    public XMLTag(String name, EnumType type, KMIPType value) {
+        this.name = name;
+        //this.tag = tag;
+        this.type = type;
+        this.value = value;
+    }
+
     @XmlElement
     public String getName() {
         return name;
