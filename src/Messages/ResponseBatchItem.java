@@ -7,9 +7,12 @@ import Objects.XMLTag;
 
 
 //extends BatchItem
-public class ResponseBatchItem  extends BatchItem{
-	public ResponseBatchItem(XMLTag operation, XMLTag uniqueBatchItemId) {
-	 	super(operation, uniqueBatchItemId);
+public class ResponseBatchItem  extends BatchItem
+{
+	ResponsePayload responsePayload;
+	public ResponseBatchItem(XMLTag operation, XMLTag uniqueBatchItemId, ResponsePayload responsePayload) {
+		 super(operation, uniqueBatchItemId);
+		 this.responsePayload = responsePayload;
 	 	// TODO Auto-generated constructor stub
 	 }
 

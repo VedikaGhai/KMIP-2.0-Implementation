@@ -11,10 +11,8 @@ public class KeyBlock
     KeyValue keyValue;
     CryptographicLength cryptographicLength;
     CryptographicAlgorithm cryptographicAlgorithm;
-    
 
-    public KeyBlock(XMLTag keyFormatType, KeyValue keyValue, CryptographicLength cryptographicLength,
-            CryptographicAlgorithm cryptographicAlgorithm) {
+    public KeyBlock(XMLTag keyFormatType, KeyValue keyValue, CryptographicLength cryptographicLength, CryptographicAlgorithm cryptographicAlgorithm) {
         KeyFormatType = keyFormatType;
         this.keyValue = keyValue;
         this.cryptographicLength = cryptographicLength;
