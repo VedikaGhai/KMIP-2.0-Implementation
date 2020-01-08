@@ -50,6 +50,5 @@ public class KeyBlock
     public void setCryptographicAlgorithm(CryptographicAlgorithm cryptographicAlgorithm) {
         this.cryptographicAlgorithm = cryptographicAlgorithm;
     }
-
-    
+   
 }

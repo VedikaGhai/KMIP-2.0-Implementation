@@ -21,6 +21,7 @@ public class EnumTag extends KMIPEnum {
 	public static final int ObjectType= 0x420057;
 	public static final int Attribute= 0x420008;
 	public static final int CryptographicLength= 0x42002A;
+	public static final int ResultStatus=0x42007F;
 	public static HashMap<String, Integer> tagvalues;
 	static {
 		tagvalues=new HashMap<String, Integer>();

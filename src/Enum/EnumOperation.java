@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 public class EnumOperation extends KMIPEnum {
 	public static final int Create= 0x01;
+	public static final int Register=0x02;
 	public static HashMap<String, Integer> tagvalues;
 	static {
 		tagvalues=new HashMap<String, Integer>();
