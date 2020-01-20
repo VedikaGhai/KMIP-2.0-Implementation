@@ -13,7 +13,7 @@ public class Client {
     public static void main(String[] args) {
          
         try {
-        final char[] password = "password".toCharArray();
+        /*final char[] password = "password".toCharArray();
         final KeyStore keyStore = KeyStore.getInstance(new File("D:/keystore.jks"), password);
         final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
         trustManagerFactory.init(keyStore);
@@ -22,7 +22,10 @@ public class Client {
         keyManagerFactory.init(keyStore, password);
 
         final SSLContext context = SSLContext.getInstance("TLS");//"SSL" "TLS"
-        context.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
+        context.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);*/
+         
+        System.setProperty("javax.net.ssl.trustStore","D:/keystore.jks");
+        System.setProperty("javax.net.ssl.trustStorePassword", "password");
 
         SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
         try {
