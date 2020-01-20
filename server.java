@@ -11,6 +11,9 @@ import javax.net.ssl.SSLServerSocketFactory;
     
     public static void main(String args[])
     {
+        System.setProperty("javax.net.ssl.keyStore","D:/keystore.jks");
+        System.setProperty("javax.net.ssl.keyStorePassword", "password");
+     
         SSLServerSocketFactory sslServerSocketFactory = (SSLServerSocketFactory)SSLServerSocketFactory.getDefault();
          
         try {
