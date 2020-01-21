@@ -1,10 +1,7 @@
 import java.io.*;
 import java.net.Socket;
-import javax.net.SocketFactory;
 import java.util.*;
 import javax.net.ssl.*;
-import java.lang.*;
-import java.security.*;
  
 public class Client {
      
@@ -13,17 +10,17 @@ public class Client {
     public static void main(String[] args) {
          
         try {
-        /*final char[] password = "password".toCharArray();
-        final KeyStore keyStore = KeyStore.getInstance(new File("D:/keystore.jks"), password);
-        final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
-        trustManagerFactory.init(keyStore);
+        // final char[] password = "password".toCharArray();
+        // final KeyStore keyStore = KeyStore.getInstance(new File("D:/keystore.jks"), password);
+        // final TrustManagerFactory trustManagerFactory = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+        // trustManagerFactory.init(keyStore);
 
-        final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("NewSunX509");
-        keyManagerFactory.init(keyStore, password);
+        // final KeyManagerFactory keyManagerFactory = KeyManagerFactory.getInstance("NewSunX509");
+        // keyManagerFactory.init(keyStore, password);
 
-        final SSLContext context = SSLContext.getInstance("TLS");//"SSL" "TLS"
-        context.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);*/
-         
+        // final SSLContext context = SSLContext.getInstance("TLS");//"SSL" "TLS"
+        // context.init(keyManagerFactory.getKeyManagers(), trustManagerFactory.getTrustManagers(), null);
+
         System.setProperty("javax.net.ssl.trustStore","D:/keystore.jks");
         System.setProperty("javax.net.ssl.trustStorePassword", "password");
 
@@ -39,10 +36,14 @@ public class Client {
                     if(inputLine.equals("Over")){
                         break;
                     }
-                     
                     out.println(inputLine);
                     System.out.println(bufferedReader.readLine());
+
+                    String line = bufferedReader.readLine();
+                    System.out.println(line);
+                    out.println(line);
                 }
+                scanner.close();
             }
              
         } catch (Exception ex) {
@@ -53,6 +54,5 @@ public class Client {
         {
             e.printStackTrace();
         } 
-        
     }
 }
