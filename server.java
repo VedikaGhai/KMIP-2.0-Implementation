@@ -1,16 +1,21 @@
+  
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Scanner;
 
 import javax.net.ssl.SSLServerSocketFactory;
- public class server
+ 
+public class server
 {
     static final int port = 3000;
     
     public static void main(String args[])
     {
+        Scanner scanner = new Scanner(System.in);
+
         System.setProperty("javax.net.ssl.keyStore","D:/keystore.jks");
         System.setProperty("javax.net.ssl.keyStorePassword", "password");
      
@@ -30,6 +35,14 @@ import javax.net.ssl.SSLServerSocketFactory;
                 while((line = bufferedReader.readLine()) != null){
                     System.out.println(line);
                     out.println(line);
+
+                    System.out.println("Enter something:");
+                    String inputLine = scanner.nextLine();
+                    if(inputLine.equals("Over")){
+                        break;
+                    }
+                    out.println(inputLine);
+                    //System.out.println(bufferedReader.readLine());
                 }
             }
             System.out.println("Closed");
@@ -37,6 +50,6 @@ import javax.net.ssl.SSLServerSocketFactory;
         } catch (Exception ex) {
             ex.printStackTrace();
         }
-       
+       scanner.close();
     }
 }
