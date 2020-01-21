@@ -1,10 +1,29 @@
 package ClientInterfaces;
+import java.io.*;
+import java.net.Socket;
+import java.util.*;
+import javax.net.ssl.*;
 
 public class KMIPConnection
 {
-    EstablishConnection connect(String ip, int port)
+    Connection connect(String ip, int port)
     {
-        EstablishConnection e = new EstablishConnection();
+        try {
+            
+    
+            System.setProperty("javax.net.ssl.trustStore","/home/soha/keystore.jks");
+            System.setProperty("javax.net.ssl.trustStorePassword", "password");
+    
+            SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
+            try {
+                Socket socket = sslSocketFactory.createSocket(ip, port);
+                Connection connection= new Connection(socket, ip, port);
+                return connection;
+                }
+                 
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
 
         return e;
     }    

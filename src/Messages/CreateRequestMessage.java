@@ -42,7 +42,7 @@ public class CreateRequestMessage {
 
     KMIPRequestMessage requestMessage;
 
-    public void createSDRequestMessage() throws JAXBException
+    public File createKeyRequestMessage(CreateKey createKey) throws JAXBException
     {
         //KMIP v2.0
         ProtocolVersionMajor = new XMLTag("ProtocolVersionMajor", new EnumTag(EnumTag.ProtocolVersionMajor), new EnumType(EnumType.Integer), new KMIPInteger("2"));
@@ -84,11 +84,11 @@ public class CreateRequestMessage {
     }
 
 
-    public static void main(String[] args) throws JAXBException {
+    /*public static void main(String[] args) throws JAXBException {
         
         CreateRequestMessage createRequestMessage = new CreateRequestMessage();
-        createRequestMessage.createSDRequestMessage();
+        createRequestMessage.createKeyRequestMessage();
         //System.out.println(createRequestMessage.requestMessage.toString());
-    }
+    }*/
         
 }

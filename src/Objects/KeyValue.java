@@ -15,7 +15,6 @@ public class KeyValue
     public void setKeyMaterial(XMLTag keyMaterial) {
         KeyMaterial = keyMaterial;
 
-        //hi
     }
 
 }

@@ -1,6 +1,8 @@
 package ClientInterfaces;
 
-public class GetKey
+public class GetKey extends KMIPOperations
 {
+    String uniqueIdentifier;
+    
     
 }

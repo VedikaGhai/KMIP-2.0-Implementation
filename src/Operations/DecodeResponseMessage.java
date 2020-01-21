@@ -24,35 +24,40 @@ public class DecodeResponseMessage {
 
     List<ResponseBatchItem> responseBatchItem;
 
-    public void DOMParser() throws SAXException, IOException, ParserConfigurationException
+    public String DOMParser() throws SAXException, IOException, ParserConfigurationException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        Document document = builder.parse(new File("/home/soha/Documents/Response1.xml"));
+        Document document = builder.parse(new File("/home/soha/Documents/Response2.xml"));
 
         document.getDocumentElement().normalize();
 
         Element root = document.getDocumentElement();
         //System.out.println(root.getNodeName());
 
-        NodeList nList = document.getElementsByTagName("BatchItem");
+        NodeList nList = document.getElementsByTagName("UniqueIdentifier");
         System.out.println("============================");
         System.out.println(nList.getLength());
+        String s=null;
         for(int temp=0; temp< nList.getLength(); temp++)
         {
             Node node = nList.item(temp);
             Element e= (Element)node;
-            ResponseBatchItem responseBatchItem=new ResponseBatchItem(new XMLTag("Operation", new EnumTag(EnumTag.BatchItem), new EnumType(EnumType.Enummeration), new KMIPEnumeration("Register")), new XMLTag("ResultStatus", new EnumTag(EnumTag.ResultStatus), new EnumType(EnumType.Enummeration), new KMI)
+            //ResponseBatchItem responseBatchItem=new ResponseBatchItem(new XMLTag("Operation", new EnumTag(EnumTag.BatchItem), new EnumType(EnumType.Enummeration), new KMIPEnumeration("Register")), new XMLTag("ResultStatus", new EnumTag(EnumTag.ResultStatus), new EnumType(EnumType.Enummeration), new KMI)
+            //System.out.println(e.getElementsByTagName("value").item(0).getTextContent());
+            //System.out.println(e.getAttribute("value"));
+            s= e.getAttribute("value");
         }
+        return s;
 
     }
 
-    public static void main(String args[]) throws SAXException, IOException, ParserConfigurationException
+    /*public static void main(String args[]) throws SAXException, IOException, ParserConfigurationException 
     {
         DecodeResponseMessage d = new DecodeResponseMessage();
-        d.responseBatchItem=new ArrayList<ResponseBatchItem>();
+        //d.responseBatchItem=new ArrayList<ResponseBatchItem>();
         d.DOMParser();
-    }
+    }*/
 
 }
