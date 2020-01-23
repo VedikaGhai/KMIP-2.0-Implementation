@@ -10,7 +10,7 @@ public class EnumType extends KMIPEnum {
 	public static final int Integer= 0x02;
 	public static final int LongInteger= 0x03;
 	public static final int BigInteger= 0x04;
-	public static final int Enummeration= 0x05;
+	public static final int Enumeration= 0x05;
 	public static final int Boolean= 0x06;
 	public static final int TextString= 0x07;
 	public static final int ByteString= 0x08;

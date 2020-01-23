@@ -1,5 +1,9 @@
 package ClientInterfaces;
 import Messages.CreateRequestMessage;
+import java.io.*;
+import Operations.DecodeResponseMessage;
+import Messages.CreateRequestMessage;
+
 
 public class KMIPOperations
 {
@@ -9,11 +13,11 @@ public class KMIPOperations
     {
         
     }
-    KeyUniqueIDMap create(KeyUniqueIDMap k, Connection connection)
+    KeyUniqueIDMap create(KeyUniqueIDMap k, Connection connection) throws Exception
     {
         CreateRequestMessage createRequestMessage= new CreateRequestMessage();
-        CreateKey createKey=new CreateKey(k.algorithm, k.typeOfKey, k.length);
-        File f= createRequestmessage.createKeyRequestMessage(createKey);
+        CreateKey createKey=new CreateKey(k.algorithm, k.type, k.length);
+        File f= createRequestMessage.createKeyRequestMessage(createKey);
         //byte[] requestMessageByteArray = new byte[(int)f.length()];
         DataInputStream bis= new DataInputStream(new FileInputStream(f));
         DataOutputStream bout= new DataOutputStream(connection.socket.getOutputStream());
@@ -22,11 +26,15 @@ public class KMIPOperations
         DataInputStream dis=new DataInputStream(connection.socket.getInputStream());
         //String s= dis.readUTF();
         File response =new File("/home/soha/Documents/Response2.xml");
-        DataOutputStream dout= new DataOutputStream(new FileOuptutStream(response));
+        DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
         dout.writeUTF(dis.readUTF());
-        DecodeReponseMessage decodeResponseMessage= new DecodeResponseMessage();
+        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
         String uniqueIdentifier = decodeResponseMessage.DOMParser();
         KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
+
+        bis.close();
+        dout.close();
+
         return responseUID;
     }
     

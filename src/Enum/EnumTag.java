@@ -3,6 +3,7 @@ package Enum;
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
+import Enum.KMIPEnum;
 
 //TTLV tags
 public class EnumTag extends KMIPEnum {
@@ -22,6 +23,12 @@ public class EnumTag extends KMIPEnum {
 	public static final int Attribute= 0x420008;
 	public static final int CryptographicLength= 0x42002A;
 	public static final int ResultStatus=0x42007F;
+	public static final int CryptographicAlgorithm=0x420028;
+	public static final int CryptographicUsageMask=0x42002C;
+	public static final int AttributeName=0x42000A;
+	public static final int AttributeValue=0x42000B;
+	public static final int VendorIdentification=0x42009D;
+
 	public static HashMap<String, Integer> tagvalues;
 	static {
 		tagvalues=new HashMap<String, Integer>();
@@ -33,10 +40,8 @@ public class EnumTag extends KMIPEnum {
 				try {
 					tagvalues.put(f.getName(), f.getInt(EnumType.class));
 				} catch (IllegalArgumentException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				} catch (IllegalAccessException e) {
-					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
 			}

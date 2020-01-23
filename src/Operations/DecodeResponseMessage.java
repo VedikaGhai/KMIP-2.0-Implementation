@@ -24,6 +24,11 @@ public class DecodeResponseMessage {
 
     List<ResponseBatchItem> responseBatchItem;
 
+    public DecodeResponseMessage()
+    {
+        
+    }
+
     public String DOMParser() throws SAXException, IOException, ParserConfigurationException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();

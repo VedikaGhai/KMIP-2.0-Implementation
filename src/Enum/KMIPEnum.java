@@ -7,7 +7,6 @@ import java.util.Map.Entry;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-
 public class KMIPEnum {
 	Entry<String, Integer> value;
 	public final int defaultLength=4;

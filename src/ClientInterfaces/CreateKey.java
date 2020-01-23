@@ -1,5 +1,6 @@
 package ClientInterfaces;
 
+
 public class CreateKey extends KMIPOperations
 {
     //CreateKey specific methods
@@ -7,7 +8,7 @@ public class CreateKey extends KMIPOperations
     String typeOfKey;
     int length;
     
-    CreateKey(String algorithm, String typeOfkey, int length)
+    public CreateKey(String algorithm, String typeOfkey, int length)
     {
         this.algorithm=algorithm;
         this.typeOfKey=typeOfKey;

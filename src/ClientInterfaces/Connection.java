@@ -1,5 +1,5 @@
 package ClientInterfaces;
-import java.net,*;
+import java.net.*;
 
 public class Connection{
 
@@ -13,9 +13,5 @@ public class Connection{
         this.ip=ip;
         this.port=port;
     }
-
-    //call SSL connection methods
-    
-    
 
 }

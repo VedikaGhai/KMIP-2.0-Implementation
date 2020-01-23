@@ -8,14 +8,16 @@ import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
 
 import Attributes.Attribute;
+import ClientInterfaces.CreateKey;
 import Enum.EnumTag;
 import Enum.EnumType;
-import KMIPTypes.KMIPBoolean;
-import KMIPTypes.KMIPByteString;
-import KMIPTypes.KMIPInteger;
-import KMIPTypes.KMIPTextString;
 import Objects.ProtocolVersion;
 import Objects.XMLTag;
+import KMIPTypes.*;
+import Messages.KMIPRequestMessage;
+
+import java.io.*;
+import java.lang.*;
 
 public class CreateRequestMessage {
 
@@ -42,6 +44,11 @@ public class CreateRequestMessage {
 
     KMIPRequestMessage requestMessage;
 
+    public CreateRequestMessage()
+    {
+
+    }
+
     public File createKeyRequestMessage(CreateKey createKey) throws JAXBException
     {
         //KMIP v2.0
@@ -50,24 +57,36 @@ public class CreateRequestMessage {
 
         protocolVersion = new ProtocolVersion(ProtocolVersionMajor, ProtocolVersionMinor);
 
-        ClientCorrelationValue = new XMLTag("ClientCorrelationValue", new EnumTag(EnumTag.ClientCorrelationValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-CREATE-SD-1-20"));
+        ClientCorrelationValue = new XMLTag("ClientCorrelationValue", new EnumTag(EnumTag.ClientCorrelationValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20"));
     
-        BatchOrderOption = new XMLTag("BatchOrderOption", new EnumTag(EnumTag.BatchOrderOption), new EnumType(EnumType.Boolean), new KMIPBoolean(true));
+        //There is not BatchOrderOption tag??? - DONE
+        //BatchOrderOption = new XMLTag("BatchOrderOption", new EnumTag(EnumTag.BatchOrderOption), new EnumType(EnumType.Boolean), new KMIPBoolean(true));
 
-        BatchCount = new XMLTag("BatchCount", new EnumTag(EnumTag.BatchCount), new EnumType(EnumType.Integer), new KMIPInteger("1"));
+        BatchCount = new XMLTag("BatchCount", new EnumTag(EnumTag.BatchCount), new EnumType(EnumType.Integer), new KMIPInteger("5"));
     
-        requestHeader = new RequestHeader(protocolVersion, ClientCorrelationValue, BatchOrderOption, BatchCount);
+        requestHeader = new RequestHeader(protocolVersion, ClientCorrelationValue, BatchCount);
 
-        //DOUBT - EnumOperation?
-        Operation = new XMLTag("Operation", new EnumTag(EnumTag.Operation), new EnumType(EnumType.Enummeration), new KMIPTextString("Create"));
+        //DOUBT - EnumOperation? - DONE
+        Operation = new XMLTag("Operation", new EnumTag(EnumTag.Operation), new EnumType(EnumType.Enumeration), new KMIPTextString("Create"));
 
         UniqueBatchItemID = new XMLTag("UniqueBatchItemID", new EnumTag(EnumTag.UniqueBatchItemId), new EnumType(EnumType.ByteString), new KMIPByteString("01"));
     
-        ObjectType = new XMLTag("ObjectType", new EnumTag(EnumTag.ObjectType), new EnumType(EnumType.Enummeration), new KMIPTextString("SecretData"));
+        ObjectType = new XMLTag("ObjectType", new EnumTag(EnumTag.ObjectType), new EnumType(EnumType.Enumeration), new KMIPTextString("SymmetricKey"));
         
-        attribute = new Attribute("CryptographicLength", new KMIPInteger("80"), new EnumType(EnumType.Integer), new EnumTag(EnumTag.CryptographicLength));
+        Attribute attribute1 = new Attribute("CryptographicLength", new KMIPInteger("128"), new EnumType(EnumType.Integer), new EnumTag(EnumTag.CryptographicLength));
+        Attribute attribute2 = new Attribute("CryptographicAlgorithm", new KMIPTextString("AES"), new EnumType(EnumType.Enumeration), new EnumTag(EnumTag.CryptographicAlgorithm));
+        Attribute attribute3 = new Attribute("CryptographicUsageMask", new KMIPTextString("Decrypt Encrypt"), new EnumType(EnumType.Integer), new EnumTag(EnumTag.CryptographicUsageMask));
+        Attribute attribute4 = new Attribute("VendorIdentification", new KMIPTextString("x"), new EnumType(EnumType.TextString), new EnumTag(EnumTag.VendorIdentification));
+        Attribute attribute5 = new Attribute("AttributeName", new KMIPTextString("ID"), new EnumType(EnumType.TextString), new EnumTag(EnumTag.AttributeName));
+        Attribute attribute6 = new Attribute("AttributeValue", new KMIPTextString("TC-OFFSET-1-20-key1"), new EnumType(EnumType.TextString), new EnumTag(EnumTag.AttributeValue));
+
         attributes = new ArrayList<Attribute>();
-        attributes.add(attribute);
+        attributes.add(attribute1);
+        attributes.add(attribute2);
+        attributes.add(attribute3);
+        attributes.add(attribute4);
+        attributes.add(attribute5);
+        attributes.add(attribute6);
 
         requestPayload = new RequestPayload(ObjectType, attributes);
 
@@ -80,9 +99,10 @@ public class CreateRequestMessage {
 
         final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
         final Marshaller marshaller = context.createMarshaller();
-        marshaller.marshal(requestMessage, System.out);    
+        marshaller.marshal(requestMessage, System.out); 
+        return new File("/home/soha/Documents/Response1.xml");
+      
     }
-
 
     /*public static void main(String[] args) throws JAXBException {
         
