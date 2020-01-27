@@ -33,7 +33,7 @@ public class XMLTag
         this.value = value;
     }
 
-    @XmlElement
+    //@XmlElement
     public String getName() {
         return name;
     }
@@ -49,7 +49,8 @@ public class XMLTag
     public void setTag(EnumTag tag) {
         this.tag = tag;
     }
-    @XmlElement
+
+    //@XmlElement
     public EnumType getType() {
         return type;
     }
@@ -57,7 +58,8 @@ public class XMLTag
     public void setType(EnumType type) {
         this.type = type;
     }
-    @XmlElement
+
+    //@XmlElement
     public KMIPType getValue() {
         return value;
     }

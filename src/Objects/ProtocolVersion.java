@@ -27,6 +27,7 @@ public class ProtocolVersion{
     public void setProtocolVersionMajor(XMLTag protocolVersionMajor) {
         ProtocolVersionMajor = protocolVersionMajor;
     }
+    
     @XmlElement
     public XMLTag getProtocolVersionMinor() {
         return ProtocolVersionMinor;

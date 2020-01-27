@@ -1,7 +1,6 @@
 package ClientInterfaces;
 import java.io.*;
 import java.lang.*;
-
 public class MainApplication
 {
     public static void main(String args[]) throws Exception

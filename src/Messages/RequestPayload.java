@@ -24,6 +24,7 @@ public class RequestPayload {
 		this.objectType = objectType;
 		this.attributes = attributes;
 	}
+
 	@XmlElement
 	public XMLTag getObjectType() {
 		return objectType;
@@ -32,6 +33,7 @@ public class RequestPayload {
 	public void setObjectType(XMLTag objectType) {
 		this.objectType = objectType;
 	}
+	
 	@XmlElement
 	public List<Attribute> getAttributes() {
 		return attributes;

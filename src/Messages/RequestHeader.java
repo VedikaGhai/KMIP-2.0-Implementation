@@ -40,6 +40,7 @@ public class RequestHeader {
 	public void setProtocolVersion(ProtocolVersion protocolVersion) {
 		this.protocolVersion = protocolVersion;
 	}
+	
 	@XmlElement
 	public XMLTag getClientCorrelationValue() {
 		return ClientCorrelationValue;
@@ -48,6 +49,7 @@ public class RequestHeader {
 	public void setClientCorrelationValue(XMLTag clientCorrelationValue) {
 		ClientCorrelationValue = clientCorrelationValue;
 	}
+
 	@XmlElement
 	public XMLTag getBatchOrderOption() {
 		return BatchOrderOption;
@@ -56,6 +58,7 @@ public class RequestHeader {
 	public void setBatchOrderOption(XMLTag batchOrderOption) {
 		BatchOrderOption = batchOrderOption;
 	}
+
 	@XmlElement
 	public XMLTag getBatchCount() {
 		return BatchCount;

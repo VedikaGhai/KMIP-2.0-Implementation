@@ -97,12 +97,23 @@ public class CreateRequestMessage {
 
         requestMessage = new KMIPRequestMessage(requestHeader, batchItems);
 
+        //Working!
+        File file = new File("/home/soha/Documents/Gheee.xml");
+    
         final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
         final Marshaller marshaller = context.createMarshaller();
+
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        
+        //Working!
+        marshaller.marshal(requestMessage, file);
+        
         marshaller.marshal(requestMessage, System.out); 
-        return new File("/home/soha/Documents/Response1.xml");
-      
+        
+        return file;
+
     }
+   
 
     /*public static void main(String[] args) throws JAXBException {
         

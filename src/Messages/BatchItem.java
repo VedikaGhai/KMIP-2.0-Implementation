@@ -37,7 +37,6 @@ public class BatchItem {
 		UniqueBatchItemId = uniqueBatchItemId;
 	}
 
-	
 	public String toString() {
 		return "BatchItem [UniqueBatchItemId=" + UniqueBatchItemId + ", operation=" + operation + "]";
 	}
