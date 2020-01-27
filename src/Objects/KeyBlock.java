@@ -1,5 +1,4 @@
 package Objects;
-
 import javax.xml.crypto.dsig.keyinfo.KeyValue;
 
 import Attributes.CryptographicAlgorithm;
@@ -7,6 +6,7 @@ import Attributes.CryptographicLength;
 
 public class KeyBlock
 {
+    
     XMLTag KeyFormatType;
     KeyValue keyValue;
     CryptographicLength cryptographicLength;

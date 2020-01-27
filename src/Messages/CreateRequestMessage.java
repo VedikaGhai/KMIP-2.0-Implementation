@@ -1,5 +1,4 @@
 package Messages;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -111,7 +110,6 @@ public class CreateRequestMessage {
         marshaller.marshal(requestMessage, System.out); 
         
         return file;
-
     }
    
 

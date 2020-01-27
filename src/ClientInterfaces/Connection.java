@@ -1,6 +1,7 @@
 package ClientInterfaces;
 import java.net.*;
 
+
 public class Connection{
 
     Socket socket;
@@ -13,5 +14,4 @@ public class Connection{
         this.ip=ip;
         this.port=port;
     }
-
 }

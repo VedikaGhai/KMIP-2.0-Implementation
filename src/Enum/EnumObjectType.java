@@ -1,5 +1,4 @@
 package Enum;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
@@ -24,6 +23,7 @@ public class EnumObjectType extends KMIPEnum {
 					e.printStackTrace();
 				}
 			}
+			
 		}
 	}
 	public EnumObjectType(int value)

@@ -1,5 +1,4 @@
 package Attributes;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import Enum.EnumTag;
@@ -10,7 +9,7 @@ import KMIPTypes.KMIPInteger;
 public class CryptographicLength extends Attribute{
 
 	public CryptographicLength(){
-		
+			
 	}
 
 	public CryptographicLength(KMIPInteger value) {

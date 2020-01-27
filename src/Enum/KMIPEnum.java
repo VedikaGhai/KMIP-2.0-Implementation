@@ -1,5 +1,4 @@
 package Enum;
-
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -28,7 +27,6 @@ public class KMIPEnum {
 	}
 
 	//function to get entry if you have the string (name) (that corresponds to the hex value)
-	
 	public Entry<String, Integer> getEntry(String value, HashMap<String, Integer> tagvalues)
 	{
 		for(Map.Entry<String, Integer> e: tagvalues.entrySet() )

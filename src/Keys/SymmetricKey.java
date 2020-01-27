@@ -1,5 +1,4 @@
 package Keys;
-
 import Objects.KeyBlock;
 
 public class SymmetricKey
@@ -10,6 +9,7 @@ public class SymmetricKey
         this.keyBlock = keyBlock;
     }
 
+    
     public KeyBlock getKeyBlock() {
         return keyBlock;
     }

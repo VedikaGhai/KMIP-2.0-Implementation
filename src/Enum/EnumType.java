@@ -1,9 +1,13 @@
 package Enum;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.*;
+
+//@XmlAccessorType(XmlAccessType.FIELD)
 
 //TTLV types
 public class EnumType extends KMIPEnum {
@@ -17,6 +21,7 @@ public class EnumType extends KMIPEnum {
 	public static final int DateTime= 0x09;
 	public static final int Interval= 0x0A;
 	public static HashMap<String, Integer> tagvalues;
+	//String name1;
 	static {
 		tagvalues=new HashMap<String, Integer>();
 		Field tagfieldvalues[]=EnumType.class.getDeclaredFields();
@@ -36,11 +41,26 @@ public class EnumType extends KMIPEnum {
 			}
 		}
 	}
+	
 	public EnumType(int value)
 	{
 		this.value=getEntry(value, tagvalues);
 		System.out.println("EnumType : "+value);
+		//this.name1=this.value.getKey();
 	}
+
+	//@XmlAttribute(name="type")
+	/*public String getName1()
+	{
+		return this.name1;
+	}
+
+	public void setName1(String name1)
+	{
+		this.name1=name1;	
+	}*/
+
+	
 
 	
 	

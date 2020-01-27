@@ -1,5 +1,4 @@
 package KMIPTypes;
-
 import java.util.Arrays;
 
 public class KMIPByteString extends KMIPType {
@@ -16,6 +15,7 @@ public class KMIPByteString extends KMIPType {
 		setValue(value);
 	}
 
+	
 	public KMIPByteString(String value) {
 		super(0);
 		setValue(value);

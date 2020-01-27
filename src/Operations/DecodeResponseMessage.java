@@ -19,9 +19,8 @@ import Enum.EnumType;
 import KMIPTypes.KMIPEnumeration;
 import Messages.ResponseBatchItem;
 import Objects.XMLTag;
-
-public class DecodeResponseMessage {
-
+public class DecodeResponseMessage 
+{
     List<ResponseBatchItem> responseBatchItem;
 
     public DecodeResponseMessage()
@@ -29,12 +28,12 @@ public class DecodeResponseMessage {
         
     }
 
-    public String DOMParser() throws SAXException, IOException, ParserConfigurationException
+    public String DOMParser(File f) throws SAXException, IOException, ParserConfigurationException
     {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         DocumentBuilder builder = factory.newDocumentBuilder();
 
-        Document document = builder.parse(new File("/home/soha/Documents/Response2.xml"));
+        Document document = builder.parse(f);
 
         document.getDocumentElement().normalize();
 
@@ -53,6 +52,7 @@ public class DecodeResponseMessage {
             //System.out.println(e.getElementsByTagName("value").item(0).getTextContent());
             //System.out.println(e.getAttribute("value"));
             s= e.getAttribute("value");
+            System.out.println(s);
         }
         return s;
 

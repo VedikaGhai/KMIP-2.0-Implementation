@@ -1,5 +1,4 @@
 package Messages;
-
 import Enum.EnumOperation;
 import Enum.EnumResultStatus;
 import KMIPTypes.KMIPByteString;
@@ -10,6 +9,7 @@ import Objects.XMLTag;
 public class ResponseBatchItem  extends BatchItem
 {
 	ResponsePayload responsePayload;
+	
 	public ResponseBatchItem(XMLTag operation, XMLTag uniqueBatchItemId, ResponsePayload responsePayload) {
 		 super(operation, uniqueBatchItemId);
 		 this.responsePayload = responsePayload;

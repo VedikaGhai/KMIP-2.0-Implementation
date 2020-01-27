@@ -1,5 +1,4 @@
 package Enum;
-
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
@@ -31,7 +30,7 @@ public class EnumOperation extends KMIPEnum {
 	{
 		this.value=getEntry(value, tagvalues);
 	}
-
+	
 	@Override
 	public String toString() {
 		return "EnumOperation []";

@@ -1,13 +1,15 @@
 package ClientInterfaces;
 import java.io.*;
 import java.lang.*;
+
+
 public class MainApplication
 {
     public static void main(String args[]) throws Exception
     {
         BufferedReader buf=new BufferedReader(new InputStreamReader(System.in));
         KMIPConnection kconn = new KMIPConnection();
-        Connection connection = kconn.connect(" ", 0); //String IP Address, integer port number
+        Connection connection = kconn.connect("localhost", 4000); //String IP Address, integer port number
         KMIPOperations kops = new KMIPOperations();
         System.out.println("Algorithm :");
         String algorithm=buf.readLine();

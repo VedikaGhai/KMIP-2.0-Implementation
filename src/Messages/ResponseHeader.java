@@ -1,5 +1,5 @@
 package Messages;
-
-public class ResponseHeader {
+public class ResponseHeader 
+{
 
 }

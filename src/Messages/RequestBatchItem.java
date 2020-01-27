@@ -1,11 +1,11 @@
 package Messages;
-
 import javax.xml.bind.annotation.XmlRootElement;
 
 import Objects.XMLTag;
 
 @XmlRootElement
-public class RequestBatchItem extends BatchItem {
+public class RequestBatchItem extends BatchItem 
+{
 
 	RequestPayload requestPayload;
 

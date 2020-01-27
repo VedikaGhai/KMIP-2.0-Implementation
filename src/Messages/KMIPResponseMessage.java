@@ -1,5 +1,5 @@
 package Messages;
-
-public class KMIPResponseMessage {
+public class KMIPResponseMessage 
+{
 
 }

@@ -4,6 +4,7 @@ import java.net.Socket;
 import java.util.*;
 import javax.net.ssl.*;
 
+
 public class KMIPConnection
 {
 
@@ -11,7 +12,6 @@ public class KMIPConnection
     {
         try {
                    
-    
             System.setProperty("javax.net.ssl.trustStore","/home/soha/keystore.jks");
             System.setProperty("javax.net.ssl.trustStorePassword", "password");
     

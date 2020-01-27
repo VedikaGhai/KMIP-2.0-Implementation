@@ -14,7 +14,7 @@ public class Attribute {
 	EnumType type;
 	EnumTag tag;
 	int length;
-
+	
 	public Attribute(){
 		//default constructor
 	}

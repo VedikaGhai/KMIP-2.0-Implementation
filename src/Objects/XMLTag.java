@@ -1,20 +1,30 @@
 package Objects;
-
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+
+import javax.xml.bind.annotation.*;
 
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 
 @XmlRootElement
 public class XMLTag
 {
     String name;
     EnumTag tag;
+
+    //@XmlAttribute
     EnumType type;
+
+
+    //@XmlAttribute
     KMIPType value;
 
+    
     public XMLTag(){
 
     }
@@ -50,7 +60,6 @@ public class XMLTag
         this.tag = tag;
     }
 
-    //@XmlElement
     public EnumType getType() {
         return type;
     }
@@ -59,7 +68,6 @@ public class XMLTag
         this.type = type;
     }
 
-    //@XmlElement
     public KMIPType getValue() {
         return value;
     }

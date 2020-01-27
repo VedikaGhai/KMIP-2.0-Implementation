@@ -1,11 +1,15 @@
 package Objects;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-public class ProtocolVersion{
+import javax.xml.bind.annotation.*;
 
+
+@XmlAccessorType(XmlAccessType.FIELD)
+
+@XmlRootElement
+public class ProtocolVersion
+{
     XMLTag ProtocolVersionMajor;
     XMLTag ProtocolVersionMinor;
 

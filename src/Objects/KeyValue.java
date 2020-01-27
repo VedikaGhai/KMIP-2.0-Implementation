@@ -1,5 +1,4 @@
 package Objects;
-
 public class KeyValue
 {
     XMLTag KeyMaterial;
@@ -12,6 +11,7 @@ public class KeyValue
         return KeyMaterial;
     }
 
+    
     public void setKeyMaterial(XMLTag keyMaterial) {
         KeyMaterial = keyMaterial;
 

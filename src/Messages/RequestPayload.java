@@ -1,5 +1,4 @@
 package Messages;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -11,6 +10,7 @@ import Objects.XMLTag;
 
 @XmlRootElement
 public class RequestPayload {
+	
 	XMLTag objectType;
 	//Attribute[] attributes;
 	List<Attribute> attributes;

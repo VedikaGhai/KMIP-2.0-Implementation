@@ -1,5 +1,4 @@
 package Messages;
-
 //import Enum.EnumObjectType;
 import Keys.SymmetricKey;
 import Objects.XMLTag;
@@ -16,7 +15,7 @@ public class ResponsePayload {
      3. There are all 3 - ObjectType, UnqiueIdentifier and SymmetricKey in the ResponsePayload
     */
 
-     public ResponsePayload(XMLTag objectType, XMLTag uniqueIdentifier, SymmetricKey symmetricKey) {
+    public ResponsePayload(XMLTag objectType, XMLTag uniqueIdentifier, SymmetricKey symmetricKey) {
         this.objectType = objectType;
         this.uniqueIdentifier = uniqueIdentifier;
         this.symmetricKey = symmetricKey;
