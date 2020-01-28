@@ -16,7 +16,6 @@ public class ProtocolVersion
     public ProtocolVersion(){
         
     }
-
     //constructor
     public ProtocolVersion(XMLTag protocolVersionMajor, XMLTag protocolVersionMinor) {
         ProtocolVersionMajor = protocolVersionMajor;

@@ -7,7 +7,6 @@ import javax.net.ssl.*;
 
 public class KMIPConnection
 {
-
     Connection connect(String ip, int port)
     {
         try {

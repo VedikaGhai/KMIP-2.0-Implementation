@@ -20,7 +20,6 @@ public class KMIPType {
 	{
 		
 	}
-
 	//@XmlElement
 	public int getDefaultLength()
 	{

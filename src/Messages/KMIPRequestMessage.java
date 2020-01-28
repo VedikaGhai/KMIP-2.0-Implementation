@@ -14,7 +14,6 @@ public class KMIPRequestMessage {
 	public KMIPRequestMessage(){
 
 	}
-
 	//Request Message setter
 	public KMIPRequestMessage(RequestHeader requestHeader, List<RequestBatchItem> batchItems) {
 		super();

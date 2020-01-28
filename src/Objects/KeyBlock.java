@@ -6,7 +6,6 @@ import Attributes.CryptographicLength;
 
 public class KeyBlock
 {
-    
     XMLTag KeyFormatType;
     KeyValue keyValue;
     CryptographicLength cryptographicLength;

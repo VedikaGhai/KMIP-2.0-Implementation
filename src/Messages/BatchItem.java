@@ -13,7 +13,6 @@ public class BatchItem {
 	public BatchItem(){
 		
 	}
-
 	public BatchItem(XMLTag operation, XMLTag uniqueBatchItemId) {
 		this.operation = operation;
 		UniqueBatchItemId = uniqueBatchItemId;

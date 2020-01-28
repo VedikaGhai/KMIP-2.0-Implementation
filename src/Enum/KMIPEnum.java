@@ -14,6 +14,7 @@ public class KMIPEnum {
 
 	}
 
+	
 	//function to get entry if you have the hex value
 	
 	public Entry<String, Integer> getEntry(int value, HashMap<String, Integer> tagvalues)

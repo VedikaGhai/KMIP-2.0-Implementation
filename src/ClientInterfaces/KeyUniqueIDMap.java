@@ -9,6 +9,7 @@ public class KeyUniqueIDMap
     String value;
     String type;
     
+    
     KeyUniqueIDMap(String algorithm, int length, String type)
     {
         this.algorithm=algorithm;

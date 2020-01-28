@@ -8,7 +8,6 @@ import Messages.CreateRequestMessage;
 public class KMIPOperations
 {
     //call the desired operation class and its methods
-
     public KMIPOperations() 
     {
         
@@ -20,14 +19,30 @@ public class KMIPOperations
         CreateKey createKey=new CreateKey(k.algorithm, k.type, k.length);
         File f= createRequestMessage.createKeyRequestMessage(createKey);
         //byte[] requestMessageByteArray = new byte[(int)f.length()];
-        BufferedReader bis= new BufferedReader(new InputStreamReader(new FileInputStream(f)));
+        //BufferedReader bis= new BufferedReader(new InputStreamReader(new FileInputStream(f)));
         DataOutputStream bout= new DataOutputStream(connection.socket.getOutputStream());
+        //DataInputStream bin=new DataInputStream(new FileInputStream(f));
+        InputStreamReader isr = new InputStreamReader(new FileInputStream(f), "UTF-8");
+        BufferedReader bin = new BufferedReader(isr);
+
         String line=null;
-        while((line=bis.readLine())!=null)
+        System.out.println("Hello");
+        
+        while((line=bin.readLine())!=null)
         {
             bout.writeUTF(line);
         }
-        Thread.sleep(1000);
+        //bout.writeUTF(bin.readUTF());
+        //System.out.println(bin.available());
+
+        /*while(bin.available()>0)
+        {
+            String sin=bin.readUTF();
+            System.out.println(sin);
+            bout.writeUTF(sin);
+        }*/
+
+        //Thread.sleep(1000);
         DataInputStream dis=new DataInputStream(connection.socket.getInputStream());
         //String s= dis.readUTF();
         File response =new File("/home/soha/Documents/Response3.xml");
@@ -36,8 +51,8 @@ public class KMIPOperations
         DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
         String uniqueIdentifier = decodeResponseMessage.DOMParser(response);
         KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
-        
-        bis.close();
+            
+        bin.close();
         dout.close();
 
         return responseUID;

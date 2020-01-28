@@ -2,7 +2,6 @@ package Attributes;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;

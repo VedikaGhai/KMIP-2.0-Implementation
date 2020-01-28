@@ -27,6 +27,7 @@ public class KMIPInteger extends KMIPType{
 
 	}
 
+	
 	public String toString()
 	{
 		return Integer.toString(value);

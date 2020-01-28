@@ -17,6 +17,7 @@ public class XMLTag
     String name;
     EnumTag tag;
 
+    
     //@XmlAttribute
     EnumType type;
 

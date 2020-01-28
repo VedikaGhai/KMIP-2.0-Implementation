@@ -19,4 +19,5 @@ public class ResponseBatchItem  extends BatchItem
 	// EnumResultStatus resultStatus;
 	// ResponsePayload responsePayload;
 
+	
 }

@@ -25,5 +25,4 @@ public class KMIPTextString extends KMIPType{
     {
         this.value=value;
     }
-    
 }

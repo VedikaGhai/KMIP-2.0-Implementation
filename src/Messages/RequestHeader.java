@@ -16,7 +16,6 @@ public class RequestHeader {
 	public RequestHeader(){
 		
 	}
-
 	public RequestHeader(ProtocolVersion protocolVersion, XMLTag clientCorrelationValue, XMLTag batchOrderOption,
 			XMLTag batchCount) {
 		this.protocolVersion = protocolVersion;

@@ -9,6 +9,7 @@ import javax.xml.bind.annotation.*;
 
 //@XmlAccessorType(XmlAccessType.FIELD)
 
+
 //TTLV types
 public class EnumType extends KMIPEnum {
 	public static final int Integer= 0x02;

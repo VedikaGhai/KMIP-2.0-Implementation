@@ -1,6 +1,5 @@
 package Attributes;
 import javax.xml.bind.annotation.XmlRootElement;
-
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPInteger;

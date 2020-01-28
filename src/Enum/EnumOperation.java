@@ -26,6 +26,7 @@ public class EnumOperation extends KMIPEnum {
 			}
 		}
 	}
+	
 	public EnumOperation(int value)
 	{
 		this.value=getEntry(value, tagvalues);

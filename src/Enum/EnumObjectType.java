@@ -26,6 +26,7 @@ public class EnumObjectType extends KMIPEnum {
 			
 		}
 	}
+	
 	public EnumObjectType(int value)
 	{
 		this.value=getEntry(value, tagvalues);

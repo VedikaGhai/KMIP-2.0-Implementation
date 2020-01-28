@@ -18,7 +18,6 @@ public class RequestPayload {
 	public RequestPayload(){
 		
 	}
-
 	public RequestPayload(XMLTag objectType, List<Attribute> attributes) {
 		this.attributes =  new ArrayList<Attribute>();
 		this.objectType = objectType;

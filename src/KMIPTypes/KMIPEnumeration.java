@@ -27,6 +27,7 @@ public class KMIPEnumeration extends KMIPType
 
 	}
 
+	
 	public String toString()
 	{
 		return Integer.toString(value);

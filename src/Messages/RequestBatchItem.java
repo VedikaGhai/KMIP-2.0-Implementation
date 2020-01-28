@@ -6,7 +6,6 @@ import Objects.XMLTag;
 @XmlRootElement
 public class RequestBatchItem extends BatchItem 
 {
-
 	RequestPayload requestPayload;
 
 	public RequestBatchItem(){

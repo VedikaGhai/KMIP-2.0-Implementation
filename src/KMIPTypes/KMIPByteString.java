@@ -20,7 +20,6 @@ public class KMIPByteString extends KMIPType {
 		super(0);
 		setValue(value);
 	}
-
 	public void setValue(byte[] value) {
 		this.value = value;
 	}

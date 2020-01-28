@@ -25,6 +25,7 @@ public class EnumResultStatus extends KMIPEnum {
 			}
 		}
 	}
+	
 	public EnumResultStatus(int value)
 	{
 		this.value=getEntry(value, tagvalues);

@@ -1,10 +1,11 @@
 package Messages;
+
 //import Enum.EnumObjectType;
 import Keys.SymmetricKey;
 import Objects.XMLTag;
 
-public class ResponsePayload {
-
+public class ResponsePayload 
+{
     XMLTag objectType;
     XMLTag uniqueIdentifier;
     SymmetricKey symmetricKey;

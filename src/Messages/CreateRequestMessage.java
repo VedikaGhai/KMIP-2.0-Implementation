@@ -14,7 +14,6 @@ import Objects.ProtocolVersion;
 import Objects.XMLTag;
 import KMIPTypes.*;
 import Messages.KMIPRequestMessage;
-
 import java.io.*;
 import java.lang.*;
 
@@ -97,7 +96,7 @@ public class CreateRequestMessage {
         requestMessage = new KMIPRequestMessage(requestHeader, batchItems);
 
         //Working!
-        File file = new File("/home/soha/Documents/Gheee.xml");
+        File file = new File("/home/soha/Documents/Gheee&Poha.xml");
     
         final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
         final Marshaller marshaller = context.createMarshaller();

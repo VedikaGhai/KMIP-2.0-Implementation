@@ -20,7 +20,6 @@ public class KMIPBoolean extends KMIPType {
 		super(8);
 		setValue(value);
 	}
-
 	public void setValue(String value)
 	{
 		if(value.toLowerCase().equals("true"))

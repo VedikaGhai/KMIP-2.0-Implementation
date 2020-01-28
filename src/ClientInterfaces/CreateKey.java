@@ -7,6 +7,7 @@ public class CreateKey extends KMIPOperations
     String typeOfKey;
     int length;
     
+    
     public CreateKey(String algorithm, String typeOfkey, int length)
     {
         this.algorithm=algorithm;

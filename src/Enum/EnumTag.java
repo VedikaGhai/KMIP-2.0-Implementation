@@ -6,6 +6,7 @@ import Enum.KMIPEnum;
 
 //TTLV tags
 public class EnumTag extends KMIPEnum {
+	
 	public static final int ProtocolVersion= 0x420069;
 	public static final int ProtocolVersionMajor= 0x42006A;
 	public static final int ProtocolVersionMinor= 0x42006B;
