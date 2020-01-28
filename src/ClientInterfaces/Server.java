@@ -47,11 +47,11 @@ public class Server {
 
                 Thread.sleep(1000);
 
-                out.close();
-                in.close();
-                bis.close();
-                sslSocket.close();
-                sslServerSocket.close();
+                //out.close();
+                //in.close();
+                //bis.close();
+                //sslSocket.close();
+                //sslServerSocket.close();
 
             }
         }

@@ -7,6 +7,8 @@ import Messages.CreateRequestMessage;
 
 public class KMIPOperations
 {
+    
+
     //call the desired operation class and its methods
 
     public KMIPOperations() 
@@ -37,8 +39,8 @@ public class KMIPOperations
         String uniqueIdentifier = decodeResponseMessage.DOMParser(response);
         KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
         
-        bis.close();
-        dout.close();
+        //bis.close();
+        //dout.close();
 
         return responseUID;
     }
