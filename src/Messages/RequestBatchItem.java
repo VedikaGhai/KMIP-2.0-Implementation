@@ -1,4 +1,5 @@
 package Messages;
+
 import javax.xml.bind.annotation.XmlRootElement;
 
 import Objects.XMLTag;

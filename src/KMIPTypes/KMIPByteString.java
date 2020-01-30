@@ -1,4 +1,5 @@
 package KMIPTypes;
+
 import java.util.Arrays;
 
 public class KMIPByteString extends KMIPType {

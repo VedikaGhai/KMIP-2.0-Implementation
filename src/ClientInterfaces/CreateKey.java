@@ -1,7 +1,6 @@
 package ClientInterfaces;
 
-public class CreateKey extends KMIPOperations
-{
+public class CreateKey extends KMIPOperations{
     //CreateKey specific methods
     String algorithm;
     String typeOfKey;

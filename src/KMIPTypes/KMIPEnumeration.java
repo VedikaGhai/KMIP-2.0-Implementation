@@ -1,4 +1,5 @@
 package KMIPTypes;
+
 import javax.xml.bind.annotation.XmlAttribute;
 
 public class KMIPEnumeration extends KMIPType

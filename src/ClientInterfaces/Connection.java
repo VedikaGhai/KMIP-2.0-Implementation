@@ -1,6 +1,6 @@
 package ClientInterfaces;
-import java.net.*;
 
+import java.net.*;
 
 public class Connection{
 

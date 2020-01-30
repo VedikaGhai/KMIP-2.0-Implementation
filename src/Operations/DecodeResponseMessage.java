@@ -3,7 +3,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -52,7 +51,7 @@ public class DecodeResponseMessage
             //System.out.println(e.getElementsByTagName("value").item(0).getTextContent());
             //System.out.println(e.getAttribute("value"));
             s= e.getAttribute("value");
-            System.out.println(s);
+            //System.out.println(s);
         }
         return s;
 
