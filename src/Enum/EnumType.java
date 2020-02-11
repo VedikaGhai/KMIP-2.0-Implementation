@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
+
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.*;
@@ -11,6 +12,8 @@ import javax.xml.bind.annotation.*;
 //@XmlAccessorType(XmlAccessType.FIELD)
 
 //TTLV types
+@XmlRootElement
+@XmlAccessorType(XmlAccessType.NONE)
 public class EnumType extends KMIPEnum {
 	public static final int Integer= 0x02;
 	public static final int LongInteger= 0x03;
@@ -23,6 +26,9 @@ public class EnumType extends KMIPEnum {
 	public static final int Interval= 0x0A;
 	public static HashMap<String, Integer> tagvalues;
 	//String name1;
+
+	String type;
+
 	static {
 		tagvalues=new HashMap<String, Integer>();
 		Field tagfieldvalues[]=EnumType.class.getDeclaredFields();
@@ -50,6 +56,25 @@ public class EnumType extends KMIPEnum {
 		//this.name1=this.value.getKey();
 	}
 
+	@XmlAttribute(name = "type")
+	public String getType()
+	{
+		this.type = this.value.getKey();
+		return this.type;
+	}
+
+	public void setType(String type)
+	{
+		this.type = type;
+	}
+
+	public EnumType()
+	{
+
+	}
+	
+
+	
 	//@XmlAttribute(name="type")
 	/*public String getName1()
 	{

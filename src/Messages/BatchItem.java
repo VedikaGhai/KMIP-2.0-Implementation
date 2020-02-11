@@ -5,8 +5,9 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import Objects.XMLTag;
 
-@XmlRootElement
-public class BatchItem {
+//@XmlRootElement
+public class BatchItem 
+{
 	
 	XMLTag operation;
 	XMLTag UniqueBatchItemId;
@@ -20,7 +21,7 @@ public class BatchItem {
 		UniqueBatchItemId = uniqueBatchItemId;
 	}
 
-	@XmlElement
+	//@XmlElement
 	public XMLTag getOperation() {
 		return operation;
 	}
@@ -29,7 +30,7 @@ public class BatchItem {
 		this.operation = operation;
 	}
 
-	@XmlElement
+	//@XmlElement
 	public XMLTag getUniqueBatchItemId() {
 		return UniqueBatchItemId;
 	}

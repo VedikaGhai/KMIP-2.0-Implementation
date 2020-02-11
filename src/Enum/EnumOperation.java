@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
+
 public class EnumOperation extends KMIPEnum {
 	public static final int Create= 0x01;
 	public static final int Register=0x02;

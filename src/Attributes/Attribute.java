@@ -1,19 +1,28 @@
 package Attributes;
 
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;
 
-@XmlRootElement
+
+//@XmlRootElement
 public class Attribute 
 {
-
+	//@XmlAttribute(name = "name")
 	String name;
+	
+	//@XmlAttribute(name = "value")
 	KMIPType value;
+
+	//@XmlAttribute(name = "type")
 	EnumType type;
+
+	//@XmlAttribute(name = "tag")
 	EnumTag tag;
+
 	int length;
 	
 	public Attribute(){
@@ -29,35 +38,35 @@ public class Attribute
 		this.length=value.getDefaultLength();
 	}
 	
-	@XmlElement
+	//@XmlElement
 	public String getName() {
 		return name;
 	}
 	public void setName(String name) {
 		this.name = name;
 	}
-	@XmlElement
+	//@XmlElement
 	public KMIPType getValue() {
 		return value;
 	}
 	public void setValue(KMIPType value) {
 		this.value = value;
 	}
-	@XmlElement
+	//@XmlElement
 	public EnumType getType() {
 		return type;
 	}
 	public void setType(EnumType type) {
 		this.type = type;
 	}
-	@XmlElement
+	//@XmlElement
 	public EnumTag getTag() {
 		return tag;
 	}
 	public void setTag(EnumTag tag) {
 		this.tag = tag;
 	}
-	@XmlElement
+	//@XmlElement
 	public int getLength() {
 		return length;
 	}

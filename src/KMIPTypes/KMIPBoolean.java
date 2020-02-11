@@ -2,6 +2,7 @@ package KMIPTypes;
 
 import javax.xml.bind.annotation.XmlAttribute;
 
+
 public class KMIPBoolean extends KMIPType {
 	boolean value;
 	

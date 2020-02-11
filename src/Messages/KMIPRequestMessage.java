@@ -1,18 +1,24 @@
 package Messages;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlAttribute;
 
-@XmlRootElement
-public class KMIPRequestMessage {
-	
+@XmlRootElement(name = "RequestMessage") 
+public class KMIPRequestMessage
+{
 	RequestHeader requestHeader;
 	List<RequestBatchItem> batchItems;
+	
+	//@XmlAttribute(name="Name") - Working!
+	//String hi = "Soha";
 
-	public KMIPRequestMessage(){
+	public KMIPRequestMessage()
+	{
 
 	}
 
@@ -24,8 +30,14 @@ public class KMIPRequestMessage {
 		this.batchItems = batchItems;
 	}
 
+	/* Working!
+	public String getString()
+	{
+		return hi;
+	}*/
+
 	//Resquest Header getter
-	@XmlElement
+	@XmlElement(name = "RequestHeader") //yes
 	public RequestHeader getRequestHeader() {
 		return requestHeader;
 	}
@@ -36,7 +48,7 @@ public class KMIPRequestMessage {
 	}
 
 	//Request Message Batch Items getter
-	@XmlElement
+	@XmlElement(name = "BatchItem") //yes
 	public List<RequestBatchItem> getBatchItems() {
 		return batchItems;
 	}
@@ -46,9 +58,8 @@ public class KMIPRequestMessage {
 		this.batchItems = batchItems;
 	}
 
-	@Override
+	/*@Override
 	public String toString() {
-		return "KMIPRequestMessage [batchItems=" + batchItems + ", requestHeader=" + requestHeader + "]";
-	}
-
+		return "KMIPRequestMessage [requestHeader=" + requestHeader + ", batchItem=" + batchItems + "]";
+	}*/
 }

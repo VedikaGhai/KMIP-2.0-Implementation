@@ -3,6 +3,7 @@ package KMIPTypes;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
+
 //@XmlRootElement
 public class KMIPType {
 
@@ -32,6 +33,5 @@ public class KMIPType {
 	public String toString() {
 		return "KMIPType [defaultLength=" + defaultLength + "]";
 	}
-
 	
 }

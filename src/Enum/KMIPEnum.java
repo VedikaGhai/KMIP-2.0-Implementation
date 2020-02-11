@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
@@ -38,10 +39,11 @@ public class KMIPEnum {
 		return null;
 	}
 
+	/*
 	@Override
 	public String toString() {
 		return "KMIPEnum [defaultLength=" + defaultLength + ", value=" + value + "]";
 	}
-
+	*/
 	
 }

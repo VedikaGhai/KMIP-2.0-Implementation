@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import Objects.ProtocolVersion;
 import Objects.XMLTag;
 
-@XmlRootElement
+@XmlRootElement(name = "RequestHeader")
 public class RequestHeader {
 	
 	ProtocolVersion protocolVersion;
@@ -33,7 +33,7 @@ public class RequestHeader {
 		BatchCount = batchCount;
 	}
 
-	@XmlElement
+	@XmlElement(name = "ProtocolVersion") //yes
 	public ProtocolVersion getProtocolVersion() {
 		return protocolVersion;
 	}
@@ -42,7 +42,7 @@ public class RequestHeader {
 		this.protocolVersion = protocolVersion;
 	}
 	
-	@XmlElement
+	@XmlElement(name = "ClientCorelationValue") //yes
 	public XMLTag getClientCorrelationValue() {
 		return ClientCorrelationValue;
 	}
@@ -51,7 +51,7 @@ public class RequestHeader {
 		ClientCorrelationValue = clientCorrelationValue;
 	}
 
-	@XmlElement
+	//@XmlElement(name = )
 	public XMLTag getBatchOrderOption() {
 		return BatchOrderOption;
 	}
@@ -60,7 +60,7 @@ public class RequestHeader {
 		BatchOrderOption = batchOrderOption;
 	}
 
-	@XmlElement
+	@XmlElement(name = "BatchCount")
 	public XMLTag getBatchCount() {
 		return BatchCount;
 	}

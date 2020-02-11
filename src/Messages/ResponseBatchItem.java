@@ -5,7 +5,6 @@ import Enum.EnumResultStatus;
 import KMIPTypes.KMIPByteString;
 import Objects.XMLTag;
 
-
 //extends BatchItem
 public class ResponseBatchItem  extends BatchItem
 {

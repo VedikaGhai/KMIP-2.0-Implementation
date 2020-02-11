@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import Objects.XMLTag;
 
-@XmlRootElement
+//@XmlRootElement
 public class RequestBatchItem extends BatchItem 
 {
 

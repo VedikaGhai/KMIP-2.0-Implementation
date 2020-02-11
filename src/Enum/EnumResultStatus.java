@@ -4,6 +4,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
+
 public class EnumResultStatus extends KMIPEnum {
 	public static final int Success= 0x00;
 	public static HashMap<String, Integer> tagvalues;

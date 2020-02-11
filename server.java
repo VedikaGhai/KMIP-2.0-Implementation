@@ -16,6 +16,7 @@ public class server
     {
         Scanner scanner = new Scanner(System.in);
 
+        
         System.setProperty("javax.net.ssl.keyStore","D:/keystore.jks");
         System.setProperty("javax.net.ssl.keyStorePassword", "password");
      

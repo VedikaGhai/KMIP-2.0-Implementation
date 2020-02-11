@@ -2,14 +2,13 @@ package Messages;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import Attributes.Attribute;
 import Objects.XMLTag;
 
-@XmlRootElement
+//@XmlRootElement
 public class RequestPayload {
 	
 	XMLTag objectType;
@@ -26,7 +25,7 @@ public class RequestPayload {
 		this.attributes = attributes;
 	}
 
-	@XmlElement
+	//@XmlElement
 	public XMLTag getObjectType() {
 		return objectType;
 	}
@@ -35,7 +34,7 @@ public class RequestPayload {
 		this.objectType = objectType;
 	}
 	
-	@XmlElement
+	//@XmlElement
 	public List<Attribute> getAttributes() {
 		return attributes;
 	}
