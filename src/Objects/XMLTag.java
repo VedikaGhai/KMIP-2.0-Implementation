@@ -11,8 +11,9 @@ import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;
 
-@XmlRootElement
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlRegistry
+//@XmlRootElement
+//@XmlAccessorType(XmlAccessType.NONE)
 public class XMLTag
 {
     String name;
@@ -39,7 +40,7 @@ public class XMLTag
         this.value = value;
     }
 
-    //@XmlElement
+    @XmlTransient
     public String getName() {
         return name;
     }
@@ -48,6 +49,7 @@ public class XMLTag
         this.name = name;
     }
     
+    @XmlTransient
     public EnumTag getTag() {
         return tag;
     }
@@ -56,7 +58,7 @@ public class XMLTag
         this.tag = tag;
     }
 
-    @XmlAttribute(name="type")
+    //@XmlTransient
     public EnumType getType() {
         return type;
     }
@@ -65,7 +67,8 @@ public class XMLTag
         this.type = type;
     }
 
-    @XmlAttribute(name="value")
+    //@XmlTransient
+    @XmlElementDecl(scope = KMIPType.class, name = "value")
     public KMIPType getValue() {
         return value;
     }

@@ -6,7 +6,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.*;
 
 //@XmlAccessorType(XmlAccessType.FIELD)
-
+@XmlRegistry
 @XmlRootElement(name = "ProtocolVersion")
 public class ProtocolVersion
 {
@@ -24,6 +24,7 @@ public class ProtocolVersion
     }
 
     @XmlElement(name = "ProtocolVersionMajor")
+    //@XmlElementDecl(scope = XMLTag.class, name = "ProtocolVersionMajor")
     public XMLTag getProtocolVersionMajor() {
         return ProtocolVersionMajor;
     }

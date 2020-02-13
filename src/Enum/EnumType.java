@@ -9,8 +9,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.*;
 
-//@XmlAccessorType(XmlAccessType.FIELD)
-
 //TTLV types
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -25,8 +23,7 @@ public class EnumType extends KMIPEnum {
 	public static final int DateTime= 0x09;
 	public static final int Interval= 0x0A;
 	public static HashMap<String, Integer> tagvalues;
-	//String name1;
-
+	
 	String type;
 
 	static {
@@ -53,7 +50,6 @@ public class EnumType extends KMIPEnum {
 	{
 		this.value=getEntry(value, tagvalues);
 		System.out.println("EnumType : "+value);
-		//this.name1=this.value.getKey();
 	}
 
 	@XmlAttribute(name = "type")
@@ -72,23 +68,5 @@ public class EnumType extends KMIPEnum {
 	{
 
 	}
-	
 
-	
-	//@XmlAttribute(name="type")
-	/*public String getName1()
-	{
-		return this.name1;
-	}
-
-	public void setName1(String name1)
-	{
-		this.name1=name1;	
-	}*/
-
-	
-
-	
-	
-	
 }

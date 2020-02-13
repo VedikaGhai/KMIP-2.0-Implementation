@@ -5,8 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
-@XmlRootElement
-//@XmlAccessorType(XmlAccessType.FIELD)
 public class KMIPInteger extends KMIPType{
 	
 	int value;
@@ -38,7 +36,6 @@ public class KMIPInteger extends KMIPType{
 		return Integer.toString(value);
 	}
 
-	@XmlAttribute(name="value")
 	public int getValue()
 	{
 		return this.value;

@@ -1,8 +1,13 @@
 package KMIPTypes;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
-
+//@XmlRootElement
+//@XmlAccessorType(XmlAccessType.NONE)
 public class KMIPEnumeration extends KMIPType
 {
     int value;
@@ -29,15 +34,10 @@ public class KMIPEnumeration extends KMIPType
 
 	}
 
+	//@XmlElement
 	public String toString()
 	{
 		return Integer.toString(value);
-	}
-
-	//@XmlAttribute(name="value")
-	public int getValue()
-	{
-		return this.value;
 	}
 	
 	public void setValue(int value)

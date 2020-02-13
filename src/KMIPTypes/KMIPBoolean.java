@@ -46,6 +46,6 @@ public class KMIPBoolean extends KMIPType {
 	public String toString() {
 		return "KMIPBoolean [value=" + value + "]";
 	}
-
 	
 }
+

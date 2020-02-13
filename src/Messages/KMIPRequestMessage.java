@@ -7,8 +7,10 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlAttribute;
+import javax.xml.bind.annotation.*;
 
 @XmlRootElement(name = "RequestMessage") 
+@XmlType(propOrder = {"requestHeader", "batchItems"}) //for getting the RequestHeader element and BatchItem element in sequence
 public class KMIPRequestMessage
 {
 	RequestHeader requestHeader;
