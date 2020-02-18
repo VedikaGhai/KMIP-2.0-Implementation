@@ -2,18 +2,26 @@ package Messages;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.jar.Attributes;
 
+import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+import javax.xml.bind.annotation.XmlElements;
 
-import Attributes.Attribute;
+import Attributes.*;
+import Enum.EnumTag;
 import Objects.XMLTag;
 
 @XmlRootElement(name = "RequestPayload")
-@XmlAccessorType(XmlAccessType.NONE)
+@XmlSeeAlso({Attribute.class, XMLTag.class})
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class RequestPayload {
 	
 	XMLTag objectType;
@@ -22,6 +30,7 @@ public class RequestPayload {
 	//@XmlElementWrapper(name = "Attributes")
 	//@XmlElement(name="Attribute")
 	//@XmlElement(name = "Attributes")
+	//@XmlElementRef
 	List<Object> attributes;
 	//List<XMLTag> attributes;
 
@@ -44,6 +53,21 @@ public class RequestPayload {
 		this.objectType = objectType;
 	}
 	
+	/*
+	@XmlElements({
+		@XmlElement(type=Attribute.class)
+		@XmlElement(type = XMLTag.class)
+	})*/
+	@XmlElementWrapper(name= "Attributes")
+	//@XmlElementRef()
+	//@XmlAnyElement(lax = true)
+	//@XmlElement(name = "Attribute")
+	@XmlElements({
+		@XmlElement(name="Attribute", type=Attribute.class),
+		@XmlElement(name="CryptographicAlgorithm", type=XMLTag.class),
+		@XmlElement(name="CryptographicLength", type=XMLTag.class),
+		@XmlElement(name="CryptographicUsageMask", type=XMLTag.class)
+	})
 	public List<Object> getAttributes() {
 		return attributes;
 	}

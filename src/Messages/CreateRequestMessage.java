@@ -32,6 +32,10 @@ public class CreateRequestMessage {
     XMLTag Operation;
     XMLTag UniqueBatchItemID;
     XMLTag ObjectType;
+    XMLTag CryptographicAlgorithm;
+    XMLTag CryptographicLength;
+    XMLTag CryptographicUsageMask;
+
 
     RequestHeader requestHeader;
 
@@ -86,9 +90,9 @@ public class CreateRequestMessage {
                                             new XMLTag("AttributeName",new EnumTag(EnumTag.AttributeName) , new EnumType(EnumType.TextString),new KMIPTextString("ID")),
                                             new XMLTag("AttributeValue",new EnumTag(EnumTag.AttributeValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20-key1"))); 
 
-        XMLTag CryptographicAlgorithm = new XMLTag("CryptographicAlgorithm", new EnumTag(EnumTag.CryptographicAlgorithm), new EnumType(EnumType.Enumeration), new KMIPTextString("AES"));
-        XMLTag CryptographicLength = new XMLTag("CryptographicLength", new EnumTag(EnumTag.CryptographicLength), new EnumType(EnumType.Integer), new KMIPInteger("128"));
-        XMLTag CryptographicUsageMask = new XMLTag("CryptographicUsageMask", new EnumTag(EnumTag.CryptographicUsageMask), new EnumType(EnumType.Integer), new KMIPTextString("Decrypt Encrypt"));
+        CryptographicAlgorithm = new XMLTag("CryptographicAlgorithm", new EnumTag(EnumTag.CryptographicAlgorithm), new EnumType(EnumType.Enumeration), new KMIPTextString("AES"));
+        CryptographicLength = new XMLTag("CryptographicLength", new EnumTag(EnumTag.CryptographicLength), new EnumType(EnumType.Integer), new KMIPInteger("128"));
+        CryptographicUsageMask = new XMLTag("CryptographicUsageMask", new EnumTag(EnumTag.CryptographicUsageMask), new EnumType(EnumType.Integer), new KMIPTextString("Decrypt Encrypt"));
 
         attributes = new ArrayList<Object>();
         /*attributes.add(attribute1);
@@ -98,7 +102,7 @@ public class CreateRequestMessage {
         attributes.add(attribute5);
         attributes.add(attribute6);
         */
-        
+
         attributes.add(attribute);
         attributes.add(CryptographicAlgorithm);
         attributes.add(CryptographicLength);

@@ -10,9 +10,11 @@ import javax.xml.bind.annotation.*;
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;
+import Messages.CreateRequestMessage;
 
 //@XmlRegistry
 @XmlRootElement
+//@XmlSeeAlso({CreateRequestMessage.class})
 //@XmlAccessorType(XmlAccessType.NONE)
 public class XMLTag
 {

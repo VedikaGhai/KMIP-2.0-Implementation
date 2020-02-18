@@ -126,7 +126,10 @@ public class Attribute
 		AttributeValue = attributeValue;
 	}
 	
-	
+	public Attribute()
+	{
+
+	}
 	
 	
 }
