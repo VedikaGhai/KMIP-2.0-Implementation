@@ -5,32 +5,32 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import Objects.XMLTag;
 
-//@XmlRootElement
+@XmlRootElement
 public class BatchItem 
 {
 	
-	XMLTag operation;
+	XMLTag Operation;
 	XMLTag UniqueBatchItemId;
 
 	public BatchItem(){
 		
 	}
 
-	public BatchItem(XMLTag operation, XMLTag uniqueBatchItemId) {
-		this.operation = operation;
-		UniqueBatchItemId = uniqueBatchItemId;
+	public BatchItem(XMLTag Operation, XMLTag UniqueBatchItemId) {
+		this.Operation = Operation;
+		this.UniqueBatchItemId = UniqueBatchItemId;
 	}
 
-	//@XmlElement
+	@XmlElement(name = "Operation")
 	public XMLTag getOperation() {
-		return operation;
+		return Operation;
 	}
 
-	public void setOperation(XMLTag operation) {
-		this.operation = operation;
+	public void setOperation(XMLTag Operation) {
+		this.Operation = Operation;
 	}
 
-	//@XmlElement
+	@XmlElement(name = "UniqueBatchItemId")
 	public XMLTag getUniqueBatchItemId() {
 		return UniqueBatchItemId;
 	}
@@ -40,11 +40,7 @@ public class BatchItem
 	}
 
 	public String toString() {
-		return "BatchItem [UniqueBatchItemId=" + UniqueBatchItemId + ", operation=" + operation + "]";
+		return "BatchItem [UniqueBatchItemId=" + UniqueBatchItemId + ", Operation=" + Operation + "]";
 	}
 	
-	
-	
-	
-
 }

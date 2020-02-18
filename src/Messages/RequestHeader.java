@@ -1,12 +1,15 @@
 package Messages;
 
+import javax.xml.bind.annotation.XmlAccessorOrder;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlType;
 
 import Objects.ProtocolVersion;
 import Objects.XMLTag;
 
 @XmlRootElement(name = "RequestHeader")
+//@XmlType(propOrder = {"protocolVersion", "BatchCount", "BatchOrderOption", "ClientCorrelationValue"})
 public class RequestHeader {
 	
 	ProtocolVersion protocolVersion;

@@ -20,7 +20,7 @@ public class KMIPType {
 	
 	KMIPType(int defaultLength)
 	{
-		this.defaultLength=defaultLength;
+		this.defaultLength = defaultLength;
 	}
 	
 	KMIPType(String value)
@@ -33,8 +33,8 @@ public class KMIPType {
 		return this.defaultLength;
 	}
 
-	@XmlAttribute(name = "value")
-	public int getValue()
+	//@XmlAttribute(name = "value")
+	public String getValue()
 	{
 		return this.value;
 	}

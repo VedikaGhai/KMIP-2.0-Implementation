@@ -23,6 +23,11 @@ public class KMIPByteString extends KMIPType {
 		setValue(value);
 	}
 
+	public String getValue()
+	{
+		return Arrays.toString(this.value).replaceAll("\\[","").replaceAll("\\]", "");
+	}
+
 	public void setValue(byte[] value) {
 		this.value = value;
 	}

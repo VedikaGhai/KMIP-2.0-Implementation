@@ -13,6 +13,7 @@ import javax.xml.bind.annotation.*;
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
 public class EnumType extends KMIPEnum {
+	
 	public static final int Integer= 0x02;
 	public static final int LongInteger= 0x03;
 	public static final int BigInteger= 0x04;
@@ -52,7 +53,7 @@ public class EnumType extends KMIPEnum {
 		System.out.println("EnumType : "+value);
 	}
 
-	@XmlAttribute(name = "type")
+	//@XmlAttribute(name = "type")
 	public String getType()
 	{
 		this.type = this.value.getKey();

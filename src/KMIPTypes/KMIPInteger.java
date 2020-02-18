@@ -36,10 +36,10 @@ public class KMIPInteger extends KMIPType{
 		return Integer.toString(value);
 	}
 
-	public int getValue()
+	public String getValue()
 	{
-		return this.value;
-	}
+		return String.valueOf(this.value);
+	} 
 	
 	public void setValue(int value)
 	{

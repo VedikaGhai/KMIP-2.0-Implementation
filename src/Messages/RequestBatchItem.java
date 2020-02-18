@@ -1,5 +1,6 @@
 package Messages;
 
+import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import Objects.XMLTag;
@@ -7,7 +8,7 @@ import Objects.XMLTag;
 //@XmlRootElement
 public class RequestBatchItem extends BatchItem 
 {
-
+	@XmlElement(name = "RequestPayload")
 	RequestPayload requestPayload;
 
 	public RequestBatchItem(){

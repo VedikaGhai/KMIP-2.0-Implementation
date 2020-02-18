@@ -5,7 +5,6 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import Enum.KMIPEnum;
 
-
 //TTLV tags
 public class EnumTag extends KMIPEnum {
 	public static final int ProtocolVersion= 0x420069;

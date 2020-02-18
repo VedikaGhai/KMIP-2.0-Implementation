@@ -1,16 +1,20 @@
 package Attributes;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;
+import Objects.XMLTag;
 
-
-//@XmlRootElement
+@XmlRootElement(name = "Attribute")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Attribute 
 {
+	/*
 	//@XmlAttribute(name = "name")
 	String name;
 	
@@ -79,7 +83,50 @@ public class Attribute
 		return "Attribute [length=" + length + ", name=" + name + ", tag=" + tag + ", type=" + type + ", value=" + value
 				+ "]";
 	}
+	*/
+	XMLTag VendorIdentification;
+	XMLTag AttributeName;
+	XMLTag AttributeValue;
 
+	@XmlElement(name = "VendorIdentification")
+	public XMLTag getVendorIdentification() {
+		return VendorIdentification;
+	}
+
+	public void setVendorIdentification(XMLTag vendorIdentification) {
+		VendorIdentification = vendorIdentification;
+	}
+
+	@XmlElement(name = "AttributeName")
+	public XMLTag getAttributeName() {
+		return AttributeName;
+	}
+
+	public void setAttributeName(XMLTag attributeName) {
+		AttributeName = attributeName;
+	}
+
+	@XmlElement(name = "AttributeValue")
+	public XMLTag getAttributeValue() {
+		return AttributeValue;
+	}
+
+	public void setAttributeValue(XMLTag attributeValue) {
+		AttributeValue = attributeValue;
+	}
+
+	public Attribute(XMLTag vendorIdentification, XMLTag attributeName, XMLTag attributeValue) {
+		VendorIdentification = vendorIdentification;
+		AttributeName = attributeName;
+		AttributeValue = attributeValue;
+	}
+
+	public Attribute(XMLTag attributeName, XMLTag attributeValue) {
+		AttributeName = attributeName;
+		AttributeValue = attributeValue;
+	}
+	
+	
 	
 	
 }
