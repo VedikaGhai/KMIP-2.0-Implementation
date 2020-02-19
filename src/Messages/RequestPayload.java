@@ -25,21 +25,28 @@ import Objects.XMLTag;
 public class RequestPayload {
 	
 	XMLTag objectType;
+	XMLTag UniqueIdentifier;
+	XMLTag KeyFormatType;
 	//Attribute[] attributes;
 
 	//@XmlElementWrapper(name = "Attributes")
 	//@XmlElement(name="Attribute")
 	//@XmlElement(name = "Attributes")
 	//@XmlElementRef
-	List<Object> attributes;
-	//List<XMLTag> attributes;
+	//@XmlVariableNode("name")
+
+	//trial
+	List<JAXBElement<Object>> attributes;
+
+
+	//original --> List<Object> attributes;
 
 	public RequestPayload(){
 		
 	}
 
-	public RequestPayload(XMLTag objectType, List<Object> attributes) {
-		this.attributes =  new ArrayList<Object>();
+	public RequestPayload(XMLTag objectType, List<JAXBElement<Object>> attributes) {
+		this.attributes =  new ArrayList<JAXBElement<Object>>();
 		this.objectType = objectType;
 		this.attributes = attributes;
 	}
@@ -58,27 +65,59 @@ public class RequestPayload {
 		@XmlElement(type=Attribute.class)
 		@XmlElement(type = XMLTag.class)
 	})*/
-	@XmlElementWrapper(name= "Attributes")
 	//@XmlElementRef()
 	//@XmlAnyElement(lax = true)
 	//@XmlElement(name = "Attribute")
+
+	/* original -->
+	@XmlElementWrapper(name= "Attributes")
+	
 	@XmlElements({
 		@XmlElement(name="Attribute", type=Attribute.class),
 		@XmlElement(name="CryptographicAlgorithm", type=XMLTag.class),
 		@XmlElement(name="CryptographicLength", type=XMLTag.class),
-		@XmlElement(name="CryptographicUsageMask", type=XMLTag.class)
-	})
-	public List<Object> getAttributes() {
+		@XmlElement(name= "CryptographicUsageMask",type=XMLTag.class)
+	})*/
+	@XmlElementWrapper(name = "Attributes")
+	@XmlAnyElement
+	public List<JAXBElement<Object>> getAttributes() {
 		return attributes;
 	}
 
-	public void setAttributes(List<Object> attributes) {
+	public void setAttributes(List<JAXBElement<Object>> attributes) {
 		this.attributes = attributes;
 	}
 
 	@Override
 	public String toString() {
 		return "RequestPayload [attributes=" + attributes + ", objectType=" + objectType + "]";
+	}
+
+	@XmlElement(name="UniqueIdentifier")
+	public XMLTag getUniqueIdentifier() {
+		return UniqueIdentifier;
+	}
+
+	public void setUniqueIdentifier(XMLTag uniqueIdentifier) {
+		UniqueIdentifier = uniqueIdentifier;
+	}
+
+	@XmlElement(name="KeyFormatType")
+	public XMLTag getKeyFormatType() {
+		return KeyFormatType;
+	}
+
+	public void setKeyFormatType(XMLTag keyFormatType) {
+		KeyFormatType = keyFormatType;
+	}
+
+	public RequestPayload(XMLTag uniqueIdentifier, XMLTag keyFormatType) {
+		UniqueIdentifier = uniqueIdentifier;
+		KeyFormatType = keyFormatType;
+	}
+
+	public RequestPayload(XMLTag uniqueIdentifier) {
+		UniqueIdentifier = uniqueIdentifier;
 	}
 
 }

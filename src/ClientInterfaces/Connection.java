@@ -2,7 +2,6 @@ package ClientInterfaces;
 
 import java.net.*;
 
-
 public class Connection{
 
     Socket socket;

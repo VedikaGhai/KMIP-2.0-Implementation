@@ -34,7 +34,7 @@ import Operations.DecodeResponseMessage;
 public class KMIPOperations
 {
     //call the desired operation class and its methods
-    int port = 5000;
+    //int port = 5000;
     FileReader fr;
     BufferedReader br;
     File f2;
@@ -51,8 +51,8 @@ public class KMIPOperations
         CreateRequestMessage createRequestMessage= new CreateRequestMessage();
         CreateKey createKey=new CreateKey(k.algorithm, k.type, k.length);
         File f= createRequestMessage.createKeyRequestMessage(createKey);
-        //byte[] requestMessageByteArray = new byte[(int)f.length()];
         
+        //byte[] requestMessageByteArray = new byte[(int)f.length()];
         try 
         {
             PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
@@ -131,5 +131,108 @@ public class KMIPOperations
         StreamResult result =  new StreamResult(new File("/home/soha/ResponseMessage.xml"));
         transformer.transform(source, result);
     }*/
+
+
+    KeyUniqueIDMap get(KeyUniqueIDMap k, Connection connection) throws Exception
+    {           
+        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
+        GetKey getKey = new GetKey(k.uniqueIdentifier);
+        File f = createRequestMessage.getKeyRequestMessage(getKey);
+
+        //byte[] requestMessageByteArray = new byte[(int)f.length()];
+        try 
+        {
+            PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
+            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.socket.getInputStream())))
+            {
+                Scanner scanner = new Scanner(System.in);
+                fr = new FileReader(f);
+                br = new BufferedReader(fr);    
+                String i;
+                String request="";    
+                while((i=br.readLine())!=null)    
+                    request+= i;
+
+                System.out.println("******************REQUEST SENT TO SERVER***************");
+                out.println(request);
+                Thread.sleep(2000);
+                line = bufferedReader.readLine();
+                System.out.println("*****************RESPONSE RECEIVED FROM SERVER****************");
+                System.out.println(line);
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        catch(Exception e) 
+        {
+            e.printStackTrace();
+        } 
+
+        //faaltu experiment
+        Path pathXMLFile=Paths.get("/home/soha/Documents/Response5.xml");
+        Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+
+        //NOT WORKING FROM HERE ONWARDS
+        File response =new File("/home/soha/Documents/Response5.xml");
+        /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
+        dout.writeUTF(line);*/
+        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
+        String uniqueIdentifier = decodeResponseMessage.DOMParser(response);
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
+        
+        return responseUID;
+    }
+
+    KeyUniqueIDMap destroy(KeyUniqueIDMap k, Connection connection) throws Exception
+    {           
+        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
+        DestroyKey destroyKey = new DestroyKey(k.uniqueIdentifier);
+        File f = createRequestMessage.destroyKeyRequestMessage(destroyKey);
+
+        //byte[] requestMessageByteArray = new byte[(int)f.length()];
+        try 
+        {
+            PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
+            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.socket.getInputStream())))
+            {
+                Scanner scanner = new Scanner(System.in);
+                fr = new FileReader(f);
+                br = new BufferedReader(fr);    
+                String i;
+                String request="";    
+                while((i=br.readLine())!=null)    
+                    request+= i;
+
+                System.out.println("******************REQUEST SENT TO SERVER***************");
+                out.println(request);
+                Thread.sleep(2000);
+                line = bufferedReader.readLine();
+                System.out.println("*****************RESPONSE RECEIVED FROM SERVER****************");
+                System.out.println(line);
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        catch(Exception e) 
+        {
+            e.printStackTrace();
+        } 
+
+        //faaltu experiment
+        Path pathXMLFile=Paths.get("/home/soha/Documents/Response5.xml");
+        Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
+
+        //NOT WORKING FROM HERE ONWARDS
+        File response =new File("/home/soha/Documents/Response5.xml");
+        /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
+        dout.writeUTF(line);*/
+        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
+        String uniqueIdentifier = decodeResponseMessage.DOMParser(response);
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
+        
+        return responseUID;
+    }
 
 }

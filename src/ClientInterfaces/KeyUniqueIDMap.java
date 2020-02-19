@@ -16,6 +16,8 @@ public class KeyUniqueIDMap
         this.type=type;
     }
 
+    
+
     //Constructor for create operation
     KeyUniqueIDMap(KeyUniqueIDMap k, String uniqueIdentifier, String value)
     {
@@ -34,6 +36,10 @@ public class KeyUniqueIDMap
         this.type=k.type;
         //this.value=value;
         this.uniqueIdentifier=uniqueIdentifier;
+    }
+
+    public KeyUniqueIDMap(String uniqueIdentifier) {
+        this.uniqueIdentifier = uniqueIdentifier;
     }
     
 }

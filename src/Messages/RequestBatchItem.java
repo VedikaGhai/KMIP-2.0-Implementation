@@ -21,6 +21,12 @@ public class RequestBatchItem extends BatchItem
 		// TODO Auto-generated constructor stub
 	}
 
+	public RequestBatchItem(XMLTag Operation, RequestPayload requestPayload)
+	{
+		super(Operation, null);
+		this.requestPayload=requestPayload;
+	}
+
 	@Override
 	public String toString() {
 		return "RequestBatchItem [requestPayload=" + requestPayload + "]";

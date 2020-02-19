@@ -1,15 +1,15 @@
 package ClientInterfaces;
 
-public class GetKey extends KMIPOperations
+public class DestroyKey extends KMIPOperations
 {
     String uniqueIdentifier;
     //
 
-    public GetKey(String uniqueIdentifier) {
+    public DestroyKey(String uniqueIdentifier) {
         this.uniqueIdentifier = uniqueIdentifier;
     }
 
-    public GetKey() {
+    public DestroyKey() {
     }
 
     public String getUniqueIdentifier() {

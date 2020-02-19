@@ -12,7 +12,7 @@ import javax.net.ssl.*;
 public class Server {
     
     public static void main(String[] args) throws Exception {
-        
+       
         Scanner scanner = new Scanner(System.in);
 
         FileReader fr;

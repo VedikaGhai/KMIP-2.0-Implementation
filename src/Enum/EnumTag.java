@@ -28,6 +28,8 @@ public class EnumTag extends KMIPEnum {
 	public static final int AttributeName=0x42000A;
 	public static final int AttributeValue=0x42000B;
 	public static final int VendorIdentification=0x42009D;
+	public static final int UniqueIdentifier=0x420094;
+	public static final int KeyFormatType=0x420042;
 
 	public static HashMap<String, Integer> tagvalues;
 	static {

@@ -11,10 +11,17 @@ public class KMIPConnection
     Connection connect(String ip, int port)
     {
         try {
-                   
+             
+            //Mock Server keystore
             System.setProperty("javax.net.ssl.trustStore","/home/soha/keystore.jks");
             System.setProperty("javax.net.ssl.trustStorePassword", "password");
-    
+            
+
+            /* IBM SKLM keystore
+            System.setProperty("javax.net.ssl.trustStore","/home/soha/defaultKeyStore");
+            System.setProperty("javax.net.ssl.trustStorePassword", "passw0rd");
+            */
+
             SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
             try {
                 Socket socket = sslSocketFactory.createSocket(ip, port);
@@ -25,7 +32,7 @@ public class KMIPConnection
                 ex.printStackTrace();
             }
         }
-        finally{
+        finally {
             //
         }
         return null;
