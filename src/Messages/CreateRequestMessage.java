@@ -248,6 +248,31 @@ public class CreateRequestMessage {
         
         return file;
     }
+
+    /*
+    public File createKeyPairRequestMessage()
+    {
+        //KMIP v2.0
+        ProtocolVersionMajor = new XMLTag("ProtocolVersionMajor", new EnumTag(EnumTag.ProtocolVersionMajor), new EnumType(EnumType.Integer), new KMIPInteger("2"));
+        ProtocolVersionMinor = new XMLTag("ProtocolVersionMinor", new EnumTag(EnumTag.ProtocolVersionMinor), new EnumType(EnumType.Integer), new KMIPInteger("0"));
+
+        protocolVersion = new ProtocolVersion(ProtocolVersionMajor, ProtocolVersionMinor);
+
+        ClientCorrelationValue = new XMLTag("ClientCorrelationValue", new EnumTag(EnumTag.ClientCorrelationValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-DERIVEKEY-6-20 step=0"));
+    
+        BatchCount = new XMLTag("BatchCount", new EnumTag(EnumTag.BatchCount), new EnumType(EnumType.Integer), new KMIPInteger("1"));
+    
+        requestHeader = new RequestHeader(protocolVersion, ClientCorrelationValue, BatchCount);
+
+        Operation = new XMLTag("Operation", new EnumTag(EnumTag.Operation), new EnumType(EnumType.Enumeration), new KMIPTextString("CreateKeyPair"));
+
+        CryptographicAlgorithm = new XMLTag("CryptographicAlgorithm", new EnumTag(EnumTag.CryptographicAlgorithm), new EnumType(EnumType.Enumeration), new KMIPTextString(createKey.getAlgorithm()));
+        
+        
+    }*/
+    
+
+
    
 
     /*public static void main(String[] args) throws JAXBException {

@@ -49,13 +49,13 @@ public class MainApplication
         MainApplication m = new MainApplication();
         BufferedReader buf=new BufferedReader(new InputStreamReader(System.in));
         KMIPConnection kconn = new KMIPConnection();
-        Connection connection = kconn.connect("localhost", 5000);
-        //Connection connection = kconn.connect("169.38.124.246", 9443); //String IP Address, integer port number
+        //Connection connection = kconn.connect("localhost", 5000);
+        Connection connection = kconn.connect("localhost", portno); //instead of localhost, put IBM SKLM IP address, and instead of "portno", put KMIP port no.
         KMIPOperations kops = new KMIPOperations();
         
-        m.mainCreate(buf,connection, kops);
-        //m.mainGet(buf, connection, kops);
-        //m.mainDestroy(buf, connection, kops);
+        m.mainCreate(buf,connection, kops); //Create Key
+        //m.mainGet(buf, connection, kops); //Get Key
+        //m.mainDestroy(buf, connection, kops); //Destroy Key
     }
     
 }
