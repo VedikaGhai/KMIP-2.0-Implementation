@@ -45,7 +45,7 @@ public class RequestHeader {
 		this.protocolVersion = protocolVersion;
 	}
 	
-	@XmlElement(name = "ClientCorelationValue") //yes
+	@XmlElement(name = "ClientCorrelationValue") //yes
 	public XMLTag getClientCorrelationValue() {
 		return ClientCorrelationValue;
 	}

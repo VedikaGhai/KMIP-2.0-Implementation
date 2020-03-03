@@ -48,11 +48,11 @@ public class KMIPConnection
             System.setProperty("javax.net.ssl.trustStorePassword", "passw0rd");
             
 
-            /*
+            
             System.setProperty("javax.net.ssl.keyStore","/home/soha/defaultKeyStore");
             System.setProperty("javax.net.ssl.keyStoreType", "JCEKS");
             System.setProperty("javax.net.ssl.keyStorePassword", "passw0rd");
-            */
+            
 
             SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
             try {

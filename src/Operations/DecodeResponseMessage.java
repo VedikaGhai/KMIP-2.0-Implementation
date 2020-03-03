@@ -21,6 +21,11 @@ import Objects.XMLTag;
 
 public class DecodeResponseMessage 
 {
+    DocumentBuilderFactory factory;
+    DocumentBuilder builder;
+    Document document;
+    Element root;
+
     List<ResponseBatchItem> responseBatchItem;
 
     public DecodeResponseMessage()
@@ -28,35 +33,61 @@ public class DecodeResponseMessage
         
     }
 
-    public String DOMParser(File f) throws SAXException, IOException, ParserConfigurationException
+    public void DOMParser(File f) throws SAXException, IOException, ParserConfigurationException
     {
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
+        factory = DocumentBuilderFactory.newInstance();
+        builder = factory.newDocumentBuilder();
 
-        Document document = builder.parse(f);
+        document = builder.parse(f);
 
         document.getDocumentElement().normalize();
 
-        Element root = document.getDocumentElement();
+        root = document.getDocumentElement();
         //System.out.println(root.getNodeName());
+    }
 
-        NodeList nList = document.getElementsByTagName("UniqueIdentifier");
-        System.out.println("============================");
-        System.out.println(nList.getLength());
+    public String getElementsByTagName(String tagName) throws SAXException, IOException, ParserConfigurationException
+    {
+        NodeList nList = document.getElementsByTagName(tagName);
+        //System.out.println(nList.getLength());
         String s=null;
-        for(int temp=0; temp< nList.getLength(); temp++)
+        for(int temp=0; temp < nList.getLength(); temp++)
         {
             Node node = nList.item(temp);
             Element e= (Element)node;
             //ResponseBatchItem responseBatchItem=new ResponseBatchItem(new XMLTag("Operation", new EnumTag(EnumTag.BatchItem), new EnumType(EnumType.Enummeration), new KMIPEnumeration("Register")), new XMLTag("ResultStatus", new EnumTag(EnumTag.ResultStatus), new EnumType(EnumType.Enummeration), new KMI)
             //System.out.println(e.getElementsByTagName("value").item(0).getTextContent());
             //System.out.println(e.getAttribute("value"));
-            s= e.getAttribute("value");
+            s = e.getAttribute("value");
             //System.out.println(s);
         }
-        return s;
 
+        return s;
     }
+
+    public List<String> DOMParser(File f, List<String> tagNames) throws SAXException, IOException, ParserConfigurationException
+    {
+        List<String> requiredValues = new ArrayList<>();
+
+        DOMParser(f);
+
+        System.out.println("============================");
+
+        if(getElementsByTagName("ResultStatus").equalsIgnoreCase("Success"))
+        {
+            for(String tagName : tagNames)
+            {
+                String requiredValue = getElementsByTagName(tagName);
+                System.out.println(requiredValue);
+                requiredValues.add(requiredValue);
+            }
+            
+        }
+
+        return requiredValues;
+    }
+
+
 
     /*public static void main(String args[]) throws SAXException, IOException, ParserConfigurationException 
     {

@@ -1,18 +1,13 @@
 package ClientInterfaces;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.PrintWriter;
-import java.io.StringReader;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
 import java.util.Scanner;
 import java.io.*;
+import java.util.*;
 
+import javax.net.ssl.HttpsURLConnection;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
@@ -40,10 +35,153 @@ public class KMIPOperations
     File f2;
     FileWriter fw;
     String line="";
+    OutputStream outputStream;
+    InputStream inputStream;
+    DataInputStream dataInputStream;
+    ByteArrayInputStream byteArrayInputStream;
 
     public KMIPOperations() 
     {
         
+    }
+
+    private static String separator = System.getProperty("line.separator");
+
+    public static byte[] getXMLOutMessage(byte[] dataOut)
+    {
+        byte[] httpHeader = null;
+        byte[] httpOut = null;
+        if(dataOut!=null)
+        {
+            httpHeader = createXMLHeader(dataOut.length).getBytes();
+            httpOut = new byte[httpHeader.length + dataOut.length];
+
+            for(int i=0;i<httpHeader.length;i++)
+            {
+                httpOut[i] = httpHeader[i];
+            }
+
+            int j=httpHeader.length;
+            for(int i=0;i<dataOut.length;i++)
+            {
+                httpOut[j++] = dataOut[i];
+            }
+
+        }
+        return httpOut;
+    }
+
+    public static String createXMLHeader(int contentLength)
+    {    
+        StringBuffer sb =new StringBuffer();
+
+        sb.append("POST /ibm/sklm/KMIPServlet"+"HTTP/1.1").append(separator);
+        sb.append("Host: "+"localhost"+":"+"portno").append(separator);
+        sb.append("Content-Type: text/xml").append(separator);
+        sb.append("Content-Length: "+contentLength).append(separator);
+        sb.append("Pragma: no-cache").append(separator);
+        sb.append("Cache-Control: no-cache").append(separator);
+        sb.append(separator);
+
+        return sb.toString();
+    }
+
+    public static String byteArrayInputStringToString(ByteArrayInputStream is)
+    {
+        int size = is.available();
+        char[] theChars = new char[size];
+        byte[] bytes = new byte[size];
+
+        is.read(bytes, 0,size);
+        for(int i=0;i<size;)
+            theChars[i] = (char)(bytes[i++]&0xff);
+
+        return new String(theChars);
+    }
+    
+    public void HTTPSMethod(File f, KeyUniqueIDMap k, Connection connection)
+    {
+
+        try{
+
+            fr = new FileReader(f);
+            br = new BufferedReader(fr);
+
+            String i;
+            String request = "";
+            while((i= br.readLine())!=null)
+            {
+                request+= i;
+            }
+
+            System.out.println("************************REQUEST SENT TO SERVER**********************");
+            outputStream = connection.socket.getOutputStream();
+            outputStream.write(getXMLOutMessage(request.getBytes("UTF-8")));
+            outputStream.flush();
+            Thread.sleep(2000);
+
+            inputStream = connection.socket.getInputStream();
+            dataInputStream = new DataInputStream(inputStream);
+            String line = "'";
+            String httpProtocolStr = "XML";
+            String responseCode = "";
+            int contentLength = 0;
+
+            try{
+
+                while(!(line = dataInputStream.readLine()).equals(""))
+                {
+                    System.out.println("Received from server ******************************"+line);
+                    if(line.contains(httpProtocolStr))
+                    {
+                        responseCode = line.substring(httpProtocolStr.length()+2);
+                        if(!responseCode.contains("200"))
+                        {
+                            System.out.println("Response is not OK");
+                        }
+                    }
+                    else if(line.contains("Content-Length"))
+                    {
+                        String[] parts = line.split(":");
+                        String contentLengthStr = parts[1].trim();
+
+                        try
+                        {
+                            contentLength = Integer.valueOf(contentLengthStr);
+                        }
+                        catch(NumberFormatException e)
+                        {
+                            contentLength = -1;
+                        }
+                    }
+
+                }
+            }
+            catch(Exception e)
+            {
+                
+            }
+
+            System.out.println("************************REQUEST SENT TO SERVER**********************");
+            System.out.println("Content Length : "+contentLength);
+
+            //dataInputStream.flush();
+
+            dataInputStream = new DataInputStream(new BufferedInputStream(inputStream));
+            if(contentLength<0)
+            {
+                System.out.println("Content Length unknown");
+            }
+            byte[] contentBytes = new byte[contentLength];
+            dataInputStream.read(contentBytes);
+            byteArrayInputStream = new ByteArrayInputStream(contentBytes);
+            System.out.println(byteArrayInputStringToString(byteArrayInputStream));
+            
+        }
+        catch(Exception e)
+        {
+
+        }
     }
 
     KeyUniqueIDMap create(KeyUniqueIDMap k, Connection connection) throws Exception
@@ -53,68 +191,32 @@ public class KMIPOperations
         File f= createRequestMessage.createKeyRequestMessage(createKey);
         
         //byte[] requestMessageByteArray = new byte[(int)f.length()];
-        try 
-        {
-            PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.socket.getInputStream())))
-             {
-                Scanner scanner = new Scanner(System.in);
-                //while(true)
-                //{
-                    fr = new FileReader(f);
-                    br = new BufferedReader(fr);    
-                    String i;
-                    String request="";    
-                    while((i=br.readLine())!=null)    
-                        //System.out.print((char)i);    
-                        request+= i;
-
-                    /*System.out.println("Enter something:");
-                    String inputLine = scanner.nextLine();
-                    if(inputLine.equals("Over"))
-                    {
-                        break;
-                    }
-                    out.println(inputLine);*/
-                    System.out.println("******************REQUEST SENT TO SERVER***************");
-                    out.println(request);
-                    //System.out.println(bufferedReader.readLine());
-                    Thread.sleep(2000);
-                    line = bufferedReader.readLine();
-                    //f2=new File("/home/soha/Documents/Response4.xml");
-                    //fw= new FileWriter(f2);
-                    //fw.write(line);
-                    System.out.println("*****************RESPONSE RECEIVED FROM SERVER****************");
-                    System.out.println(line);
-                    //NOT WORKING! -> stringToDom(line);
-                    //out.println(line);
-                //}
-                //scanner.close();
-                //fr.close();
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        catch(Exception e) 
-        {
-            e.printStackTrace();
-        } 
+        HTTPSMethod(f, k, connection);
 
         //faaltu experiment
-        Path pathXMLFile=Paths.get("/home/soha/Documents/Response5.xml");
+        Path pathXMLFile=Paths.get("/home/soha/Documents/Response1.xml");
         Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
 
         //NOT WORKING FROM HERE ONWARDS
-        File response =new File("/home/soha/Documents/Response5.xml");
+        File response =new File("/home/soha/Documents/Response1.xml");
         /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
         dout.writeUTF(line);*/
+        
         DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
-        String uniqueIdentifier = decodeResponseMessage.DOMParser(response);
-        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
+
+        List<String> uid = new ArrayList<String>();
+        uid.add("UniqueIdentifier");
+    
+        List<String> uidResponse = new ArrayList<String>();
+        uidResponse = decodeResponseMessage.DOMParser(response, uid);
+        
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
         
         return responseUID;
+        //return null;
     }
+
+    
 
     /*public static void stringToDom(String xmlSource) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException
     {
@@ -140,6 +242,7 @@ public class KMIPOperations
         File f = createRequestMessage.getKeyRequestMessage(getKey);
 
         //byte[] requestMessageByteArray = new byte[(int)f.length()];
+        /*
         try 
         {
             PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
@@ -168,20 +271,33 @@ public class KMIPOperations
         {
             e.printStackTrace();
         } 
+        */
+
+        HTTPSMethod(f, k, connection);
 
         //faaltu experiment
-        Path pathXMLFile=Paths.get("/home/soha/Documents/Response5.xml");
+        Path pathXMLFile=Paths.get("/home/soha/Documents/Response1.xml");
         Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
 
         //NOT WORKING FROM HERE ONWARDS
-        File response =new File("/home/soha/Documents/Response5.xml");
+        File response =new File("/home/soha/Documents/Response1.xml");
         /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
         dout.writeUTF(line);*/
+        
         DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
-        String uniqueIdentifier = decodeResponseMessage.DOMParser(response);
-        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
+        
+        List<String> uid = new ArrayList<String>();
+        uid.add("UniqueIdentifier");
+        uid.add("KeyFormatType");
+        uid.add("KeyMaterial");
+    
+        List<String> uidResponse = new ArrayList<String>();
+        uidResponse = decodeResponseMessage.DOMParser(response, uid);
+        
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
         
         return responseUID;
+        //return null;
     }
 
     KeyUniqueIDMap destroy(KeyUniqueIDMap k, Connection connection) throws Exception
@@ -191,7 +307,7 @@ public class KMIPOperations
         File f = createRequestMessage.destroyKeyRequestMessage(destroyKey);
 
         //byte[] requestMessageByteArray = new byte[(int)f.length()];
-        try 
+        /*try 
         {
             PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
             try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.socket.getInputStream())))
@@ -219,18 +335,28 @@ public class KMIPOperations
         {
             e.printStackTrace();
         } 
+        */
+
+        HTTPSMethod(f, k, connection);
 
         //faaltu experiment
-        Path pathXMLFile=Paths.get("/home/soha/Documents/Response5.xml");
+        Path pathXMLFile=Paths.get("/home/soha/Documents/Response1.xml");
         Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
 
         //NOT WORKING FROM HERE ONWARDS
-        File response =new File("/home/soha/Documents/Response5.xml");
+        File response =new File("/home/soha/Documents/Response1.xml");
         /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
         dout.writeUTF(line);*/
+        
         DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
-        String uniqueIdentifier = decodeResponseMessage.DOMParser(response);
-        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uniqueIdentifier);
+
+        List<String> uid = new ArrayList<String>();
+        uid.add("UniqueIdentifier");
+    
+        List<String> uidResponse = new ArrayList<String>();
+        uidResponse = decodeResponseMessage.DOMParser(response, uid);
+        
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
         
         return responseUID;
     }

@@ -1,6 +1,8 @@
 package ClientInterfaces;
+
 import java.io.*;
 import java.lang.*;
+import java.util.*;
 
 public class MainApplication
 {
@@ -17,19 +19,20 @@ public class MainApplication
         //System.out.println(k.type);
         KeyUniqueIDMap kr = kops.create(k, connection);
         
-        System.out.println(kr.uniqueIdentifier);
+        System.out.println(kr.requiredValues);
     }
 
     public void mainGet(BufferedReader buf, Connection connection, KMIPOperations kops) throws Exception
     {
         System.out.println("Unique Identifier :");
         String uniqueIdentifier = buf.readLine();
-        
+
         KeyUniqueIDMap kg = new KeyUniqueIDMap(uniqueIdentifier);
         KeyUniqueIDMap kgresponse = kops.get(kg, connection);
         
-        System.out.println(kgresponse.uniqueIdentifier);
-        System.out.println(kgresponse.value);
+        //System.out.println(kgresponse.uniqueIdentifier);
+        //System.out.println(kgresponse.value);
+        System.out.println(kgresponse.requiredValues);
     }
 
     public void mainDestroy(BufferedReader buf, Connection connection, KMIPOperations kops) throws Exception
@@ -40,8 +43,9 @@ public class MainApplication
         KeyUniqueIDMap kdestroy = new KeyUniqueIDMap(uniqueIdentifier);
         KeyUniqueIDMap kdestroyresponse = kops.destroy(kdestroy, connection);
         
-        System.out.println(kdestroyresponse.uniqueIdentifier);
-        System.out.println(kdestroyresponse.value);
+        System.out.println(kdestroyresponse.requiredValues);
+        //System.out.println(kdestroyresponse.uniqueIdentifier);
+        //System.out.println(kdestroyresponse.value);
     }
 
     public static void main(String args[]) throws Exception

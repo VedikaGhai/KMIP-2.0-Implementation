@@ -7,6 +7,7 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.namespace.QName;
 
 import Attributes.Attribute;
@@ -23,6 +24,7 @@ import Messages.KMIPRequestMessage;
 import java.io.*;
 import java.lang.*;
 
+//@XmlSeeAlso(Name.class)
 public class CreateRequestMessage {
 
     ProtocolVersion protocolVersion;
@@ -40,6 +42,7 @@ public class CreateRequestMessage {
     XMLTag CryptographicUsageMask;
     XMLTag UniqueIdentifier;
     XMLTag KeyFormatType;
+    XMLTag ActivationDate;
 
 
     RequestHeader requestHeader;
@@ -71,7 +74,7 @@ public class CreateRequestMessage {
 
         protocolVersion = new ProtocolVersion(ProtocolVersionMajor, ProtocolVersionMinor);
 
-        ClientCorrelationValue = new XMLTag("ClientCorrelationValue", new EnumTag(EnumTag.ClientCorrelationValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20"));
+        ClientCorrelationValue = new XMLTag("ClientCorrelationValue", new EnumTag(EnumTag.ClientCorrelationValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20 step=0  "));
     
         //There is not BatchOrderOption tag??? - DONE
         //BatchOrderOption = new XMLTag("BatchOrderOption", new EnumTag(EnumTag.BatchOrderOption), new EnumType(EnumType.Boolean), new KMIPBoolean(true));
@@ -83,7 +86,7 @@ public class CreateRequestMessage {
         //DOUBT - EnumOperation? - DONE
         Operation = new XMLTag("Operation", new EnumTag(EnumTag.Operation), new EnumType(EnumType.Enumeration), new KMIPTextString("Create"));
 
-        UniqueBatchItemID = new XMLTag("UniqueBatchItemID", new EnumTag(EnumTag.UniqueBatchItemId), new EnumType(EnumType.ByteString), new KMIPByteString("01"));
+        UniqueBatchItemID = new XMLTag("UniqueBatchItemID", new EnumTag(EnumTag.UniqueBatchItemId), new EnumType(EnumType.ByteString), new KMIPByteString("1"));
     
         ObjectType = new XMLTag("ObjectType", new EnumTag(EnumTag.ObjectType), new EnumType(EnumType.Enumeration), new KMIPTextString(createKey.getTypeOfKey()));
         
@@ -95,17 +98,18 @@ public class CreateRequestMessage {
         Attribute attribute5 = new Attribute("AttributeName", new KMIPTextString("ID"), new EnumType(EnumType.TextString), new EnumTag(EnumTag.AttributeName));
         Attribute attribute6 = new Attribute("AttributeValue", new KMIPTextString("TC-OFFSET-1-20-key1"), new EnumType(EnumType.TextString), new EnumTag(EnumTag.AttributeValue));
         */
+        
         Attribute attribute = new Attribute(new XMLTag("VendorIdentification", new EnumTag(EnumTag.VendorIdentification), new EnumType(EnumType.TextString), new KMIPTextString("x")),
                                             new XMLTag("AttributeName",new EnumTag(EnumTag.AttributeName) , new EnumType(EnumType.TextString),new KMIPTextString("ID")),
                                             new XMLTag("AttributeValue",new EnumTag(EnumTag.AttributeValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20-key1"))); 
-
-        /*Attribute attribute1 = new Attribute(new XMLTag("VendorIdentification", new EnumTag(EnumTag.VendorIdentification), new EnumType(EnumType.TextString), new KMIPTextString("x")),
-        new XMLTag("AttributeName",new EnumTag(EnumTag.AttributeName) , new EnumType(EnumType.TextString),new KMIPTextString("ID")),
-        new XMLTag("AttributeValue",new EnumTag(EnumTag.AttributeValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20-key1"))); 
-        */
+        
+        
         CryptographicAlgorithm = new XMLTag("CryptographicAlgorithm", new EnumTag(EnumTag.CryptographicAlgorithm), new EnumType(EnumType.Enumeration), new KMIPTextString(createKey.getAlgorithm()));
         CryptographicLength = new XMLTag("CryptographicLength", new EnumTag(EnumTag.CryptographicLength), new EnumType(EnumType.Integer), new KMIPInteger(String.valueOf(createKey.getLength())));
         CryptographicUsageMask = new XMLTag("CryptographicUsageMask", new EnumTag(EnumTag.CryptographicUsageMask), new EnumType(EnumType.Integer), new KMIPTextString("Decrypt Encrypt"));
+        ActivationDate = new XMLTag("ActivationDate", new EnumTag(EnumTag.ActivationDate),new EnumType(EnumType.DateTime),new KMIPTextString("$NOW-3600"));
+
+        //name = new Name(new XMLTag("NameValue", new EnumTag(EnumTag.NameValue), new EnumType(EnumType.TextString),new KMIPTextString("TC-REKEY-1-20-original")),new XMLTag("NameType",new EnumTag(EnumTag.NameType), new EnumType(EnumType.Enumeration),new KMIPTextString("UninterpretedTextString")));
 
         attributes = new ArrayList<Object>();
         /*attributes.add(attribute1);
@@ -121,21 +125,25 @@ public class CreateRequestMessage {
         attributes.add(CryptographicAlgorithm);
         attributes.add(CryptographicLength);
         attributes.add(CryptographicUsageMask);
+        //attributes.add(name);
 
 
         //trial
         attributes1 = new ArrayList<JAXBElement<Object>>();
 
+
         attributes1.add(new JAXBElement(new QName("Attribute"),Attribute.class, attribute));
+        //attributes1.add(new JAXBElement(new QName("Name"),Name.class,name));
         attributes1.add(new JAXBElement(new QName("CryptographicAlgorithm"),XMLTag.class, CryptographicAlgorithm));
         attributes1.add(new JAXBElement(new QName("CryptographicLength"),XMLTag.class, CryptographicLength));
         attributes1.add(new JAXBElement(new QName("CryptographicUsageMask"),XMLTag.class, CryptographicUsageMask));
+        //System.out.println(name.toString());
 
         requestPayload = new RequestPayload(ObjectType, attributes1);
 
         //requestPayload = new RequestPayload(ObjectType, attributes);
 
-        requestBatchItem = new RequestBatchItem(Operation, UniqueBatchItemID, requestPayload);
+        requestBatchItem = new RequestBatchItem(Operation, UniqueBatchItemID ,requestPayload);
 
         batchItems = new ArrayList<RequestBatchItem>();
         batchItems.add(requestBatchItem);
@@ -148,6 +156,7 @@ public class CreateRequestMessage {
         final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
         final Marshaller marshaller = context.createMarshaller();
 
+        marshaller.setProperty("jaxb.fragment",Boolean.TRUE);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         
         //Working!
@@ -194,6 +203,7 @@ public class CreateRequestMessage {
         final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
         final Marshaller marshaller = context.createMarshaller();
 
+        marshaller.setProperty("jaxb.fragment",Boolean.TRUE);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         
         //Working!
@@ -239,6 +249,7 @@ public class CreateRequestMessage {
         final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
         final Marshaller marshaller = context.createMarshaller();
 
+        marshaller.setProperty("jaxb.fragment",Boolean.TRUE);
         marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
         
         //Working!
