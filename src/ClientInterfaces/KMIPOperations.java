@@ -35,7 +35,10 @@ public class KMIPOperations
     File f2;
     FileWriter fw;
     String line="";
+    
     OutputStream outputStream;
+    DataOutputStream outTRIAL;
+
     InputStream inputStream;
     DataInputStream dataInputStream;
     ByteArrayInputStream byteArrayInputStream;
@@ -75,8 +78,8 @@ public class KMIPOperations
     {    
         StringBuffer sb =new StringBuffer();
 
-        sb.append("POST /ibm/sklm/KMIPServlet"+"HTTP/1.1").append(separator);
-        sb.append("Host: "+"localhost"+":"+"portno").append(separator);
+        sb.append("POST ENTERURL"+"HTTP/1.1").append(separator);
+        sb.append("Host: "+"localhost" + ":"+"portno").append(separator);
         sb.append("Content-Type: text/xml").append(separator);
         sb.append("Content-Length: "+contentLength).append(separator);
         sb.append("Pragma: no-cache").append(separator);
@@ -115,9 +118,20 @@ public class KMIPOperations
             }
 
             System.out.println("************************REQUEST SENT TO SERVER**********************");
+            
+            /*
             outputStream = connection.socket.getOutputStream();
+            //outTRIAL = new DataOutputStream(outputStream);
             outputStream.write(getXMLOutMessage(request.getBytes("UTF-8")));
             outputStream.flush();
+            //outTRIAL.write(getXMLOutMessage(request.getBytes("UTF-8")));
+            //outTRIAL.flush();
+            */
+            outTRIAL = new DataOutputStream(connection.socket.getOutputStream());
+            //ByteArrayInputStream b = new ByteArrayInputStream(getXMLOutMessage(request.getBytes("UTF-8")));
+            outTRIAL.writeUTF(request);
+            outTRIAL.flush();
+
             Thread.sleep(2000);
 
             inputStream = connection.socket.getInputStream();
@@ -162,7 +176,7 @@ public class KMIPOperations
                 
             }
 
-            System.out.println("************************REQUEST SENT TO SERVER**********************");
+            System.out.println("************************RESPONSE RECEIVED FROM SERVER**********************");
             System.out.println("Content Length : "+contentLength);
 
             //dataInputStream.flush();
@@ -178,6 +192,7 @@ public class KMIPOperations
             System.out.println(byteArrayInputStringToString(byteArrayInputStream));
             
         }
+
         catch(Exception e)
         {
 

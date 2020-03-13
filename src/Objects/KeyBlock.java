@@ -1,18 +1,16 @@
 package Objects;
 
 import javax.xml.crypto.dsig.keyinfo.KeyValue;
-import Attributes.CryptographicAlgorithm;
-import Attributes.CryptographicLength;
 
 public class KeyBlock
 {
     
     XMLTag KeyFormatType;
     KeyValue keyValue;
-    CryptographicLength cryptographicLength;
-    CryptographicAlgorithm cryptographicAlgorithm;
+    XMLTag cryptographicLength;
+    XMLTag cryptographicAlgorithm;
 
-    public KeyBlock(XMLTag keyFormatType, KeyValue keyValue, CryptographicLength cryptographicLength, CryptographicAlgorithm cryptographicAlgorithm) {
+    public KeyBlock(XMLTag keyFormatType, KeyValue keyValue, XMLTag cryptographicLength, XMLTag cryptographicAlgorithm) {
         KeyFormatType = keyFormatType;
         this.keyValue = keyValue;
         this.cryptographicLength = cryptographicLength;
@@ -35,19 +33,19 @@ public class KeyBlock
         this.keyValue = keyValue;
     }
 
-    public CryptographicLength getCryptographicLength() {
+    public XMLTag getCryptographicLength() {
         return cryptographicLength;
     }
 
-    public void setCryptographicLength(CryptographicLength cryptographicLength) {
+    public void setCryptographicLength(XMLTag cryptographicLength) {
         this.cryptographicLength = cryptographicLength;
     }
 
-    public CryptographicAlgorithm getCryptographicAlgorithm() {
+    public XMLTag getCryptographicAlgorithm() {
         return cryptographicAlgorithm;
     }
 
-    public void setCryptographicAlgorithm(CryptographicAlgorithm cryptographicAlgorithm) {
+    public void setCryptographicAlgorithm(XMLTag cryptographicAlgorithm) {
         this.cryptographicAlgorithm = cryptographicAlgorithm;
     }
    

@@ -74,7 +74,7 @@ public class CreateRequestMessage {
 
         protocolVersion = new ProtocolVersion(ProtocolVersionMajor, ProtocolVersionMinor);
 
-        ClientCorrelationValue = new XMLTag("ClientCorrelationValue", new EnumTag(EnumTag.ClientCorrelationValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20 step=0  "));
+        ClientCorrelationValue = new XMLTag("ClientCorrelationValue", new EnumTag(EnumTag.ClientCorrelationValue), new EnumType(EnumType.TextString), new KMIPTextString("TC-OFFSET-1-20 step=0"));
     
         //There is not BatchOrderOption tag??? - DONE
         //BatchOrderOption = new XMLTag("BatchOrderOption", new EnumTag(EnumTag.BatchOrderOption), new EnumType(EnumType.Boolean), new KMIPBoolean(true));
