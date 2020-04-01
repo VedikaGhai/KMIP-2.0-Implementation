@@ -38,9 +38,9 @@ public class KMIPBoolean extends KMIPType {
 	}
 
 	//@XmlAttribute(name="value")
-	public boolean getValue()
+	public String getValue()
 	{
-		return this.value;
+		return Boolean.toString(this.value);
 	}
 
 	@Override

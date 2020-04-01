@@ -1,16 +1,12 @@
 package Objects;
 
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
-
-import java.io.Serializable;
 
 import javax.xml.bind.annotation.*;
 import Enum.EnumTag;
 import Enum.EnumType;
 import KMIPTypes.KMIPType;
-import Messages.CreateRequestMessage;
 
 //@XmlRegistry
 @XmlRootElement

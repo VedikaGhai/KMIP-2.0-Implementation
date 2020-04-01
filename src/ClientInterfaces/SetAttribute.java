@@ -1,16 +1,15 @@
 package ClientInterfaces;
 
-public class CreateKey extends KMIPOperations{
-    //CreateKey specific methods
+public class SetAttribute extends KMIPOperations
+{
     String algorithm;
     String typeOfKey;
     int length;
-    
-    public CreateKey(String algorithm, String typeOfkey, int length)
-    {
-        this.algorithm=algorithm;
-        this.typeOfKey=typeOfkey;
-        this.length=length;
+
+    public SetAttribute(String algorithm, String typeOfKey, int length) {
+        this.algorithm = algorithm;
+        this.typeOfKey = typeOfKey;
+        this.length = length;
     }
 
     public String getAlgorithm() {
@@ -36,4 +35,5 @@ public class CreateKey extends KMIPOperations{
     public void setLength(int length) {
         this.length = length;
     }
+
 }

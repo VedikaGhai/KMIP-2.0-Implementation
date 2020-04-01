@@ -36,6 +36,12 @@ public class RequestHeader {
 		BatchCount = batchCount;
 	}
 
+	public RequestHeader(ProtocolVersion protocolVersion, XMLTag batchCount) 
+	{
+		this.protocolVersion = protocolVersion;
+		BatchCount = batchCount;
+	}
+
 	@XmlElement(name = "ProtocolVersion") //yes
 	public ProtocolVersion getProtocolVersion() {
 		return protocolVersion;

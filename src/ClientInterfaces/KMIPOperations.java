@@ -3,24 +3,8 @@ package ClientInterfaces;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.io.*;
 import java.util.*;
-
-import javax.net.ssl.HttpsURLConnection;
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerConfigurationException;
-import javax.xml.transform.TransformerException;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
-
-import org.w3c.dom.Document;
-import org.xml.sax.InputSource;
-import org.xml.sax.SAXException;
 import java.nio.file.*;
 
 import Messages.CreateRequestMessage;
@@ -78,13 +62,15 @@ public class KMIPOperations
     {    
         StringBuffer sb =new StringBuffer();
 
-        sb.append("POST ENTERURL"+"HTTP/1.1").append(separator);
+        sb.append("POST URL"+"HTTP/1.1").append(separator);
         sb.append("Host: "+"localhost" + ":"+"portno").append(separator);
         sb.append("Content-Type: text/xml").append(separator);
         sb.append("Content-Length: "+contentLength).append(separator);
         sb.append("Pragma: no-cache").append(separator);
         sb.append("Cache-Control: no-cache").append(separator);
         sb.append(separator);
+
+        System.out.println(sb.toString());
 
         return sb.toString();
     }
@@ -119,18 +105,18 @@ public class KMIPOperations
 
             System.out.println("************************REQUEST SENT TO SERVER**********************");
             
-            /*
+            
             outputStream = connection.socket.getOutputStream();
             //outTRIAL = new DataOutputStream(outputStream);
             outputStream.write(getXMLOutMessage(request.getBytes("UTF-8")));
             outputStream.flush();
             //outTRIAL.write(getXMLOutMessage(request.getBytes("UTF-8")));
             //outTRIAL.flush();
-            */
-            outTRIAL = new DataOutputStream(connection.socket.getOutputStream());
+            
+            //outTRIAL = new DataOutputStream(connection.socket.getOutputStream());
             //ByteArrayInputStream b = new ByteArrayInputStream(getXMLOutMessage(request.getBytes("UTF-8")));
-            outTRIAL.writeUTF(request);
-            outTRIAL.flush();
+            //outTRIAL.writeUTF(request);
+            //outTRIAL.flush();
 
             Thread.sleep(2000);
 

@@ -7,7 +7,6 @@ import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.JAXBException;
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlSeeAlso;
 import javax.xml.namespace.QName;
 
 import Attributes.Attribute;
@@ -19,10 +18,8 @@ import Enum.EnumType;
 import Objects.ProtocolVersion;
 import Objects.XMLTag;
 import KMIPTypes.*;
-import Messages.KMIPRequestMessage;
 
 import java.io.*;
-import java.lang.*;
 
 //@XmlSeeAlso(Name.class)
 public class CreateRequestMessage {
@@ -137,6 +134,7 @@ public class CreateRequestMessage {
         attributes1.add(new JAXBElement(new QName("CryptographicAlgorithm"),XMLTag.class, CryptographicAlgorithm));
         attributes1.add(new JAXBElement(new QName("CryptographicLength"),XMLTag.class, CryptographicLength));
         attributes1.add(new JAXBElement(new QName("CryptographicUsageMask"),XMLTag.class, CryptographicUsageMask));
+        //attributes1.add(new JAXBElement(new QName("ActivationDate"),XMLTag.class, ActivationDate));
         //System.out.println(name.toString());
 
         requestPayload = new RequestPayload(ObjectType, attributes1);
@@ -237,6 +235,87 @@ public class CreateRequestMessage {
         requestPayload = new RequestPayload(UniqueIdentifier);
 
         requestBatchItem = new RequestBatchItem(Operation,UniqueBatchItemID,requestPayload);
+
+        batchItems = new ArrayList<RequestBatchItem>();
+        batchItems.add(requestBatchItem);
+
+        requestMessage = new KMIPRequestMessage(requestHeader, batchItems);
+
+        //Working!
+        File file = new File("/home/soha/Documents/Gheee.xml");
+    
+        final JAXBContext context = JAXBContext.newInstance(KMIPRequestMessage.class);
+        final Marshaller marshaller = context.createMarshaller();
+
+        marshaller.setProperty("jaxb.fragment",Boolean.TRUE);
+        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
+        
+        //Working!
+        marshaller.marshal(requestMessage, file);
+        
+        marshaller.marshal(requestMessage, System.out);
+        
+        return file;
+    }
+
+    public File setAttributeRequestMessage(SetAttribute setAttribute) throws JAXBException
+    {
+        //KMIP v2.0
+        ProtocolVersionMajor = new XMLTag("ProtocolVersionMajor", new EnumTag(EnumTag.ProtocolVersionMajor), new EnumType(EnumType.Integer), new KMIPInteger("2"));
+        ProtocolVersionMinor = new XMLTag("ProtocolVersionMinor", new EnumTag(EnumTag.ProtocolVersionMinor), new EnumType(EnumType.Integer), new KMIPInteger("0"));
+
+        protocolVersion = new ProtocolVersion(ProtocolVersionMajor, ProtocolVersionMinor);
+
+        BatchCount = new XMLTag("BatchCount", new EnumTag(EnumTag.BatchCount), new EnumType(EnumType.Integer), new KMIPInteger("1"));
+    
+        requestHeader = new RequestHeader(protocolVersion, BatchCount);
+
+        //DOUBT - EnumOperation? - DONE
+        Operation = new XMLTag("Operation", new EnumTag(EnumTag.Operation), new EnumType(EnumType.Enumeration), new KMIPTextString("Register"));
+
+        ObjectType = new XMLTag("ObjectType", new EnumTag(EnumTag.ObjectType), new EnumType(EnumType.Enumeration), new KMIPTextString(setAttribute.getTypeOfKey()));
+        
+        CryptographicAlgorithm = new XMLTag("CryptographicAlgorithm", new EnumTag(EnumTag.CryptographicAlgorithm), new EnumType(EnumType.Enumeration), new KMIPTextString(setAttribute.getAlgorithm()));
+        CryptographicLength = new XMLTag("CryptographicLength", new EnumTag(EnumTag.CryptographicLength), new EnumType(EnumType.Integer), new KMIPInteger(String.valueOf(setAttribute.getLength())));
+        CryptographicUsageMask = new XMLTag("CryptographicUsageMask", new EnumTag(EnumTag.CryptographicUsageMask), new EnumType(EnumType.Integer), new KMIPTextString("Decrypt Encrypt"));
+        //ActivationDate = new XMLTag("ActivationDate", new EnumTag(EnumTag.ActivationDate),new EnumType(EnumType.DateTime),new KMIPTextString("$NOW-3600"));
+
+        //name = new Name(new XMLTag("NameValue", new EnumTag(EnumTag.NameValue), new EnumType(EnumType.TextString),new KMIPTextString("TC-REKEY-1-20-original")),new XMLTag("NameType",new EnumTag(EnumTag.NameType), new EnumType(EnumType.Enumeration),new KMIPTextString("UninterpretedTextString")));
+
+        attributes = new ArrayList<Object>();
+        /*attributes.add(attribute1);
+        attributes.add(attribute2);
+        attributes.add(attribute3);
+        attributes.add(attribute4);
+        attributes.add(attribute5);
+        attributes.add(attribute6);
+        */
+
+        //attributes.add(attribute);
+        attributes.add(CryptographicAlgorithm);
+        attributes.add(CryptographicLength);
+        attributes.add(CryptographicUsageMask);
+        
+        //trial
+        attributes1 = new ArrayList<JAXBElement<Object>>();
+
+
+        //attributes1.add(new JAXBElement(new QName("Attribute"),Attribute.class, attribute));
+        //attributes1.add(new JAXBElement(new QName("Name"),Name.class,name));
+        attributes1.add(new JAXBElement(new QName("CryptographicAlgorithm"),XMLTag.class, CryptographicAlgorithm));
+        attributes1.add(new JAXBElement(new QName("CryptographicLength"),XMLTag.class, CryptographicLength));
+        attributes1.add(new JAXBElement(new QName("CryptographicUsageMask"),XMLTag.class, CryptographicUsageMask));
+        //System.out.println(name.toString());
+
+
+        //TO ADD - SymmetricKey tag (with KeyFormatType and KeyMaterial)
+
+
+        requestPayload = new RequestPayload(ObjectType, attributes1);
+
+        //requestPayload = new RequestPayload(ObjectType, attributes);
+
+        requestBatchItem = new RequestBatchItem(Operation, UniqueBatchItemID ,requestPayload);
 
         batchItems = new ArrayList<RequestBatchItem>();
         batchItems.add(requestBatchItem);
