@@ -7,9 +7,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import Objects.XMLTag;
 
-
-@XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "Name")
+@XmlAccessorType(XmlAccessType.NONE)
 public class Name
 {
     XMLTag NameValue;

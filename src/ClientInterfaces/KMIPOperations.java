@@ -62,8 +62,8 @@ public class KMIPOperations
     {    
         StringBuffer sb =new StringBuffer();
 
-        sb.append("POST URL"+"HTTP/1.1").append(separator);
-        sb.append("Host: "+"localhost" + ":"+"portno").append(separator);
+        sb.append("POST /ibm/sklm/KMIPServlet"+"HTTP/1.1").append(separator);
+        sb.append("Host: "+"ip" + ":"+"portno").append(separator);
         sb.append("Content-Type: text/xml").append(separator);
         sb.append("Content-Length: "+contentLength).append(separator);
         sb.append("Pragma: no-cache").append(separator);
@@ -108,8 +108,30 @@ public class KMIPOperations
             
             outputStream = connection.socket.getOutputStream();
             //outTRIAL = new DataOutputStream(outputStream);
+
             outputStream.write(getXMLOutMessage(request.getBytes("UTF-8")));
+            
+            /*String requestNEW = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><RequestMessage>" + "<RequestHeader>"
+				+ "<ProtocolVersion>" + "<ProtocolVersionMajor type=\"Integer\" value=\"2\"/>"
+				+ "<ProtocolVersionMinor type=\"Integer\" value=\"0\"/>" + "</ProtocolVersion>"
+				+ "<BatchCount type=\"Integer\" value=\"1\"/>" + "</RequestHeader>" + "<BatchItem>"
+				+ "<Operation type=\"Enumeration\" value=\"Create\"/>" + "<RequestPayload>"
+				+ "<ObjectType type=\"Enumeration\" value=\"SymmetricKey\"/>" + "<TemplateAttribute>" + "<Attribute>"
+				+ "<AttributeName type=\"TextString\" value=\"Name\"/>" + "<AttributeValue>"
+				+ "<NameValue  type=\"TextString\" value=\"TC-REKEY-1-20-original\"/>"
+				+ "<NameType type=\"Enumeration\" value=\"UninterpretedTextString\"/>" + "</AttributeValue>"
+				+ "</Attribute>" + "<Attribute>"
+				+ "<AttributeName type=\"TextString\" value=\"Cryptographic Algorithm\"/>"
+				+ "<AttributeValue type=\"Enumeration\" value=\"AES\"/>" + "</Attribute>" + "<Attribute>"
+				+ "<AttributeName type=\"TextString\" value=\"Cryptographic Length\"/>"
+				+ "<AttributeValue type=\"Integer\" value=\"128\"/>" + "</Attribute>" + "<Attribute>"
+				+ "<AttributeName type=\"TextString\" value=\"Cryptographic Usage Mask\"/>"
+				+ "<AttributeValue type=\"Integer\" value=\"Decrypt Encrypt\"/>" + "</Attribute>"
+				+ "</TemplateAttribute>" + "</RequestPayload>" + "</BatchItem>" + "</RequestMessage>";
+            outputStream.write(getXMLOutMessage(requestNEW.getBytes("UTF-8")));*/
+            
             outputStream.flush();
+            
             //outTRIAL.write(getXMLOutMessage(request.getBytes("UTF-8")));
             //outTRIAL.flush();
             
@@ -122,19 +144,26 @@ public class KMIPOperations
 
             inputStream = connection.socket.getInputStream();
             dataInputStream = new DataInputStream(inputStream);
+
+            /*InputStreamReader inputttt = new InputStreamReader(inputStream);
+            BufferedReader triallll = new BufferedReader(inputttt);
+            */
+
             String line = "'";
-            String httpProtocolStr = "XML";
+            String httpProtocolStr = "text/xml";
             String responseCode = "";
             int contentLength = 0;
 
             try{
 
+                //while(!(line=triallll.readLine()).equals(""))
                 while(!(line = dataInputStream.readLine()).equals(""))
                 {
                     System.out.println("Received from server ******************************"+line);
                     if(line.contains(httpProtocolStr))
                     {
                         responseCode = line.substring(httpProtocolStr.length()+2);
+                        System.out.println(responseCode);
                         if(!responseCode.contains("200"))
                         {
                             System.out.println("Response is not OK");

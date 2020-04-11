@@ -54,7 +54,7 @@ public class MainApplication
         BufferedReader buf=new BufferedReader(new InputStreamReader(System.in));
         KMIPConnection kconn = new KMIPConnection();
         //Connection connection = kconn.connect("localhost", 5000);
-        Connection connection = kconn.connect("localhost", portno); //instead of localhost, put IBM SKLM IP address, and instead of "portno", put KMIP port no.
+        Connection connection = kconn.connect("ip", portno); //instead of localhost, put IBM SKLM IP address, and instead of "portno", put KMIP port no.
         KMIPOperations kops = new KMIPOperations();
         
         m.mainCreate(buf,connection, kops); //Create Key

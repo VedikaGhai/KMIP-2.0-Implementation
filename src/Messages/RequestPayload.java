@@ -20,7 +20,7 @@ import Enum.EnumTag;
 import Objects.XMLTag;
 
 @XmlRootElement(name = "RequestPayload")
-@XmlSeeAlso({Attribute.class, XMLTag.class})
+@XmlSeeAlso({Attribute.class, Name.class, XMLTag.class})
 @XmlAccessorType(XmlAccessType.PROPERTY)
 public class RequestPayload {
 	
