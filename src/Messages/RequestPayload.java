@@ -2,21 +2,17 @@ package Messages;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.jar.Attributes;
 
 import javax.xml.bind.JAXBElement;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAnyElement;
 import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementRef;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlSeeAlso;
-import javax.xml.bind.annotation.XmlElements;
 
 import Attributes.*;
-import Enum.EnumTag;
 import Objects.XMLTag;
 
 @XmlRootElement(name = "RequestPayload")
@@ -27,7 +23,10 @@ public class RequestPayload {
 	XMLTag objectType;
 	XMLTag UniqueIdentifier;
 	XMLTag KeyFormatType;
-	//Attribute[] attributes;
+
+	CommonAttributes commonAttributes;
+	PrivateKeyAttributes privateKeyAttributes;
+	PublicKeyAttributes publicKeyAttributes;
 
 	//@XmlElementWrapper(name = "Attributes")
 	//@XmlElement(name="Attribute")
@@ -119,5 +118,45 @@ public class RequestPayload {
 	public RequestPayload(XMLTag uniqueIdentifier) {
 		UniqueIdentifier = uniqueIdentifier;
 	}
+
+	public RequestPayload(List<JAXBElement<Object>> attributes) {
+		this.attributes = attributes;
+	}
+
+	public RequestPayload(CommonAttributes commonAttributes, PrivateKeyAttributes privateKeyAttributes,
+			PublicKeyAttributes publicKeyAttributes) {
+		this.commonAttributes = commonAttributes;
+		this.privateKeyAttributes = privateKeyAttributes;
+		this.publicKeyAttributes = publicKeyAttributes;
+	}
+
+	@XmlElement(name="CommonAttributes")
+	public CommonAttributes getCommonAttributes() {
+		return commonAttributes;
+	}
+
+	public void setCommonAttributes(CommonAttributes commonAttributes) {
+		this.commonAttributes = commonAttributes;
+	}
+
+	@XmlElement(name="PrivateKeyAttributes")
+	public PrivateKeyAttributes getPrivateKeyAttributes() {
+		return privateKeyAttributes;
+	}
+
+	public void setPrivateKeyAttributes(PrivateKeyAttributes privateKeyAttributes) {
+		this.privateKeyAttributes = privateKeyAttributes;
+	}
+
+	@XmlElement(name="PublicKeyAttributes")
+	public PublicKeyAttributes getPublicKeyAttributes() {
+		return publicKeyAttributes;
+	}
+
+	public void setPublicKeyAttributes(PublicKeyAttributes publicKeyAttributes) {
+		this.publicKeyAttributes = publicKeyAttributes;
+	}
+
+	
 
 }

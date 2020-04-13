@@ -3,6 +3,17 @@ package Messages;
 import Keys.SymmetricKey;
 import Objects.XMLTag;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.XmlSeeAlso;
+
+import Attributes.*;
+
+@XmlRootElement(name = "RequestPayload")
+@XmlSeeAlso({Attribute.class, Name.class, XMLTag.class})
+@XmlAccessorType(XmlAccessType.PROPERTY)
 public class ResponsePayload {
 
     XMLTag objectType;
@@ -31,4 +42,33 @@ public class ResponsePayload {
         this.objectType = objectType;
         this.uniqueIdentifier = uniqueIdentifier;
     }
+
+
+    @XmlElement(name="ObjectType")
+    public XMLTag getObjectType() {
+        return objectType;
+    }
+
+    public void setObjectType(XMLTag objectType) {
+        this.objectType = objectType;
+    }
+
+    @XmlElement(name = "UniqueIdentifier")
+    public XMLTag getUniqueIdentifier() {
+        return uniqueIdentifier;
+    }
+
+    public void setUniqueIdentifier(XMLTag uniqueIdentifier) {
+        this.uniqueIdentifier = uniqueIdentifier;
+    }
+
+    public SymmetricKey getSymmetricKey() {
+        return symmetricKey;
+    }
+
+    public void setSymmetricKey(SymmetricKey symmetricKey) {
+        this.symmetricKey = symmetricKey;
+    }
+
+    
 }

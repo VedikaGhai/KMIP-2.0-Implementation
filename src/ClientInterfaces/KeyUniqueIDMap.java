@@ -1,5 +1,6 @@
 package ClientInterfaces;
 
+import java.security.Key;
 import java.util.*;
 
 public class KeyUniqueIDMap
@@ -9,6 +10,9 @@ public class KeyUniqueIDMap
     int length;
     String value;
     String type;
+
+    String privateKeyNameValue;
+    String publicKeyNameValue;
 
     List<String> requiredValues;
     
@@ -53,6 +57,26 @@ public class KeyUniqueIDMap
     public KeyUniqueIDMap(String uniqueIdentifier) {
         this.uniqueIdentifier = uniqueIdentifier;
         requiredValues = new ArrayList<String>();
+    }
+
+	public KeyUniqueIDMap() {
+	}
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
+    public KeyUniqueIDMap(String algorithm, int length, String type, String privateKeyNameValue,
+            String publicKeyNameValue) {
+        this.algorithm = algorithm;
+        this.length = length;
+        this.type = type;
+        this.privateKeyNameValue = privateKeyNameValue;
+        this.publicKeyNameValue = publicKeyNameValue;
     }
     
 }

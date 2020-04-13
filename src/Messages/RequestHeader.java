@@ -9,7 +9,7 @@ import Objects.ProtocolVersion;
 import Objects.XMLTag;
 
 @XmlRootElement(name = "RequestHeader")
-//@XmlType(propOrder = {"protocolVersion", "BatchCount", "BatchOrderOption", "ClientCorrelationValue"})
+@XmlType(propOrder = {"protocolVersion", "batchCount", "batchOrderOption", "clientCorrelationValue"})
 public class RequestHeader {
 	
 	ProtocolVersion protocolVersion;

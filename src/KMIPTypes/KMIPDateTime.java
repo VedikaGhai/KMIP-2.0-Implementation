@@ -12,9 +12,10 @@ public class KMIPDateTime extends KMIPType{
     String date;
 
 
-    public KMIPDateTime(String value) {
+    public KMIPDateTime(String value) throws ParseException {
         super(value); 
         date = simpleDateFormat.format(new Date());
+        date = String.valueOf(simpleDateFormat.parse(date));
     }
 
     public String getValue() {

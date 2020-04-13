@@ -56,7 +56,7 @@ public class EnumTag extends KMIPEnum {
 	public EnumTag(int value)
 	{
 		this.value=getEntry(value, tagvalues);
-		System.out.println("EnumTag : "+value);
+		//System.out.println("EnumTag : "+value);
 	}
 
 	

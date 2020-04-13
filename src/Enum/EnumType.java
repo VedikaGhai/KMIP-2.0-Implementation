@@ -50,7 +50,7 @@ public class EnumType extends KMIPEnum {
 	public EnumType(int value)
 	{
 		this.value=getEntry(value, tagvalues);
-		System.out.println("EnumType : "+value);
+		//System.out.println("EnumType : "+value);
 	}
 
 	//@XmlAttribute(name = "type")

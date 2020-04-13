@@ -1,11 +1,8 @@
 package ClientInterfaces;
 
-import java.nio.file.Paths;
-import java.nio.file.StandardOpenOption;
 import java.util.ArrayList;
 import java.io.*;
 import java.util.*;
-import java.nio.file.*;
 
 import Messages.CreateRequestMessage;
 import Operations.DecodeResponseMessage;
@@ -17,7 +14,11 @@ public class KMIPOperations
     FileReader fr;
     BufferedReader br;
     File f2;
-    FileWriter fw;
+
+    String responseMessage = "";
+    final String RESPONSE_FILENAME = "/home/soha/Documents/Response1.xml";
+    File response;
+    
     String line="";
     
     OutputStream outputStream;
@@ -63,7 +64,7 @@ public class KMIPOperations
         StringBuffer sb =new StringBuffer();
 
         sb.append("POST /ibm/sklm/KMIPServlet"+"HTTP/1.1").append(separator);
-        sb.append("Host: "+"ip" + ":"+"portno").append(separator);
+        sb.append("Host: "+"hostname" + ":"+"portno").append(separator);
         sb.append("Content-Type: text/xml").append(separator);
         sb.append("Content-Length: "+contentLength).append(separator);
         sb.append("Pragma: no-cache").append(separator);
@@ -108,9 +109,7 @@ public class KMIPOperations
             
             outputStream = connection.socket.getOutputStream();
             //outTRIAL = new DataOutputStream(outputStream);
-
             outputStream.write(getXMLOutMessage(request.getBytes("UTF-8")));
-            
             /*String requestNEW = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><RequestMessage>" + "<RequestHeader>"
 				+ "<ProtocolVersion>" + "<ProtocolVersionMajor type=\"Integer\" value=\"2\"/>"
 				+ "<ProtocolVersionMinor type=\"Integer\" value=\"0\"/>" + "</ProtocolVersion>"
@@ -129,15 +128,8 @@ public class KMIPOperations
 				+ "<AttributeValue type=\"Integer\" value=\"Decrypt Encrypt\"/>" + "</Attribute>"
 				+ "</TemplateAttribute>" + "</RequestPayload>" + "</BatchItem>" + "</RequestMessage>";
             outputStream.write(getXMLOutMessage(requestNEW.getBytes("UTF-8")));*/
-            
             outputStream.flush();
-            
             //outTRIAL.write(getXMLOutMessage(request.getBytes("UTF-8")));
-            //outTRIAL.flush();
-            
-            //outTRIAL = new DataOutputStream(connection.socket.getOutputStream());
-            //ByteArrayInputStream b = new ByteArrayInputStream(getXMLOutMessage(request.getBytes("UTF-8")));
-            //outTRIAL.writeUTF(request);
             //outTRIAL.flush();
 
             Thread.sleep(2000);
@@ -145,11 +137,7 @@ public class KMIPOperations
             inputStream = connection.socket.getInputStream();
             dataInputStream = new DataInputStream(inputStream);
 
-            /*InputStreamReader inputttt = new InputStreamReader(inputStream);
-            BufferedReader triallll = new BufferedReader(inputttt);
-            */
-
-            String line = "'";
+            line = "'";
             String httpProtocolStr = "text/xml";
             String responseCode = "";
             int contentLength = 0;
@@ -204,8 +192,17 @@ public class KMIPOperations
             byte[] contentBytes = new byte[contentLength];
             dataInputStream.read(contentBytes);
             byteArrayInputStream = new ByteArrayInputStream(contentBytes);
-            System.out.println(byteArrayInputStringToString(byteArrayInputStream));
             
+            //printing the response message received from server, on the terminal
+            responseMessage = byteArrayInputStringToString(byteArrayInputStream);
+            System.out.println(responseMessage);
+
+            //writing it to a file for further processing (DOM Parsing)
+            FileWriter fw = new FileWriter(RESPONSE_FILENAME);
+            fw.write(responseMessage);
+            fw.flush();
+            fw.close();
+
         }
 
         catch(Exception e)
@@ -220,17 +217,7 @@ public class KMIPOperations
         CreateKey createKey=new CreateKey(k.algorithm, k.type, k.length);
         File f= createRequestMessage.createKeyRequestMessage(createKey);
         
-        //byte[] requestMessageByteArray = new byte[(int)f.length()];
         HTTPSMethod(f, k, connection);
-
-        //faaltu experiment
-        Path pathXMLFile=Paths.get("/home/soha/Documents/Response1.xml");
-        Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
-
-        //NOT WORKING FROM HERE ONWARDS
-        File response =new File("/home/soha/Documents/Response1.xml");
-        /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
-        dout.writeUTF(line);*/
         
         DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
 
@@ -238,16 +225,112 @@ public class KMIPOperations
         uid.add("UniqueIdentifier");
     
         List<String> uidResponse = new ArrayList<String>();
-        uidResponse = decodeResponseMessage.DOMParser(response, uid);
+        uidResponse = decodeResponseMessage.DOMParser(new File(RESPONSE_FILENAME), uid);
         
         KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
         
         return responseUID;
-        //return null;
+    
     }
 
-    
+    KeyUniqueIDMap get(KeyUniqueIDMap k, Connection connection) throws Exception
+    {           
+        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
+        GetKey getKey = new GetKey(k.uniqueIdentifier);
+        File f = createRequestMessage.getKeyRequestMessage(getKey);
 
+        
+        HTTPSMethod(f, k, connection);
+
+        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
+        
+        List<String> uid = new ArrayList<String>();
+        uid.add("UniqueIdentifier");
+        uid.add("KeyFormatType");
+        uid.add("KeyMaterial");
+    
+        List<String> uidResponse = new ArrayList<String>();
+
+        //USING FILE
+        uidResponse = decodeResponseMessage.DOMParser(new File(RESPONSE_FILENAME), uid);
+        //USING STRING
+        //uidResponse = decodeResponseMessage.DOMParser(responseMessage, uid);
+
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
+        
+        return responseUID;
+    }
+
+    KeyUniqueIDMap destroy(KeyUniqueIDMap k, Connection connection) throws Exception
+    {           
+        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
+        DestroyKey destroyKey = new DestroyKey(k.uniqueIdentifier);
+        File f = createRequestMessage.destroyKeyRequestMessage(destroyKey);
+
+        HTTPSMethod(f, k, connection);
+
+        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
+
+        List<String> uid = new ArrayList<String>();
+        uid.add("UniqueIdentifier");
+    
+        List<String> uidResponse = new ArrayList<String>();
+        uidResponse = decodeResponseMessage.DOMParser(new File(RESPONSE_FILENAME), uid);
+        
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
+        
+        return responseUID;
+    }
+
+    KeyUniqueIDMap locate(KeyUniqueIDMap k, Connection connection) throws Exception
+    {           
+        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
+        LocateKey locateKey = new LocateKey(k.getType());
+        File f = createRequestMessage.locateKeyRequestMessage(locateKey);
+
+        HTTPSMethod(f, k, connection);
+
+        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
+
+        List<String> uid = new ArrayList<String>();
+        uid.add("UniqueIdentifier");
+    
+        List<String> uidResponse = new ArrayList<String>();
+        uidResponse = decodeResponseMessage.DOMParser(new File(RESPONSE_FILENAME), uid);
+        
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
+        
+        return responseUID;
+    }
+
+
+    KeyUniqueIDMap createKeyPair(KeyUniqueIDMap k, Connection connection) throws Exception
+    {           
+        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
+        CreateKeyPair createKeyPair=new CreateKeyPair(k.algorithm, k.type, k.length, k.privateKeyNameValue, k.publicKeyNameValue);
+        File f= createRequestMessage.createKeyPairRequestMessage(createKeyPair);
+        
+        HTTPSMethod(f, k, connection);
+        
+        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
+
+        List<String> uid = new ArrayList<String>();
+        uid.add("PrivateKeyUniqueIdentifier");
+        uid.add("PublicKeyUniqueIdentifier");
+        
+        //uid.add("UniqueIdentifier");
+
+        List<String> uidResponse = new ArrayList<String>();
+        uidResponse = decodeResponseMessage.DOMParser(new File(RESPONSE_FILENAME), uid);
+        
+        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
+        
+        return responseUID;
+    
+    }
+
+
+    //Trial - String to document 
     /*public static void stringToDom(String xmlSource) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException
     {
         // Parse the given input
@@ -263,132 +346,5 @@ public class KMIPOperations
         StreamResult result =  new StreamResult(new File("/home/soha/ResponseMessage.xml"));
         transformer.transform(source, result);
     }*/
-
-
-    KeyUniqueIDMap get(KeyUniqueIDMap k, Connection connection) throws Exception
-    {           
-        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
-        GetKey getKey = new GetKey(k.uniqueIdentifier);
-        File f = createRequestMessage.getKeyRequestMessage(getKey);
-
-        //byte[] requestMessageByteArray = new byte[(int)f.length()];
-        /*
-        try 
-        {
-            PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.socket.getInputStream())))
-            {
-                Scanner scanner = new Scanner(System.in);
-                fr = new FileReader(f);
-                br = new BufferedReader(fr);    
-                String i;
-                String request="";    
-                while((i=br.readLine())!=null)    
-                    request+= i;
-
-                System.out.println("******************REQUEST SENT TO SERVER***************");
-                out.println(request);
-                Thread.sleep(2000);
-                line = bufferedReader.readLine();
-                System.out.println("*****************RESPONSE RECEIVED FROM SERVER****************");
-                System.out.println(line);
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        catch(Exception e) 
-        {
-            e.printStackTrace();
-        } 
-        */
-
-        HTTPSMethod(f, k, connection);
-
-        //faaltu experiment
-        Path pathXMLFile=Paths.get("/home/soha/Documents/Response1.xml");
-        Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
-
-        //NOT WORKING FROM HERE ONWARDS
-        File response =new File("/home/soha/Documents/Response1.xml");
-        /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
-        dout.writeUTF(line);*/
-        
-        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
-        
-        List<String> uid = new ArrayList<String>();
-        uid.add("UniqueIdentifier");
-        uid.add("KeyFormatType");
-        uid.add("KeyMaterial");
-    
-        List<String> uidResponse = new ArrayList<String>();
-        uidResponse = decodeResponseMessage.DOMParser(response, uid);
-        
-        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
-        
-        return responseUID;
-        //return null;
-    }
-
-    KeyUniqueIDMap destroy(KeyUniqueIDMap k, Connection connection) throws Exception
-    {           
-        CreateRequestMessage createRequestMessage= new CreateRequestMessage();
-        DestroyKey destroyKey = new DestroyKey(k.uniqueIdentifier);
-        File f = createRequestMessage.destroyKeyRequestMessage(destroyKey);
-
-        //byte[] requestMessageByteArray = new byte[(int)f.length()];
-        /*try 
-        {
-            PrintWriter out = new PrintWriter(connection.socket.getOutputStream(), true);
-            try (BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(connection.socket.getInputStream())))
-            {
-                Scanner scanner = new Scanner(System.in);
-                fr = new FileReader(f);
-                br = new BufferedReader(fr);    
-                String i;
-                String request="";    
-                while((i=br.readLine())!=null)    
-                    request+= i;
-
-                System.out.println("******************REQUEST SENT TO SERVER***************");
-                out.println(request);
-                Thread.sleep(2000);
-                line = bufferedReader.readLine();
-                System.out.println("*****************RESPONSE RECEIVED FROM SERVER****************");
-                System.out.println(line);
-            }
-            catch (Exception ex) {
-                ex.printStackTrace();
-            }
-        }
-        catch(Exception e) 
-        {
-            e.printStackTrace();
-        } 
-        */
-
-        HTTPSMethod(f, k, connection);
-
-        //faaltu experiment
-        Path pathXMLFile=Paths.get("/home/soha/Documents/Response1.xml");
-        Files.write(pathXMLFile,line.getBytes(),StandardOpenOption.WRITE,StandardOpenOption.CREATE);
-
-        //NOT WORKING FROM HERE ONWARDS
-        File response =new File("/home/soha/Documents/Response1.xml");
-        /*DataOutputStream dout= new DataOutputStream(new FileOutputStream(response));
-        dout.writeUTF(line);*/
-        
-        DecodeResponseMessage decodeResponseMessage= new DecodeResponseMessage();
-
-        List<String> uid = new ArrayList<String>();
-        uid.add("UniqueIdentifier");
-    
-        List<String> uidResponse = new ArrayList<String>();
-        uidResponse = decodeResponseMessage.DOMParser(response, uid);
-        
-        KeyUniqueIDMap responseUID=new KeyUniqueIDMap(k, uidResponse);
-        
-        return responseUID;
-    }
 
 }

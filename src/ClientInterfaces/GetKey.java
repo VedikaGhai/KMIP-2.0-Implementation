@@ -3,7 +3,6 @@ package ClientInterfaces;
 public class GetKey extends KMIPOperations
 {
     String uniqueIdentifier;
-    //
 
     public GetKey(String uniqueIdentifier) {
         this.uniqueIdentifier = uniqueIdentifier;
