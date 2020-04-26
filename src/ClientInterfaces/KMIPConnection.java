@@ -2,10 +2,23 @@ package ClientInterfaces;
 import java.net.Socket;
 import javax.net.ssl.*;
 
-
+/**
+ * This class is used for setting the key store and trust store paths, passwords and types.
+ * It is also used for creating a socket (using the IP and port number
+ * of the key management server).
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ */
 public class KMIPConnection
 {
 
+	/**
+	 * This method creates a socket with specified IP and port number.
+	 * @param ip IP Address of the key management server
+	 * @param port port number at which key management server listens
+	 * @return Connection Socket,IP Address and Port number wrapped in an object of type Connection
+	 * @see Connection
+	 */
     Connection connect(String ip, int port)
     {
         try {
@@ -41,7 +54,7 @@ public class KMIPConnection
 
             
             //IBM SKLM keystore
-            System.setProperty("javax.net.ssl.trustStore","/home/soha/defaultKeyStore");
+            /*System.setProperty("javax.net.ssl.trustStore","/home/soha/defaultKeyStore");
             System.setProperty("javax.net.ssl.trustStoreType", "JCEKS");
             System.setProperty("javax.net.ssl.trustStorePassword", "passw0rd");
             
@@ -50,7 +63,7 @@ public class KMIPConnection
             System.setProperty("javax.net.ssl.keyStore","/home/soha/defaultKeyStore");
             System.setProperty("javax.net.ssl.keyStoreType", "JCEKS");
             System.setProperty("javax.net.ssl.keyStorePassword", "passw0rd");
-            
+            */
 
             SSLSocketFactory sslSocketFactory = (SSLSocketFactory)SSLSocketFactory.getDefault();
             try {
@@ -67,5 +80,25 @@ public class KMIPConnection
         }
         return null;
 
+    }
+    
+    /**
+     * Used to set key store and trust store paths, types and passwords.
+     * @param TrustStorePath where the trust store and key store is located
+     * @param TrustStoreType type of the trust store and key store
+     * @param TrustStorePassword trust store and key store password
+     */
+    void setKeyStore(String TrustStorePath, String TrustStoreType, String TrustStorePassword)
+    {
+    	System.setProperty("javax.net.ssl.trustStore",TrustStorePath);
+        System.setProperty("javax.net.ssl.trustStoreType", TrustStoreType);
+        System.setProperty("javax.net.ssl.trustStorePassword", TrustStorePassword);
+        
+
+        
+        System.setProperty("javax.net.ssl.keyStore",TrustStorePath);
+        System.setProperty("javax.net.ssl.keyStoreType", TrustStoreType);
+        System.setProperty("javax.net.ssl.keyStorePassword", TrustStorePassword);
+        
     }
 }

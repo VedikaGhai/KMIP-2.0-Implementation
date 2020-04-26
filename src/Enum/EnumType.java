@@ -9,6 +9,13 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.*;
 
+/**
+ * EnumType class encompasses mapping the various types to their subsequent tags
+ * as specified by KMIP for TTLV encoding.
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see KMIPEnum
+ */
 //TTLV types
 @XmlRootElement
 @XmlAccessorType(XmlAccessType.NONE)
@@ -47,24 +54,38 @@ public class EnumType extends KMIPEnum {
 		}
 	}
 	
+	/**
+	 * Parameterized constructor.
+	 * @param value
+	 */
 	public EnumType(int value)
 	{
 		this.value=getEntry(value, tagvalues);
 		//System.out.println("EnumType : "+value);
 	}
 
-	//@XmlAttribute(name = "type")
+	/**
+	 * Getter.
+	 * @return String the tag value (value) is used to find the type (key) and the type is returned.
+	 */
 	public String getType()
 	{
 		this.type = this.value.getKey();
 		return this.type;
 	}
 
+	/**
+	 * Setter.
+	 * @param type KMIP type.
+	 */
 	public void setType(String type)
 	{
 		this.type = type;
 	}
 
+	/**
+	 * Default constructor.
+	 */
 	public EnumType()
 	{
 

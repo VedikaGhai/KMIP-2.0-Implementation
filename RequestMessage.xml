@@ -1,0 +1,19 @@
+
+<RequestMessage>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="2"/>
+            <ProtocolVersionMinor type="Integer" value="0"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+        <ClientCorrelationValue type="TextString" value="TC-OFFSET-1-20 step=6"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Locate"/>
+        <RequestPayload>
+            <Attributes>
+                <ObjectType type="Enumeration" value="SymmetricKey"/>
+            </Attributes>
+        </RequestPayload>
+    </BatchItem>
+</RequestMessage>

@@ -6,122 +6,96 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 import Objects.XMLTag;
 
+/**
+ * Attributes POJO Class.
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see XMLTag
+ */
 @XmlRootElement(name = "Attribute")
 @XmlAccessorType(XmlAccessType.NONE)
 public class Attribute 
 {
-	/*
-	//@XmlAttribute(name = "name")
-	String name;
-	
-	//@XmlAttribute(name = "value")
-	KMIPType value;
-
-	//@XmlAttribute(name = "type")
-	EnumType type;
-
-	//@XmlAttribute(name = "tag")
-	EnumTag tag;
-
-	int length;
-	
-	public Attribute(){
-		//default constructor
-	}
-	//POJO
-	public Attribute(String name, KMIPType value, EnumType type, EnumTag tag) {
-		super();
-		this.name = name;
-		this.value = value;
-		this.type = type;
-		this.tag = tag;
-		this.length=value.getDefaultLength();
-	}
-	
-	//@XmlElement
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
-	//@XmlElement
-	public KMIPType getValue() {
-		return value;
-	}
-	public void setValue(KMIPType value) {
-		this.value = value;
-	}
-	//@XmlElement
-	public EnumType getType() {
-		return type;
-	}
-	public void setType(EnumType type) {
-		this.type = type;
-	}
-	//@XmlElement
-	public EnumTag getTag() {
-		return tag;
-	}
-	public void setTag(EnumTag tag) {
-		this.tag = tag;
-	}
-	//@XmlElement
-	public int getLength() {
-		return length;
-	}
-	public void setLength(int length) {
-		this.length = length;
-	}
-
-	@Override
-	public String toString() {
-		return "Attribute [length=" + length + ", name=" + name + ", tag=" + tag + ", type=" + type + ", value=" + value
-				+ "]";
-	}
-	*/
 	XMLTag VendorIdentification;
 	XMLTag AttributeName;
 	XMLTag AttributeValue;
 
+	/**
+	 * Getter
+	 * @return XMLTag Vendor Identification
+	 */
 	@XmlElement(name = "VendorIdentification")
 	public XMLTag getVendorIdentification() {
 		return VendorIdentification;
 	}
 
+	/**
+	 * Setter
+	 * @param vendorIdentification Vendor Identification
+	 */
 	public void setVendorIdentification(XMLTag vendorIdentification) {
 		VendorIdentification = vendorIdentification;
 	}
 
+	/**
+	 * Getter
+	 * @return XMLTag Attribute name
+	 */
 	@XmlElement(name = "AttributeName")
 	public XMLTag getAttributeName() {
 		return AttributeName;
 	}
 
+	/**
+	 * Setter
+	 * @param attributeName Attribute name
+	 */
 	public void setAttributeName(XMLTag attributeName) {
 		AttributeName = attributeName;
 	}
 
+	/**
+	 * Getter
+	 * @return XMLTag Attribute Value
+	 */
 	@XmlElement(name = "AttributeValue")
 	public XMLTag getAttributeValue() {
 		return AttributeValue;
 	}
 
+	/**
+	 * Setter
+	 * @param attributeValue Attribute Value
+ 	 */
 	public void setAttributeValue(XMLTag attributeValue) {
 		AttributeValue = attributeValue;
 	}
 
+	/**
+	 * Parameterized constructor
+	 * @param vendorIdentification vendor identification
+	 * @param attributeName attribute name
+	 * @param attributeValue attribute value
+	 */
 	public Attribute(XMLTag vendorIdentification, XMLTag attributeName, XMLTag attributeValue) {
 		VendorIdentification = vendorIdentification;
 		AttributeName = attributeName;
 		AttributeValue = attributeValue;
 	}
 
+	/**
+	 * Parameterized constructor
+	 * @param attributeName attribute name
+	 * @param attributeValue attribute value
+	 */
 	public Attribute(XMLTag attributeName, XMLTag attributeValue) {
 		AttributeName = attributeName;
 		AttributeValue = attributeValue;
 	}
 	
+	/**
+	 * Default constructor
+	 */
 	public Attribute()
 	{
 

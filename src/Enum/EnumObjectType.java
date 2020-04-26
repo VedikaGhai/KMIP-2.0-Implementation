@@ -4,7 +4,13 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.util.HashMap;
 
-
+/**
+ * EnumObjectType class encompasses mapping the various types of objects to their subsequent tags
+ * as specified by KMIP for TTLV encoding.
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see KMIPEnum
+ */ 
 public class EnumObjectType extends KMIPEnum {
 	public static final int SecretData= 0x07;
 	public static HashMap<String, Integer> tagvalues;
@@ -28,6 +34,11 @@ public class EnumObjectType extends KMIPEnum {
 			
 		}
 	}
+	
+	/**
+	 * Parameterized constructor.
+	 * @param value 
+	 */
 	public EnumObjectType(int value)
 	{
 		this.value=getEntry(value, tagvalues);

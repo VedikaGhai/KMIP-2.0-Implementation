@@ -13,10 +13,23 @@ import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
+
+import Enum.EnumTag;
+import Enum.EnumType;
+import KMIPTypes.KMIPType;
 import Messages.*;
 //DON'T IMPORT THIS (Document Builder doesn't accept it) -> import jdk.internal.org.xml.sax.InputSource;
 import org.xml.sax.InputSource;
 
+/**
+ * This class has methods for extracting important information from the 
+ * server's response message (without having to go through the entire response message).
+ * We are using DOM Parsing for this purpose.
+ * Input response message can be either written into a file, or as a string. This can be changed according to requirement in {@link CreateRequestMessage}.
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see ResponseBatchItem
+ */ 
 public class DecodeResponseMessage 
 {
     DocumentBuilderFactory factory;
@@ -28,11 +41,21 @@ public class DecodeResponseMessage
 
     List<ResponseBatchItem> responseBatchItem;
 
+    /**
+     * Default constructor.
+     */
     public DecodeResponseMessage()
     {
         
     }
 
+    /**
+     * This method converts the response message file into a document and normalizes it.
+     * @param f file which contains the response message.
+     * @throws SAXException
+     * @throws IOException
+     * @throws ParserConfigurationException
+     */
     public void DOMParser(File f) throws SAXException, IOException, ParserConfigurationException
     {
         factory = DocumentBuilderFactory.newInstance();
@@ -46,6 +69,14 @@ public class DecodeResponseMessage
         //System.out.println(root.getNodeName());
     }
 
+    /**
+     * This method converts the response message that is saved to a String variable, into a document and normalizes it.
+     * @param s the string variable which has the response message.
+     * @throws SAXException
+     * @throws IOException
+     * @throws ParserConfigurationException
+     * @throws IllegalArgumentException
+     */
     public void DOMParser(String s) throws SAXException, IOException, ParserConfigurationException, IllegalArgumentException
     {
         factory = DocumentBuilderFactory.newInstance();
@@ -82,6 +113,16 @@ public class DecodeResponseMessage
         return s;
     }*/
 
+    /**
+     * This method extracts values of the attributes in the response message, according to their tag name. 
+     * It also works for multiple same name tags.
+     * For eg. If there are 2 "UniqueIdentifier" tags (for asymmetric), then it extracts both the unique identifiers.
+     * @param tagName the XML tag which we need the extract the value of.
+     * @return {@code List<String>} a list of all the extracted values.
+     * @throws SAXException
+     * @throws IOException
+     * @throws ParserConfigurationException
+     */
     //TRIAL - Working! 
     public List<String> getElementsByTagName(String tagName) throws SAXException, IOException, ParserConfigurationException
     {
@@ -129,6 +170,17 @@ public class DecodeResponseMessage
         return requiredValues;
     }*/
 
+    /**
+     * This method takes in the response message file, converts it into a document, normalizes it,
+     * goes ahead with extraction of values if the ResultStatus is Success,
+     * otherwise extracts and returns back the ResultReason.  
+     * @param f the response message file.
+     * @param tagNames the list of attribute tags whose value needs to be extracted.
+     * @return {@code List<String>} a list of all the extracted values.
+     * @throws SAXException
+     * @throws IOException
+     * @throws ParserConfigurationException
+     */
     public List<String> DOMParser(File f, List<String> tagNames) throws SAXException, IOException, ParserConfigurationException
     {
         List<String> requiredValues = new ArrayList<>();
@@ -169,6 +221,17 @@ public class DecodeResponseMessage
         return requiredValues;
     }
 
+    /**
+     * This method takes in the response message string, converts it into a document, normalizes it,
+     * goes ahead with extraction of values if the ResultStatus is Success,
+     * otherwise extracts and returns back the ResultReason.  
+     * @param stringXML the response message saved in a string variable.
+     * @param tagNames the list of attribute tags whose value needs to be extracted.
+     * @return {@code List<String>} a list of all the extracted values.
+     * @throws SAXException
+     * @throws IOException
+     * @throws ParserConfigurationException
+     */
     public List<String> DOMParser(String stringXML, List<String> tagNames) throws SAXException, IOException, ParserConfigurationException
     {
         List<String> requiredValues = new ArrayList<>();

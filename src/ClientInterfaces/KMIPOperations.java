@@ -7,6 +7,16 @@ import java.util.*;
 import Messages.CreateRequestMessage;
 import Operations.DecodeResponseMessage;
 
+/**
+ * This class establishes connection with the key management server, sends request message, receives response message and
+ * sends it to DOM Parser for extracing important information from it.
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see Connection
+ * @see KeyUniqueIDMap
+ * @see CreateRequestMessage
+ * @see DecodeResponseMessage
+ */
 public class KMIPOperations
 {
     //call the desired operation class and its methods
@@ -16,7 +26,7 @@ public class KMIPOperations
     File f2;
 
     String responseMessage = "";
-    final String RESPONSE_FILENAME = "/home/soha/Documents/Response1.xml";
+    final String RESPONSE_FILENAME = "ResponseMessage.xml";
     File response;
     
     String line="";
@@ -28,6 +38,9 @@ public class KMIPOperations
     DataInputStream dataInputStream;
     ByteArrayInputStream byteArrayInputStream;
 
+    /**
+     * Default constructor
+     */
     public KMIPOperations() 
     {
         
@@ -35,13 +48,18 @@ public class KMIPOperations
 
     private static String separator = System.getProperty("line.separator");
 
-    public static byte[] getXMLOutMessage(byte[] dataOut)
+    /**
+     * This method forms the complete request message (HTTP Header + the actual XML Request Message)
+     * @param dataOut the request message.
+     * @return {@code byte[]} the combined request message is returned.
+     */
+    public static byte[] getXMLOutMessage(byte[] dataOut, Connection connection)
     {
         byte[] httpHeader = null;
         byte[] httpOut = null;
         if(dataOut!=null)
         {
-            httpHeader = createXMLHeader(dataOut.length).getBytes();
+            httpHeader = createXMLHeader(dataOut.length, connection).getBytes();
             httpOut = new byte[httpHeader.length + dataOut.length];
 
             for(int i=0;i<httpHeader.length;i++)
@@ -59,12 +77,18 @@ public class KMIPOperations
         return httpOut;
     }
 
-    public static String createXMLHeader(int contentLength)
+    /**
+     * This method creates the HTTP header.
+     * @param contentLength total length of the XML Request Message
+     * @return String the formed HTTP header
+     */
+    public static String createXMLHeader(int contentLength, Connection connection)
     {    
         StringBuffer sb =new StringBuffer();
 
         sb.append("POST /ibm/sklm/KMIPServlet"+"HTTP/1.1").append(separator);
-        sb.append("Host: "+"hostname" + ":"+"portno").append(separator);
+        //sb.append("Host: "+"169.57.202.148" + ":"+"5696").append(separator);
+        sb.append("Host: "+connection.ip + ":"+connection.port).append(separator);
         sb.append("Content-Type: text/xml").append(separator);
         sb.append("Content-Length: "+contentLength).append(separator);
         sb.append("Pragma: no-cache").append(separator);
@@ -75,7 +99,13 @@ public class KMIPOperations
 
         return sb.toString();
     }
-
+    
+    /**
+     * This method converts byte array input to string.
+     * @param is ByteArrayInputStream object
+     * @return String 
+     * @see ByteArrayInputStream
+     */
     public static String byteArrayInputStringToString(ByteArrayInputStream is)
     {
         int size = is.available();
@@ -89,6 +119,15 @@ public class KMIPOperations
         return new String(theChars);
     }
     
+    /**
+     * This method sends the request (received in a file) to the server,
+     * received response message from the server,
+     * separates the response message from the response's HTTP header, 
+     * writes the response message to a file.
+     * @param f File which has the request message combined with the HTTP header.
+     * @param k KeyUniqueIDMap object.
+     * @param connection Connection object which contains the socket and the IP and port number of the server.
+     */
     public void HTTPSMethod(File f, KeyUniqueIDMap k, Connection connection)
     {
 
@@ -109,7 +148,7 @@ public class KMIPOperations
             
             outputStream = connection.socket.getOutputStream();
             //outTRIAL = new DataOutputStream(outputStream);
-            outputStream.write(getXMLOutMessage(request.getBytes("UTF-8")));
+            outputStream.write(getXMLOutMessage(request.getBytes("UTF-8"), connection));
             /*String requestNEW = "<?xml version=\"1.0\" encoding=\"UTF-8\"?><RequestMessage>" + "<RequestHeader>"
 				+ "<ProtocolVersion>" + "<ProtocolVersionMajor type=\"Integer\" value=\"2\"/>"
 				+ "<ProtocolVersionMinor type=\"Integer\" value=\"0\"/>" + "</ProtocolVersion>"
@@ -128,6 +167,7 @@ public class KMIPOperations
 				+ "<AttributeValue type=\"Integer\" value=\"Decrypt Encrypt\"/>" + "</Attribute>"
 				+ "</TemplateAttribute>" + "</RequestPayload>" + "</BatchItem>" + "</RequestMessage>";
             outputStream.write(getXMLOutMessage(requestNEW.getBytes("UTF-8")));*/
+            
             outputStream.flush();
             //outTRIAL.write(getXMLOutMessage(request.getBytes("UTF-8")));
             //outTRIAL.flush();
@@ -211,6 +251,15 @@ public class KMIPOperations
         }
     }
 
+    /**
+     * CreateKey operation method. Uses CreateRequestMessage's createKeyRequestMessage method to create
+     * required request message, sends it to server via HTTPSMethod,
+     * uses DecodeResponseMessage's methods to extract important information from the response message
+     * @param k KeyUniqueIDMap object which contains information about the key wrapped with the key's UniqueIdentifier
+     * @param connection Connection object, contains socket wrapped with IP and port number of server.
+     * @return KeyUniqueIDMap object, which has key information wrapped with the information about key we extracted from response message.
+     * @throws Exception
+     */
     KeyUniqueIDMap create(KeyUniqueIDMap k, Connection connection) throws Exception
     {           
         CreateRequestMessage createRequestMessage= new CreateRequestMessage();
@@ -233,6 +282,15 @@ public class KMIPOperations
     
     }
 
+    /**
+     * GetKey operation method. Uses CreateRequestMessage's getKeyRequestMessage method to create
+     * required request message, sends it to server via HTTPSMethod,
+     * uses DecodeResponseMessage's methods to extract important information from the response message
+     * @param k KeyUniqueIDMap object which contains information about the key wrapped with the key's UniqueIdentifier
+     * @param connection Connection object, contains socket wrapped with IP and port number of server.
+     * @return KeyUniqueIDMap object, which has key information wrapped with the information about key we extracted from response message.
+     * @throws Exception
+     */
     KeyUniqueIDMap get(KeyUniqueIDMap k, Connection connection) throws Exception
     {           
         CreateRequestMessage createRequestMessage= new CreateRequestMessage();
@@ -261,6 +319,15 @@ public class KMIPOperations
         return responseUID;
     }
 
+    /**
+     * DestroyKey operation method. Uses CreateRequestMessage's destroyKeyRequestMessage method to create
+     * required request message, sends it to server via HTTPSMethod,
+     * uses DecodeResponseMessage's methods to extract important information from the response message
+     * @param k KeyUniqueIDMap object which contains information about the key wrapped with the key's UniqueIdentifier
+     * @param connection Connection object, contains socket wrapped with IP and port number of server.
+     * @return KeyUniqueIDMap object, which has key information wrapped with the information about key we extracted from response message.
+     * @throws Exception
+     */
     KeyUniqueIDMap destroy(KeyUniqueIDMap k, Connection connection) throws Exception
     {           
         CreateRequestMessage createRequestMessage= new CreateRequestMessage();
@@ -282,6 +349,15 @@ public class KMIPOperations
         return responseUID;
     }
 
+    /**
+     * LocateKey operation method. Uses CreateRequestMessage's locateKeyRequestMessage method to create
+     * required request message, sends it to server via HTTPSMethod,
+     * uses DecodeResponseMessage's methods to extract important information from the response message
+     * @param k KeyUniqueIDMap object which contains information about the key wrapped with the key's UniqueIdentifier
+     * @param connection Connection object, contains socket wrapped with IP and port number of server.
+     * @return KeyUniqueIDMap object, which has key information wrapped with the information about key we extracted from response message.
+     * @throws Exception
+     */
     KeyUniqueIDMap locate(KeyUniqueIDMap k, Connection connection) throws Exception
     {           
         CreateRequestMessage createRequestMessage= new CreateRequestMessage();
@@ -303,7 +379,15 @@ public class KMIPOperations
         return responseUID;
     }
 
-
+    /**
+     * CreateKeyPair operation method. Uses CreateRequestMessage's createKeyPairRequestMessage method to create
+     * required request message, sends it to server via HTTPSMethod,
+     * uses DecodeResponseMessage's methods to extract important information from the response message
+     * @param k KeyUniqueIDMap object which contains information about the key wrapped with the key's UniqueIdentifier
+     * @param connection Connection object, contains socket wrapped with IP and port number of server.
+     * @return KeyUniqueIDMap object, which has key information wrapped with the information about key we extracted from response message.
+     * @throws Exception
+     */
     KeyUniqueIDMap createKeyPair(KeyUniqueIDMap k, Connection connection) throws Exception
     {           
         CreateRequestMessage createRequestMessage= new CreateRequestMessage();
@@ -328,23 +412,4 @@ public class KMIPOperations
         return responseUID;
     
     }
-
-
-    //Trial - String to document 
-    /*public static void stringToDom(String xmlSource) throws SAXException, ParserConfigurationException, IOException, TransformerConfigurationException, TransformerException
-    {
-        // Parse the given input
-        DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
-        DocumentBuilder builder = factory.newDocumentBuilder();
-        Document doc = builder.parse(new InputSource(new StringReader(xmlSource)));
-
-        // Write the parsed document to an xml file
-        TransformerFactory transformerFactory = TransformerFactory.newInstance();
-        Transformer transformer = transformerFactory.newTransformer();
-        DOMSource source = new DOMSource(doc);
-
-        StreamResult result =  new StreamResult(new File("/home/soha/ResponseMessage.xml"));
-        transformer.transform(source, result);
-    }*/
-
 }

@@ -1,34 +1,53 @@
 package KMIPTypes;
 
-import java.nio.charset.Charset;
-import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 
-import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
+//import com.sun.org.apache.xerces.internal.impl.dv.util.Base64;
 
-
+/**
+ * KMIPByteString POJO class.
+ * It describes the ByteString data type as interpreted by KMIP for reading values.
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see KMIPType
+ */ 
 public class KMIPByteString extends KMIPType {
 
 	byte[] value;
 	int intvalue;
 
+	/**
+	 * Default constructor.
+	 * describes the default length of each byte string value.
+	 */
 	public KMIPByteString() {
 		super(0);
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Parameterized constructor.
+	 * @param value value in the form of a byte array  
+	 */
 	public KMIPByteString(byte[] value) {
 		super(0);
 		setValue(value);
 	}
 
-	
+	/**
+	 * Parameterized constructor.
+	 * @param value value in the form of a String
+	 */
 	public KMIPByteString(String value) {
 		super(0);
 		setValue(value);
 		this.intvalue=Integer.parseInt(value);
 	}
 
+	/**
+	 * Getter.
+	 * @return String byte array is converted to String before returning the value.
+	 */
 	public String getValue()
 	{
 		//byte temp;
@@ -69,6 +88,11 @@ public class KMIPByteString extends KMIPType {
 
 	}
 
+	/**
+	 * This method converts byte array to string.
+	 * @param settingsData
+	 * @return String
+	 */
 	public String getStringFromByteArray(byte[] settingsData) {
 
 		StringBuilder sb = new StringBuilder();
@@ -79,10 +103,18 @@ public class KMIPByteString extends KMIPType {
 		return sb.toString();
 	}
 
+	/**
+	 * Setter. 
+	 * @param value byte array value
+	 */
 	public void setValue(byte[] value) {
 		this.value = value;
 	}
 
+	/**
+	 * Setter. The string value is first converted to byte array and then set.
+	 * @param value value in the form of a string
+	 */
 	public void setValue(String value) {
 		byte[] val = new byte[(value.length() / 2)+1];
 		for (int i = 0; i < val.length-1; i++) {

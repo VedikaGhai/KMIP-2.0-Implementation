@@ -5,6 +5,13 @@ import java.lang.reflect.Modifier;
 import java.util.HashMap;
 import Enum.KMIPEnum;
 
+/**
+ * EnumTag class encompasses mapping the various types of tags to their subsequent tags
+ * as specified by KMIP for TTLV encoding.
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see KMIPEnum
+ */
 //TTLV tags
 public class EnumTag extends KMIPEnum {
 	public static final int ProtocolVersion= 0x420069;
@@ -53,12 +60,13 @@ public class EnumTag extends KMIPEnum {
 		}
 	}
 	
+	/**
+	 * Parameterized constructor.
+	 * @param value 
+	 */
 	public EnumTag(int value)
 	{
 		this.value=getEntry(value, tagvalues);
 		//System.out.println("EnumTag : "+value);
 	}
-
-	
-	
 }

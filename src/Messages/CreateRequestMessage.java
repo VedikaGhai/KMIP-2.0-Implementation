@@ -24,9 +24,24 @@ import Objects.XMLTag;
 import KMIPTypes.*;
 
 import java.io.*;
+import java.nio.channels.SeekableByteChannel;
 import java.text.ParseException;
 
-//@XmlSeeAlso(Name.class)
+/**
+ * This class has methods used to form the actual XML Request Messages (for various operations),
+ * which includes putting together the RequestHeader, BatchItem and RequestPayload.
+ * Current methods support the following operations: CreateKey(Symmetric), GetKey(Symmetric and Asymmetric), 
+ * LocateKey(Symmetric, Public, Private), DestroyKey(Symmetric and Asymmetric), CreateKeyPair(Asymmetric).
+ * @author Vedika Ghei, Soha Parasnis, Tanisha Rathi, Vidushi Mishra 
+ * @version 1.0
+ * @see XMLTag
+ * @see ProtocolVersion
+ * @see RequestHeader
+ * @see Attribute
+ * @see RequestBatchItem
+ * @see RequestPayload
+ * @see KMIPRequestMessage
+ */
 public class CreateRequestMessage 
 {
 
@@ -63,12 +78,23 @@ public class CreateRequestMessage
 
     KMIPRequestMessage requestMessage;
 
-    final String REQUEST_FILENAME = "/home/soha/Documents/Gheee.xml";
+    final String REQUEST_FILENAME = "RequestMessage.xml";
 
+    /**
+     * Default constructor.
+     */
     public CreateRequestMessage() {
 
     }
 
+    /**
+     * This method takes the request message saved in a string and writes it to an XML file, in an XML format.
+     * @return File returns the request message file
+     * @throws JAXBException
+     * @throws ParseException
+     * @see JAXBException
+     * @see ParseException
+     */
     public File savingRequestMsgToFile() throws JAXBException, ParseException
     {
         File file = new File(REQUEST_FILENAME);
@@ -87,6 +113,14 @@ public class CreateRequestMessage
         return file;
     }
 
+    /**
+     * This method forms the XML CreateKey request message. 
+     * @param createKey CreateKey object, through which one can access the cryptographic algorithm, cryptographic length and the object type, as requested by the user. 
+     * @return File the request message file
+     * @throws JAXBException
+     * @throws ParseException
+     * @see CreateKey
+     */
     public File createKeyRequestMessage(CreateKey createKey) throws JAXBException, ParseException
     {
         //KMIP v2.0
@@ -177,6 +211,14 @@ public class CreateRequestMessage
         return savingRequestMsgToFile();
     }
 
+    /**
+     * This method forms the XML GetKey request message. 
+     * @param getKey GetKey object, through which one can access the UniqueIdentifier of the key that the user wants to get.
+     * @return File the request message file.
+     * @throws JAXBException
+     * @throws ParseException
+     * @see GetKey
+     */
     public File getKeyRequestMessage(GetKey getKey) throws JAXBException, ParseException
     {
         ProtocolVersionMajor = new XMLTag("ProtocolVersionMajor", new EnumTag(EnumTag.ProtocolVersionMajor), new EnumType(EnumType.Integer), new KMIPInteger("2"));
@@ -211,6 +253,14 @@ public class CreateRequestMessage
 
     }
 
+    /**
+     * This method forms the XML DestroyKey request message. 
+     * @param destroyKey DestroyKey object, through which one can access the the UniqueIdentifier of the key the user wants to destroy.
+     * @return File the request message file.
+     * @throws JAXBException
+     * @throws ParseException
+     * @see DestroyKey
+     */
     public File destroyKeyRequestMessage(DestroyKey destroyKey) throws JAXBException, ParseException
     {
         ProtocolVersionMajor = new XMLTag("ProtocolVersionMajor", new EnumTag(EnumTag.ProtocolVersionMajor), new EnumType(EnumType.Integer), new KMIPInteger("2"));
@@ -242,6 +292,12 @@ public class CreateRequestMessage
         return savingRequestMsgToFile();
     }
 
+    /**
+     * This method forms the XML SetAttribute request message. 
+     * @param setAttribute SetAttribute object, through which one can access the type of object, cryptographic algorithm, cryptographic length of the key whose attribute the user wants to set.
+     * @return File the request message file.
+     * @throws JAXBException
+     */
     public File setAttributeRequestMessage(SetAttribute setAttribute) throws JAXBException
     {
         //KMIP v2.0
@@ -323,6 +379,14 @@ public class CreateRequestMessage
         return file;
     }
 
+    /**
+     * This method forms the XML LocateKey request message. 
+     * @param locateKey LocateKey object, through which one can access the object type of the key the user wants to locate.
+     * @return File the request message file
+     * @throws JAXBException
+     * @throws ParseException
+     * @see LocateKey
+     */
     public File locateKeyRequestMessage(LocateKey locateKey) throws JAXBException, ParseException
     {
         ProtocolVersionMajor = new XMLTag("ProtocolVersionMajor", new EnumTag(EnumTag.ProtocolVersionMajor), new EnumType(EnumType.Integer), new KMIPInteger("2"));
@@ -355,7 +419,14 @@ public class CreateRequestMessage
         return savingRequestMsgToFile();
     }    
 
-    
+    /**
+     * This method forms the XML CreateKeyPair request message. 
+     * @param createKeyPair CreateKeyPair object, through which we can access the various parameters of the public and private keys that the user wants to create, as requested by the user. 
+     * @return File the request message file
+     * @throws JAXBException
+     * @throws ParseException
+     * @see CreateKeyPair
+     */
     public File createKeyPairRequestMessage(CreateKeyPair createKeyPair) throws JAXBException, ParseException
     {
         //KMIP v2.0
