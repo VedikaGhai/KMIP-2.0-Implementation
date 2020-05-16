@@ -1,0 +1,29 @@
+<!--<p>create-key works!</p>-->
+
+    <div class="container" style="width:500px; margin:50px 500px auto 500px;">
+        <div>
+            <label for="TypeOfKey">Choose type of key : </label>
+            <select id="TypeOfKey" [(ngModel)]="Key.typeOfKey" required>
+                <option value="SymmetricKey">Symmetric Key</option>
+                <!--<option value="AsymmetricKey">Asymmetric Key</option>-->  
+            </select>
+        </div>
+        <div>
+            <label for="Algorithm">Choose encryption algorithm : </label>
+            <select id="Algorithm" [(ngModel)]="Key.algorithm" required>
+                <option value="AES">AES</option>
+            </select>
+        </div>
+        <div>
+            <label for="KeySize">Choose key size : </label>
+            <select id="KeySize" [(ngModel)]="Key.keySize" required>
+                <option value="128">128</option>
+                <option value="256">256</option>  
+            </select>
+        </div>
+        <button (click)=createKey() class="btn btn-success">
+            Create 
+        </button>
+        <br>
+        <pre>{{ Key1.uniqueIdentifier }}</pre>
+    </div>

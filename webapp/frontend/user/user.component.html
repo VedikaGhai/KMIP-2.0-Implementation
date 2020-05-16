@@ -1,0 +1,31 @@
+<!--
+<p>user works!</p>
+<table border="1">
+    <thead></thead>
+    <tr>
+      <th>userName</th>
+      <th>password</th>
+      </tr>
+    
+    <tbody>
+        <tr *ngFor="let user of users">
+            <td>{{user.userName}}</td>
+            <td>{{user.password}}</td>
+            </tr>
+    </tbody>
+</table>
+ -->
+<div class="container" style="width:500px; margin:50px 500px auto 500px;">
+  <div>
+    User Name : <input type="text" name="username" [(ngModel)]="username" required>
+    <br><br>
+    Password : <input type="password" name="password" [(ngModel)]="password" required>
+  </div>
+  <br>
+  <button (click)=checkLogin() class="btn btn-success" >
+    Login
+  </button>
+</div>
+
+
+

@@ -1,0 +1,39 @@
+<!--<p>create-key-pair works!</p>-->
+
+<div class="container" style="width:500px; margin:50px 500px auto 500px;">
+    <div>
+        <label for="TypeOfKey">Choose type of key : </label>
+        <select id="TypeOfKey" [(ngModel)]="Key.typeOfKey" required>
+            <option value="AsymmetricKey">Asymmetric Key</option>
+            <!--<option value="AsymmetricKey">Asymmetric Key</option>-->  
+        </select>
+    </div>
+    <div>
+        <label for="Algorithm">Choose encryption algorithm : </label>
+        <select id="Algorithm" [(ngModel)]="Key.algorithm" required>
+            <option value="RSA">RSA</option>
+        </select>
+    </div>
+    <div>
+        <label for="KeySize">Choose key size : </label>
+        <select id="KeySize" [(ngModel)]="Key.keySize" required>
+            <option value="1024">1024</option>
+            <option value="2048">2048</option>  
+        </select>
+    </div>
+    <div>
+        Enter PrivateKeyNameValue : <input type="text" name="privateKeyNameValue" [(ngModel)]="Key.privateKeyNameValue" required>
+     </div>
+     <br>
+     <div>
+       Enter PublicKeyNameValue : <input type="text" name="publicKeyNameValue" [(ngModel)]="Key.publicKeyNameValue" required>
+    </div>
+    <br>
+    <button (click)=createKeyPair() class="btn btn-success">
+        Create Key-Pair
+    </button>
+    <br>
+    <br>
+    <pre>{{ Key1.privateKeyUniqueIdentifier }}</pre>
+    <pre>{{ Key1.publicKeyUniqueIdentifier }}</pre>
+</div>

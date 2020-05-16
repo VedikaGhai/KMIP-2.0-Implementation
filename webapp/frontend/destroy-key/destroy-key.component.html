@@ -1,0 +1,14 @@
+<!--<p>destroy-key works!</p>-->
+<form>
+  <div class="container" style="width:500px; margin:50px 500px auto 500px;">
+    <div>
+      Enter UniqueIdentifier : <input type="text" name="uniqueIdentifier" [(ngModel)]="Key.uniqueIdentifier" required>
+    </div>
+    <br>
+    <button (click)=destroyKey() class="btn btn-success" >
+      Destroy
+    </button>
+    <br>
+    <pre>{{ ResultStatus }}</pre>
+  </div>
+</form>

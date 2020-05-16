@@ -1,0 +1,18 @@
+<!--<p>locate-key works!</p>-->
+
+<div class="container" style="width:500px; margin:50px 500px auto 500px;">
+    <div>
+        <label for="ObjectType">Choose Object Type : </label>
+        <select id="ObjectType" [(ngModel)]="ObjectType" required>
+            <option value="SymmetricKey">Symmetric Key</option>
+            <option value="PrivateKey">Private Key</option>
+            <option value="PublicKey">Public Key</option>  
+        </select>
+    </div>
+    <button (click)=locateKey() class="btn btn-success">
+        Locate
+    </button>
+    <br>
+    <pre>{{ this.UniqueIdentifier }}</pre>
+</div>
+

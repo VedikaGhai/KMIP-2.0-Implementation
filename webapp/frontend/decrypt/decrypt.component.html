@@ -1,0 +1,22 @@
+<!--<p>decrypt works!</p>-->
+
+<form>
+    <div class="container" style="width:500px; margin:50px 500px auto 500px;">
+        <div>
+            Upload ciphertext file : <input type="file" id="plaintextFile" (change)="selectFile($event)" required>
+          </div>
+        <div>
+        <br>
+          Enter UniqueIdentifier/ PrivateKeyUniqueIdentifier : <input type="text" name="uniqueIdentifier" [(ngModel)]="uniqueIdentifier" required>
+        </div>
+        <br>
+        <button (click)=decryptFile() class="btn btn-success" style="margin-right: 30px">
+          Decrypt File
+        </button> 
+  
+        <button (click)=downloadFile() class="btn btn-success" >
+            Download
+        </button>
+    </div>
+  </form>
+  

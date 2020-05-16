@@ -1,0 +1,16 @@
+<!--<p>get-key works!</p>-->
+<form>
+  <div class="container" style="width:500px; margin:50px 500px auto 500px;">
+    <div>
+      Enter UniqueIdentifier : <input type="text" name="uniqueIdentifier" [(ngModel)]="Key.uniqueIdentifier" required>
+    </div>
+    <br>
+    <button (click)=getKey() class="btn btn-success" style="margin-right: 30px">
+      Get
+    </button>
+
+    <button (click)=downloadFile() class="btn btn-success" >
+      Download
+  </button>
+  </div>
+</form>

@@ -1,0 +1,18 @@
+<header>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <nav class ="navbar navbar-expand-md navbar-dark bg-dark">
+    <ul class="nav navbar-nav navbar-left">
+      <li><a *ngIf="!authenticationService.isUserLoggedIn()" routerLink="/" class="nav-link" [routerLinkActive]="['active']"><b>KMIP-Client</b></a></li>
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/createkey" class="nav-link" [routerLinkActive]="['active']">Create Key</a></li>
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/createkeypair" class="nav-link" [routerLinkActive]="['active']">Create Key-Pair</a></li>
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/getkey" class="nav-link" [routerLinkActive]="['active']">Get Key</a></li>
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/destroykey" class="nav-link" [routerLinkActive]="['active']">Destroy Key</a></li>
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/locatekey" class="nav-link" [routerLinkActive]="['active']">Locate Key</a></li>
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/encrypt" class="nav-link" [routerLinkActive]="['active']">Encrypt Data</a></li>
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/decrypt" class="nav-link" [routerLinkActive]="['active']">Decrypt Data</a></li>
+    </ul>
+    <ul class="nav navbar-nav navbar-right ml-auto">
+      <li><a *ngIf="authenticationService.isUserLoggedIn()" routerLink="/logout" class="nav-link" routerLinkActive="class-name"><i class="fa fa-fw fa-user"></i> Logout</a></li>
+    </ul>
+    </nav>    
+</header>
