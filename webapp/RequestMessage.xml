@@ -1,0 +1,17 @@
+
+<RequestMessage>
+    <RequestHeader>
+        <ProtocolVersion>
+            <ProtocolVersionMajor type="Integer" value="2"/>
+            <ProtocolVersionMinor type="Integer" value="0"/>
+        </ProtocolVersion>
+        <BatchCount type="Integer" value="1"/>
+        <ClientCorrelationValue type="TextString" value="TC-PKCS12-1-20 step=8"/>
+    </RequestHeader>
+    <BatchItem>
+        <Operation type="Enumeration" value="Get"/>
+        <RequestPayload>
+            <UniqueIdentifier type="TextString" value="KEY-ff1f192-9fc31f64-f6c6-4905-a395-086e8860c5dc"/>
+        </RequestPayload>
+    </BatchItem>
+</RequestMessage>
