@@ -38,8 +38,8 @@ public class TestController {
 	MainApplication mainObject = new MainApplication();
 	
 	public void getConnection() throws IOException {
-		mainObject.setKeyStore("C:/Users/A/defaultKeyStore", "JCEKS", "passw0rd");
-		Connection connection = mainObject.getConnection("169.57.202.148", 5696);
+		mainObject.setKeyStore("keystorePath", "keystoreType", "keystorePassword");
+		Connection connection = mainObject.getConnection("IP", Port);
 		
 	}
 
