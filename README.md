@@ -19,6 +19,7 @@ This repository contains the code for a scalable and extensible JAVA library for
 
 ### The Why ###
 Key Management Interoperability Protocol is an extensible communication protocol developed by OASIS (a global non-profit consortium) for efficient management of cryptographic keys in a centralized server. IBM uses A Secure Key Lifecycle Management server for storing its cryptographic keys and objects. To manage these keys in the SKLM server, IBM uses the KMIP protocol. KMIP is widely used today and has had several versions of itself released, the latest one being KMIP v2.0 (asof October 2019). As of now, there are not many libraries that support KMIP v2.0 which clients can use to access the services of KMIP v2.0. 
+
 Therefore, our motivation is to build an open source, scalable and easily upgradable KMIP v2.0 library which developers can use for availing the services of KMIP v 2.0 and the utility to manage keys for encryption/decryption of his data, on the SKLM server using KMIP. Developers can import the library into their application program, in the .jar format, to access the services offered by the interfaces of the library. A client application supporting various environments which provides the end-user with a UI, can also directly access services of KMIP through this library. The client application will use the library at the backend to provide services as specified by the end-users through the user interface of the client application.
 
 ----
@@ -31,7 +32,7 @@ Therefore, our motivation is to build an open source, scalable and easily upgrad
 - Extensible.
 
 #### Client Application ####
-- Operations
+- Key Operations
   1. Create Key
   2. Create Key-Pair
   3. Get Key 
