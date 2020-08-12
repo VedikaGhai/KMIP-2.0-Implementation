@@ -43,6 +43,12 @@ Therefore, our motivation is to build an open source, scalable and easily upgrad
 
 ### Tech Stack ###
 - [JAVA](https://www.java.com "Java") (for the Library).
+  The packages used in the develpment of java library are: 
+  1. java.net.* 
+  2. javax.xml.bind.annotation.*  
+  3. javax.xml.parsers.* 
+  4. org.w3c.dom.* 
+  
 - [Spring](https://www.spring.io "Spring Framework").
 - [Angular.JS](https://www.angularjs.org "AngularJS").
 - [Maven](https://www.maven.apache.org "Maven").
