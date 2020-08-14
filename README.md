@@ -76,7 +76,7 @@ Therefore, our motivation is to build an open source, scalable and easily upgrad
 
 ### Mentors ###
 
-We would like to thank our mentors for their help, guidance and encouragement:
+We would like to thank our mentors for their valuable time, guidance and encouragement:
 - Professor A.N. Muchrikar, Assistant Professor and Dean (Student Affairs) at MKSSS Cummins College of Engineering for Women, Pune. 
 - Mr. Arvind Ashtekar (mentor from IBM).
-- Mr. Vikram Khopad (mentor from IBM).
+- Mr. Vikram Khopade (mentor from IBM).
