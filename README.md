@@ -8,6 +8,7 @@ This repository contains the code for a scalable and extensible JAVA library for
 - [Features](#features "Features")
   - [Library](#features "Library Features")
   - [Client Application](#features "Client App Features")
+- [Guidelines](#guidelines "Guidelines")
 - [Tech Stack](#tech-stack "Tech Stack")
 - [Documentation](#documentation "Documentation")
 - [Team](#team "Team")
@@ -42,6 +43,11 @@ Therefore, our motivation is to build an open source, scalable and easily upgrad
   4. Locate Key
   5. Destroy Key
 - Encrypt/Decrypt files using RSA or AES depending on the key-type.
+----
+
+### Guidelines ###
+- Refer below images for usage.
+
 ----
 
 ### Tech Stack ###
