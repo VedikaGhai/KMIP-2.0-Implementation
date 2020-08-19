@@ -47,6 +47,8 @@ Therefore, our motivation is to build an open source, scalable and easily upgrad
 
 ### Guidelines ###
 - Refer below images for usage.
+![Import Library](https://github.com/VedikaGhai/KMIP-2.0-Implementation/blob/master/Import%20Library.PNG?raw=true)
+![Example Usage](https://github.com/VedikaGhai/KMIP-2.0-Implementation/blob/master/Example%20Usage.png?raw=true)
 
 ----
 
